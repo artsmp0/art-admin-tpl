@@ -1,20 +1,33 @@
 {
   "name": "art-admin-tpl",
-  "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
+    "lint": "eslint . --fix",
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "simple-git-hooks"
   },
   "dependencies": {
     "vue": "^3.4.21"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.15.0",
+    "@unocss/eslint-plugin": "^0.59.3",
     "@vitejs/plugin-vue": "^5.0.4",
+    "eslint": "^9.0.0",
+    "lint-staged": "^15.2.2",
+    "simple-git-hooks": "^2.11.1",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vue-tsc": "^2.0.6"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
