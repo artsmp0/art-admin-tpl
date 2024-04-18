@@ -12,8 +12,9 @@
     >
       Hello ArtAdmin
     </button>
-    <AaSvgIcon name="test" />
-    <AaSvgIcon name="vue" size="20rem" />
+    中文
+    <AtIcon icon="svg-test" />
+    <AtIcon icon="i-ph-acorn-duotone" />
     123
   </div>
 </template>
