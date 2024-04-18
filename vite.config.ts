@@ -5,6 +5,7 @@ import UnoCSS from 'unocss/vite'
 import Components from 'unplugin-vue-components/vite'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import AutoImport from 'unplugin-auto-import/vite'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 
 const iconDirs = [fileURLToPath(new URL('./src/assets/icons', import.meta.url))]
 
@@ -21,13 +22,21 @@ export default defineConfig({
       dts: './types/components.d.ts',
       dirs: ['src/components'],
       extensions: ['vue', 'tsx', 'jsx'],
-      resolvers: [],
+      resolvers: [NaiveUiResolver()],
     }),
     AutoImport({
       dts: './types/auto-imports.d.ts',
       imports: [
         'vue',
         'vue-router',
+        {
+          'naive-ui': [
+            'useDialog',
+            'useMessage',
+            'useNotification',
+            'useLoadingBar',
+          ],
+        },
       ],
     }),
   ],

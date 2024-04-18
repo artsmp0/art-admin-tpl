@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@unocss/reset':
+        specifier: ^0.59.3
+        version: 0.59.3
       naive-ui:
         specifier: ^2.38.1
         version: 2.38.1(vue@3.4.23(typescript@5.4.5))

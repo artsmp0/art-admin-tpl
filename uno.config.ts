@@ -1,7 +1,7 @@
-import { defineConfig, presetAttributify, presetIcons, presetTypography, presetUno, transformerAttributifyJsx, transformerDirectives } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetUno, transformerAttributifyJsx, transformerDirectives } from 'unocss'
 
 export default defineConfig({
-  presets: [presetUno(), presetAttributify(), presetIcons(), presetTypography()],
+  presets: [presetUno(), presetAttributify(), presetIcons()],
   transformers: [transformerDirectives(), transformerAttributifyJsx()],
   theme: {
     colors: {

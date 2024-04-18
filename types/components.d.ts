@@ -11,6 +11,8 @@ declare module 'vue' {
     AtIcon: typeof import('./../src/components/icon/AtIcon.vue')['default']
     GpIcon: typeof import('./../src/components/icon/GpIcon.vue')['default']
     Icon: typeof import('./../src/components/icon/Icon.vue')['default']
+    NButton: typeof import('naive-ui')['NButton']
+    NFlex: typeof import('naive-ui')['NFlex']
     SvgIcon: typeof import('./../src/components/icon/SvgIcon.vue')['default']
   }
 }
