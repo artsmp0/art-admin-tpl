@@ -12,3 +12,5 @@ ni -D lint-staged simple-git-hooks
 ```
 
 3. [unocss](https://unocss.dev/integrations/vite)
+4. local svg icon
+5. auto import
