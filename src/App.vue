@@ -1,28 +1,34 @@
 <script setup lang="ts">
+import { darkTheme, dateZhCN, zhCN } from 'naive-ui'
+import { isDark } from './composables/theme'
+import { useUIStore } from './stores/ui'
+
+const currentTheme = computed(() => {
+  return isDark.value ? darkTheme : null
+})
+
+const UI = useUIStore()
+const themeOverrides = computed(() => {
+  return isDark.value ? UI.curTheme.dark : UI.curTheme.light
+  return {}
+})
+
+async function mountCssVarToRoot() {
+  await nextTick()
+  const cssVarEl = document.querySelector('.css-var-container')
+  if (!cssVarEl)
+    return
+  document.documentElement.setAttribute('style', cssVarEl.getAttribute('style')!)
+  cssVarEl.setAttribute('style', '')
+}
+
+watch([isDark, () => UI.curTheme], mountCssVarToRoot)
+onMounted(mountCssVarToRoot)
 </script>
 
 <template>
-  <div class="p4">
-    <NFlex align="center">
-      <h1 class="text-blue">
-        hello world
-      </h1>
-      <NButton type="info">
-        TEST
-      </NButton>
-      <button
-        bg="blue-400 hover:blue-500 dark:blue-500 dark:hover:blue-600"
-        text="sm white"
-        font="mono light"
-        p="y-2 x-4"
-        border="2 rounded blue-200"
-      >
-        Hello ArtAdmin
-      </button>
-      中文
-      <AtIcon icon="svg-test" />
-      <AtIcon icon="i-ph-acorn-duotone" />
-      123
-    </NFlex>
-  </div>
+  <NConfigProvider :locale="zhCN" :theme="currentTheme" :date-locale="dateZhCN" :theme-overrides="themeOverrides">
+    <RouterView />
+    <NEl class="css-var-container hidden" />
+  </NConfigProvider>
 </template>

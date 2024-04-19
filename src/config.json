@@ -1,0 +1,12 @@
+{
+  "CUR_THEME": "antd",
+  "SHOW_BREADCRUMB": false,
+  "TAB_POSITION": "top",
+  "SHOW_REFRESH_BTN": true,
+  "SHOW_FULLSCREEN_BTN": true,
+  "SHOW_THEME_BTN": true,
+  "SHOW_AVATAR": true,
+  "SIDE_WIDTH": 230,
+  "PAGE_ANIMATION": "fade-up",
+  "STORAGE_TAB": true
+}

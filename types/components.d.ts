@@ -7,12 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    AaSvgIcon: typeof import('./../src/components/icon/AaSvgIcon.vue')['default']
-    AtIcon: typeof import('./../src/components/icon/AtIcon.vue')['default']
-    GpIcon: typeof import('./../src/components/icon/GpIcon.vue')['default']
-    Icon: typeof import('./../src/components/icon/Icon.vue')['default']
+    AtIcon: typeof import('./../src/components/icon/src/AtIcon.vue')['default']
+    AtIconBtn: typeof import('./../src/components/icon/src/AtIconBtn.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
-    NFlex: typeof import('naive-ui')['NFlex']
-    SvgIcon: typeof import('./../src/components/icon/SvgIcon.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
+    SvgIcon: typeof import('./../src/components/icon/src/SvgIcon.vue')['default']
   }
 }

@@ -41,13 +41,13 @@ const style = computed((): CSSProperties => {
 </script>
 
 <template>
-  <svg aria-hidden="true" :class="spin && 'animate-spin'" class="aa-icon" :style="style">
+  <svg aria-hidden="true" :class="spin && 'animate-spin'" class="at-icon" :style="style">
     <use :xlink:href="symbolId" />
   </svg>
 </template>
 
 <style scoped>
-.aa-icon {
+.at-icon {
     display: inline-block;
     overflow: hidden;
     vertical-align: -0.15em;

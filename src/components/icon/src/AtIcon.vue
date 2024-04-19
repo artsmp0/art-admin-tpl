@@ -41,6 +41,7 @@ const iconType = computed(() => {
       NIcon,
       {
         ...props.iconProps,
+        style: { 'vertical-align': ' -0.15em' },
       },
       () => h(props.icon as Component),
     )
@@ -51,9 +52,3 @@ const iconType = computed(() => {
 <template>
   <Component v-bind="$attrs" :is="iconType" />
 </template>
-
-<style scoped>
-.n-icon {
-    vertical-align: -0.15em;
-}
-</style>
