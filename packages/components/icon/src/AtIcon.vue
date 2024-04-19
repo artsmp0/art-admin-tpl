@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type IconProps, NIcon } from 'naive-ui'
-import type { Component } from 'vue'
+import { type Component, computed, h } from 'vue'
 import SvgIcon from './SvgIcon.vue'
 
 defineOptions({

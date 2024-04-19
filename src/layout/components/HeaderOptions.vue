@@ -2,7 +2,7 @@
 import { NAvatar, NText } from 'naive-ui'
 import { useFullscreen } from '@vueuse/core'
 import type { DropdownOption } from 'naive-ui/es/dropdown/src/interface'
-import { AtIcon, AtIconBtn } from '@artsmp/ui'
+import { AtIcon, AtIconBtn } from '@art-admin/components'
 import Settings from './Settings.vue'
 import { useUIStore } from '@/stores/ui'
 import { useUserStore } from '@/stores/user'

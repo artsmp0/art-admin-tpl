@@ -11,6 +11,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 const iconDirs = [fileURLToPath(new URL('./src/assets/icons', import.meta.url))]
 const srcDir = fileURLToPath(new URL('./src', import.meta.url))
+const componentDir = fileURLToPath(new URL('./packages/components', import.meta.url))
 const envDir = fileURLToPath(new URL('env', import.meta.url))
 
 // https://vitejs.dev/config/
@@ -19,7 +20,7 @@ export default defineConfig((config) => {
   return {
     base: VITE_PUBLIC_PATH,
     envDir,
-    resolve: { alias: { '@': srcDir } },
+    resolve: { alias: { '@': srcDir, '@art-admin/components': componentDir } },
     plugins: [
       vue(),
       vueJsx(),

@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@artsmp/ui':
-        specifier: workspace:@artsmp/ui@*
-        version: link:packages/components
       '@unocss/reset':
         specifier: ^0.59.3
         version: 0.59.3

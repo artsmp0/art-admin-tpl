@@ -1,8 +1,15 @@
 {
-  "name": "art-admin-tpl",
+  "name": "art-admin",
   "type": "module",
   "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@9.0.4",
+  "engines": {
+    "node": ">=18.12.0",
+    "pnpm": ">=9.0.2"
+  },
   "scripts": {
+    "postinstall": "pnpm --filter=@art-admin/components build",
     "lint": "eslint . --fix",
     "dev": "vite",
     "build": "vue-tsc && vite build",
@@ -12,7 +19,6 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false"
   },
   "dependencies": {
-    "@artsmp/ui": "workspace:@artsmp/ui@*",
     "@unocss/reset": "^0.59.3",
     "@vueuse/core": "^10.9.0",
     "axios": "^1.6.8",
