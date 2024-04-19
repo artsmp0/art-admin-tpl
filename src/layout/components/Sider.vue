@@ -3,9 +3,9 @@ import { useWindowSize } from '@vueuse/core'
 import { type MenuOption, NEllipsis } from 'naive-ui'
 import { RouterLink } from 'vue-router'
 import type { RouteMeta } from 'vue-router'
+import { AtIcon } from '@artsmp/ui'
 import { type MenuItemType, usePermissionStore } from '@/stores/permission'
 import { useUIStore } from '@/stores/ui'
-import AtIcon from '@/components/icon/src/AtIcon.vue'
 
 type AtMenuOption = MenuOption & {
   name: string

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useDebounceFn, useEventListener } from '@vueuse/core'
+import { AtIcon } from '@artsmp/ui'
 import { type Tab, useTabsStore } from '@/stores/tabs'
 import { useUIStore } from '@/stores/ui'
 import { useAtTheme } from '@/composables/theme'

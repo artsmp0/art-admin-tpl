@@ -2,13 +2,13 @@
 import { NAvatar, NText } from 'naive-ui'
 import { useFullscreen } from '@vueuse/core'
 import type { DropdownOption } from 'naive-ui/es/dropdown/src/interface'
+import { AtIcon, AtIconBtn } from '@artsmp/ui'
 import Settings from './Settings.vue'
 import { useUIStore } from '@/stores/ui'
 import { useUserStore } from '@/stores/user'
 import { isDdOrZzd } from '@/utils'
 import { isDark, toggleDark } from '@/composables/theme'
 import { useDiscrete } from '@/composables/discrete'
-import AtIcon from '@/components/icon/src/AtIcon.vue'
 
 const isDev = computed(() => import.meta.env.DEV)
 const userStore = useUserStore()

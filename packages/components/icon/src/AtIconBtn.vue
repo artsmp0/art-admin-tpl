@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ButtonProps } from 'naive-ui'
 import type { Component } from 'vue'
+import AtIcon from './AtIcon.vue'
 
 defineOptions({
   name: 'AtIconBtn',

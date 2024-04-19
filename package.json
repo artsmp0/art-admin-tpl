@@ -2,12 +2,6 @@
   "name": "art-admin-tpl",
   "type": "module",
   "version": "0.0.0",
-  "module": "es/index.mjs",
-  "types": "es/index.d.ts",
-  "files": [
-    "es/",
-    "package.json"
-  ],
   "scripts": {
     "lint": "eslint . --fix",
     "dev": "vite",
@@ -17,11 +11,8 @@
     "prepare": "simple-git-hooks",
     "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false"
   },
-  "peerDependencies": {
-    "naive-ui": ">=2.38.1",
-    "vue": ">=3.4.21"
-  },
   "dependencies": {
+    "@artsmp/ui": "workspace:@artsmp/ui@*",
     "@unocss/reset": "^0.59.3",
     "@vueuse/core": "^10.9.0",
     "axios": "^1.6.8",
