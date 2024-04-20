@@ -27,7 +27,7 @@ export default defineConfig((config) => {
       UnoCSS(),
       EnvTypes({ dts: './types/env.d.ts' }),
       createSvgIconsPlugin({ iconDirs, symbolId: 'icon-[dir]-[name]' }),
-      Components({ dts: './types/components.d.ts', dirs: ['src/components'], extensions: ['vue', 'tsx', 'jsx'], resolvers: [NaiveUiResolver()] }),
+      Components({ dts: './types/components.d.ts', dirs: ['src/components', componentDir], extensions: ['vue', 'tsx', 'jsx'], resolvers: [NaiveUiResolver()] }),
       AutoImport({
         dts: './types/auto-imports.d.ts',
         imports: [
