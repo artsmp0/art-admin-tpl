@@ -1,23 +1,14 @@
 <script setup lang="ts">
-import { type IconProps, NIcon } from 'naive-ui'
-import { type Component, computed, h } from 'vue'
+import { NIcon } from 'naive-ui'
+import { computed, h } from 'vue'
+import type { AtIconProps } from './types'
 import SvgIcon from './SvgIcon.vue'
 
 defineOptions({
   name: 'AtIcon',
 })
 
-const props = defineProps<{
-  /** 针对 naive icon 的配置 */
-  iconProps?: Omit<IconProps, 'themeOverrides' | 'component'>
-  /** 针对 SvgIcon 的配置 */
-  svgIconProps?: {
-    color?: string
-    size?: string
-    spin?: boolean
-  }
-  icon: string | Component
-}>()
+const props = defineProps<AtIconProps>()
 
 const iconTyped = computed(() => {
   if (typeof props.icon === 'string') {
