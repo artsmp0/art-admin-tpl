@@ -7,5 +7,6 @@
       刷新
     </AtIconBtn>
     <AtEmpty height="200px" />
+    <AtLoading :show="true" :spin-props="{ size: 'small', themeOverrides: { color: '#f00' } }" />
   </div>
 </template>

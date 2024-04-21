@@ -1,3 +1,1 @@
-import AtEmpty from './src/AtEmpty.vue'
-
-export { AtEmpty }
+export { default as AtEmpty } from './src/AtEmpty.vue'
