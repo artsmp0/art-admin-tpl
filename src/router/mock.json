@@ -38,8 +38,7 @@
               "path": "/Demo/Hooks/UseChart",
               "meta": {
                 "title": "useChart",
-                "keepAlive": true,
-                "isIndex": true
+                "keepAlive": true
               },
               "children": []
             },

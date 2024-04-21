@@ -19,5 +19,6 @@ interface AtIconButtonProps extends /* @vue-ignore */ ButtonProps {
     <template #icon>
       <AtIcon :icon="props.icon" :class="spin ? 'animate-spin' : ''" />
     </template>
+    <slot />
   </NButton>
 </template>

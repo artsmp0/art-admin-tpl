@@ -9,7 +9,7 @@ defineOptions({
 
 const props = defineProps<{
   /** 针对 naive icon 的配置 */
-  iconProps?: Omit<IconProps, 'themeOverrides'>
+  iconProps?: Omit<IconProps, 'themeOverrides' | 'component'>
   /** 针对 SvgIcon 的配置 */
   svgIconProps?: {
     color?: string
@@ -19,7 +19,7 @@ const props = defineProps<{
   icon: string | Component
 }>()
 
-const iconType = computed(() => {
+const iconTyped = computed(() => {
   if (typeof props.icon === 'string') {
     if (props.icon.startsWith('svg-')) {
       return h(SvgIcon, {
@@ -50,5 +50,5 @@ const iconType = computed(() => {
 </script>
 
 <template>
-  <Component v-bind="$attrs" :is="iconType" />
+  <Component v-bind="$attrs" :is="iconTyped" />
 </template>

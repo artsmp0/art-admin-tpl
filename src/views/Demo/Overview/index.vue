@@ -2,7 +2,9 @@
 </script>
 
 <template>
-  <div>
-    wudidemo
+  <div class="p16">
+    <AtIconBtn icon="i-ph-arrow-clockwise-duotone">
+      刷新
+    </AtIconBtn>
   </div>
 </template>

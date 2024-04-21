@@ -9,11 +9,10 @@
     "pnpm": ">=9.0.2"
   },
   "scripts": {
-    "postinstall": "pnpm --filter=@art-admin/components build",
+    "build:comp": "pnpm --filter=@art-admin/components build",
     "lint": "eslint . --fix",
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "build:comp": "vite build -c vite.build.config.ts",
     "preview": "vite preview",
     "prepare": "simple-git-hooks",
     "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false"
