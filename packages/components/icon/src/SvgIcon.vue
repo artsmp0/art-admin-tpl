@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type CSSProperties, computed } from 'vue'
+import type { CSSProperties } from 'vue'
 
 defineOptions({
   name: 'AaSvgIcon',

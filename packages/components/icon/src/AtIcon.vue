@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { NIcon } from 'naive-ui'
-import { computed, h } from 'vue'
 import type { AtIconProps } from './types'
 import SvgIcon from './SvgIcon.vue'
 

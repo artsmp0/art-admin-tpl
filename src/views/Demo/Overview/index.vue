@@ -30,7 +30,7 @@ function search(v: string) {
       />
     </div>
     <NFlex>
-      <AtConfirm message="确定删除吗？" @confirm="confirmDel">
+      <AtConfirm message="确定删除吗？" :show-icon="false" @confirm="confirmDel">
         删除
       </AtConfirm>
 

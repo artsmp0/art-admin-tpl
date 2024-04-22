@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type ButtonProps, NButton } from 'naive-ui'
+import type { ButtonProps } from 'naive-ui'
 import type { Component } from 'vue'
 import AtIcon from './AtIcon.vue'
 
