@@ -1,10 +1,16 @@
 <script setup lang="ts">
+import { useDiscrete } from '@/composables/discrete'
+
 function confirmDel() {
   return new Promise<void>((resolve) => {
     setTimeout(() => {
       resolve()
     }, 2000)
   })
+}
+const { message } = useDiscrete()
+function search(v: string) {
+  message.info(v)
 }
 </script>
 
@@ -15,7 +21,7 @@ function confirmDel() {
     </AtIconBtn>
     <AtEmpty height="200px" />
     <AtLoading :show="true" :spin-props="{ size: 'small', themeOverrides: { color: '#f00' } }" />
-    <div>
+    <div mb8>
       这是一行文字
       <AtIconMsg
         style="color: royalblue;"
@@ -23,8 +29,12 @@ function confirmDel() {
         message="这是一行文字的提示这是一行文字的提示这是一行文字的提示这是一行文字的提示"
       />
     </div>
-    <AtConfirm message="确定删除吗？" @confirm="confirmDel">
-      删除
-    </AtConfirm>
+    <NFlex>
+      <AtConfirm message="确定删除吗？" @confirm="confirmDel">
+        删除
+      </AtConfirm>
+
+      <AtSearchInput size="large" style="width: 266px;" @search="search" />
+    </NFlex>
   </div>
 </template>

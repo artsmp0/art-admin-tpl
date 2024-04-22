@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { SpinProps } from 'naive-ui'
-import { NSpin } from 'naive-ui'
 
 defineOptions({
   name: 'AtLoading',
