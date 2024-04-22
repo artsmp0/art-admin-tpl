@@ -24,6 +24,7 @@ export default defineConfig({
       dts: false,
       imports: [
         'vue',
+        'vue-router',
         { 'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'] },
       ],
     }),
