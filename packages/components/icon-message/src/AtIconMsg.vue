@@ -22,7 +22,7 @@ const props = withDefaults(
 <template>
   <NTooltip v-bind="tooltipProps">
     <template #trigger>
-      <AtIcon v-bind="iconProps" />
+      <AtIcon v-bind="{ ...$attrs, ...iconProps }" />
     </template>
     <slot>{{ props.message }}</slot>
   </NTooltip>
