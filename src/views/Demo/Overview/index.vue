@@ -15,7 +15,7 @@ function search(v: string) {
 </script>
 
 <template>
-  <div class="p16">
+  <AtPageContainer>
     <AtIconBtn icon="i-ph-arrow-clockwise-duotone">
       刷新
     </AtIconBtn>
@@ -41,5 +41,5 @@ function search(v: string) {
 
       <AtSearchInput size="large" style="width: 266px;" @search="search" />
     </NFlex>
-  </div>
+  </AtPageContainer>
 </template>
