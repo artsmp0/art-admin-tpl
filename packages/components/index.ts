@@ -1,4 +1,5 @@
 import 'virtual:uno.css'
+import 'virtual:svg-icons-register'
 
 export { AtIcon, AtIconBtn } from './icon'
 export { AtEmpty } from './empty'

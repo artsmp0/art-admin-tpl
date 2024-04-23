@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { AtIcon } from '../../icon'
+
 defineOptions({
   name: 'AtEmpty',
 })
@@ -16,6 +18,10 @@ withDefaults(
 
 <template>
   <div :style="{ height }" class="h-full w-full flex items-center justify-center">
-    <NEmpty :description="desc" />
+    <NEmpty :description="desc">
+      <template #icon>
+        <AtIcon icon="svg-empty-box" />
+      </template>
+    </NEmpty>
   </div>
 </template>

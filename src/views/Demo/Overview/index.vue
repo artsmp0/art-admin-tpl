@@ -19,6 +19,7 @@ function search(v: string) {
     <AtIconBtn icon="i-ph-arrow-clockwise-duotone">
       刷新
     </AtIconBtn>
+    <AtIcon icon="svg-test" />
     <AtEmpty height="200px" />
     <AtLoading :show="true" :spin-props="{ size: 'small', themeOverrides: { color: '#f00' } }" />
     <div mb8>

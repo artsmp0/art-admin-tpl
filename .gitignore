@@ -25,6 +25,6 @@ dist-ssr
 *.sln
 *.sw?
 .npmrc
-types/auto-imports.d.ts
-types/components.d.ts
+auto-imports.d.ts
+components.d.ts
 types/env.d.ts

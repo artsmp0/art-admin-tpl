@@ -9,7 +9,7 @@ import EnvTypes from 'vite-plugin-env-types'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
-const iconDirs = [fileURLToPath(new URL('./src/assets/icons', import.meta.url))]
+const iconDirs = [fileURLToPath(new URL('./src/assets/icons', import.meta.url)), fileURLToPath(new URL('./packages/components/svg', import.meta.url))]
 const srcDir = fileURLToPath(new URL('./src', import.meta.url))
 const componentDir = fileURLToPath(new URL('./packages/components', import.meta.url))
 const envDir = fileURLToPath(new URL('env', import.meta.url))

@@ -16,5 +16,5 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "files": ["./index.ts"]
+  "include": ["./index.ts", "./components.d.ts", "./auto-imports.d.ts"]
 }

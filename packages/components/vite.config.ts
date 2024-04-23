@@ -7,7 +7,9 @@ import dts from 'vite-plugin-dts'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
+const iconDirs = [fileURLToPath(new URL('./svg', import.meta.url))]
 const componentIndex = fileURLToPath(new URL('./index.ts', import.meta.url))
 const preserveModulesRoot = fileURLToPath(new URL('.', import.meta.url))
 const outputEs = fileURLToPath(new URL('./es', import.meta.url))
@@ -18,10 +20,11 @@ export default defineConfig({
     vue(),
     vueJsx(),
     UnoCSS(),
+    createSvgIconsPlugin({ iconDirs, symbolId: 'icon-[dir]-[name]' }),
     dts({ outDir: outputEs }),
-    Components({ dts: false, dirs: ['src/components', componentDir], extensions: ['vue', 'tsx', 'jsx'], resolvers: [NaiveUiResolver()] }),
+    Components({ dts: true, dirs: ['src/components', componentDir], extensions: ['vue', 'tsx', 'jsx'], resolvers: [NaiveUiResolver()] }),
     AutoImport({
-      dts: false,
+      dts: true,
       imports: [
         'vue',
         'vue-router',
@@ -34,7 +37,7 @@ export default defineConfig({
       entry: componentIndex,
     },
     rollupOptions: {
-      external: ['vue', 'naive-ui'],
+      external: ['vue', 'naive-ui', 'vue-router'],
       output: [
         {
           format: 'esm',
