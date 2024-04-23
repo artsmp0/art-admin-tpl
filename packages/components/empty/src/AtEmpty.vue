@@ -18,7 +18,7 @@ withDefaults(
 
 <template>
   <div :style="{ height }" class="h-full w-full flex items-center justify-center">
-    <NEmpty :description="desc">
+    <NEmpty :description="desc" v-bind="$attrs">
       <template #icon>
         <AtIcon icon="svg-empty-box" />
       </template>

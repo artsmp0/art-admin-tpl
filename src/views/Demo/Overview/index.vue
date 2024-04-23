@@ -16,11 +16,14 @@ function search(v: string) {
 
 <template>
   <AtPageContainer>
-    <AtIconBtn icon="i-ph-arrow-clockwise-duotone">
-      刷新
-    </AtIconBtn>
-    <AtIcon icon="svg-test" />
-    <AtEmpty height="200px" />
+    <NFlex align="center">
+      <AtIconBtn icon="i-ph-arrow-clockwise-duotone">
+        刷新
+      </AtIconBtn>
+      <AtIcon icon="svg-test" :svg-icon-props="{ size: '24px' }" />
+      <AtIcon icon="svg-vue" :svg-icon-props="{ size: '24px' }" />
+    </NFlex>
+    <AtEmpty height="200px" size="huge" />
     <AtLoading :show="true" :spin-props="{ size: 'small', themeOverrides: { color: '#f00' } }" />
     <div mb8>
       这是一行文字
