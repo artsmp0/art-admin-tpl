@@ -74,7 +74,7 @@ export const renderMultipleBlock = defineComponent({
           .filter(Boolean) as any[]),
       )
       return (
-        <div class="mb4 w-full rounded-base bg-base px8 pt8 bd-base" key={uuids[i]}>
+        <div class="mb8 w-full rounded-base bg-base px8 pt8 hover:shadow-base bd-base" key={uuids[i]}>
           <div class="mb4 flex items-center justify-between">
             <div class="h20 w20 rounded-base bg-gray/30 text-center text-12 lh-20">{i + 1}</div>
             {multipleConfig

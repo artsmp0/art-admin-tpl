@@ -63,6 +63,10 @@ const commonDark: ThemeContent['light']['common'] = {
 export const antd: ThemeContent = {
   light: {
     common: commonLight,
+    Radio: {
+      buttonTextColorActive: '#fff',
+      buttonColorActive: primaryColor,
+    },
   },
   dark: {
     common: commonDark,
