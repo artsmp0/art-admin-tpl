@@ -16,6 +16,16 @@
             "noClosable": true
           },
           "children": []
+        },
+        {
+          "path": "/Demo/Table",
+          "meta": {
+            "title": "AtTable",
+            "keepAlive": true,
+            "icon": "sidebar-chart",
+            "noClosable": true
+          },
+          "children": []
         }
       ]
     }

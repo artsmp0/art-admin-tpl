@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { TooltipProps } from 'naive-ui'
 import type { AtIconProps } from '../../icon/src/types'
+import { AtIcon } from '../../icon'
 
 defineOptions({
   name: 'AtIconMsg',
@@ -22,7 +23,9 @@ const props = withDefaults(
 <template>
   <NTooltip v-bind="tooltipProps">
     <template #trigger>
-      <AtIcon v-bind="{ ...$attrs, ...iconProps }" />
+      <slot name="trigger">
+        <AtIcon v-bind="{ ...$attrs, ...iconProps }" />
+      </slot>
     </template>
     <slot>{{ props.message }}</slot>
   </NTooltip>

@@ -2,6 +2,7 @@
   "name": "@art-admin/components",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@9.0.5",
   "description": "",
   "author": "",
   "license": "ISC",
@@ -9,13 +10,26 @@
   "main": "es/index.mjs",
   "module": "es/index.mjs",
   "types": "es/index.d.ts",
-  "files": ["dist", "package.json"],
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "scripts": {
     "build": "vite build"
   },
   "peerDependencies": {
+    "@vueuse/core": ">=10.9.0",
+    "lodash-unified": ">=1.0.3",
     "naive-ui": ">=2.38.1",
     "vue": ">=3.4.21",
     "vue-router": ">=4.2.5"
+  },
+  "dependencies": {
+    "@vueuse/core": "^10.9.0",
+    "lodash-unified": "^1.0.3",
+    "sortablejs": "^1.15.2"
+  },
+  "devDependencies": {
+    "@types/sortablejs": "^1.15.8"
   }
 }

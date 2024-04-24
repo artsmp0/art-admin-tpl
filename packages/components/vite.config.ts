@@ -9,9 +9,9 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
-const iconDirs = [fileURLToPath(new URL('./svg', import.meta.url))]
-const componentIndex = fileURLToPath(new URL('./index.ts', import.meta.url))
-const preserveModulesRoot = fileURLToPath(new URL('.', import.meta.url))
+const iconDirs = [fileURLToPath(new URL('./src/svg', import.meta.url))]
+const componentIndex = fileURLToPath(new URL('./src/index.ts', import.meta.url))
+const preserveModulesRoot = fileURLToPath(new URL('./src', import.meta.url))
 const outputEs = fileURLToPath(new URL('./es', import.meta.url))
 const componentDir = fileURLToPath(new URL('./packages/components', import.meta.url))
 
@@ -37,7 +37,7 @@ export default defineConfig({
       entry: componentIndex,
     },
     rollupOptions: {
-      external: ['vue', 'naive-ui', 'vue-router'],
+      external: ['vue', 'naive-ui', 'vue-router', 'lodash-unified', '@vueuse/core', 'sortablejs'],
       output: [
         {
           format: 'esm',
