@@ -33,11 +33,20 @@ export default defineConfig({
     }),
   ],
   build: {
+    sourcemap: true,
     lib: {
       entry: componentIndex,
     },
     rollupOptions: {
-      external: ['vue', 'naive-ui', 'vue-router', 'lodash-unified', '@vueuse/core', 'sortablejs'],
+      external: [
+        'vue',
+        /^naive-ui/,
+        'vue-router',
+        'lodash-unified',
+        '@vueuse/core',
+        'sortablejs',
+        /^monaco-editor/,
+      ],
       output: [
         {
           format: 'esm',

@@ -27,6 +27,7 @@
   "dependencies": {
     "@vueuse/core": "^10.9.0",
     "lodash-unified": "^1.0.3",
+    "monaco-editor": "^0.48.0",
     "sortablejs": "^1.15.2"
   },
   "devDependencies": {

@@ -22,8 +22,16 @@
           "meta": {
             "title": "AtTable",
             "keepAlive": true,
-            "icon": "sidebar-chart",
-            "noClosable": true
+            "icon": "sidebar-chart"
+          },
+          "children": []
+        },
+        {
+          "path": "/Demo/Form",
+          "meta": {
+            "title": "AtForm",
+            "keepAlive": true,
+            "icon": "sidebar-chart"
           },
           "children": []
         }
