@@ -7,7 +7,6 @@ import useData from './hooks/use-data'
 import RightUtils from './components/RightUtils.vue'
 
 const props = withDefaults(defineProps<AtTableProps>(), {
-  selection: false,
   rightUtils: () => ['size', 'reload', 'fullscreen', 'setting'],
   size: 'medium',
   deepReactive: false,

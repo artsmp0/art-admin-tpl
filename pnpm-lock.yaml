@@ -63,6 +63,9 @@ importers:
       lint-staged:
         specifier: ^15.2.2
         version: 15.2.2
+      pnpm:
+        specifier: ^9.0.5
+        version: 9.0.5
       sass:
         specifier: ^1.69.5
         version: 1.69.5
@@ -2813,6 +2816,11 @@ packages:
   pluralize@8.0.0:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
+
+  pnpm@9.0.5:
+    resolution: {integrity: sha512-pyJXXBj9eR+e9x44fG4WzAPJDYWbmwmY0EKMoOMiCCizKpbm3nPOo07bwPUIJHcbGmnH6ja4bao7icfm2aPZEg==}
+    engines: {node: '>=18.12'}
+    hasBin: true
 
   posix-character-classes@0.1.1:
     resolution: {integrity: sha512-xTgYBc3fuo7Yt7JbiuFxSYGToMoz8fLoE6TC9Wx1P/u+LfeThMOAqmuyECnlBaaJb+u1m9hHiXUEtwW4OzfUJg==}
@@ -6660,6 +6668,8 @@ snapshots:
       pathe: 1.1.2
 
   pluralize@8.0.0: {}
+
+  pnpm@9.0.5: {}
 
   posix-character-classes@0.1.1: {}
 

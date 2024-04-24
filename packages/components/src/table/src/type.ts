@@ -1,4 +1,5 @@
 import type { DataTableBaseColumn, DataTableColumns, DataTableProps } from 'naive-ui'
+import type { TableSelectionColumn } from 'naive-ui/es/data-table/src/interface'
 import type { ComputedRef, InjectionKey, ShallowRef } from 'vue'
 
 /** 分页参数 */
@@ -31,7 +32,7 @@ export interface AtTableProps {
   pagination?: DataTableProps['pagination']
   columns: TableColumns
   sorterKeys?: SorterKeys
-  selection?: boolean
+  selection?: TableSelectionColumn
   /** 右侧功能区 */
   rightUtils?: RightUtils
   size?: DataTableProps['size']

@@ -14,13 +14,9 @@ export default function useColumns(propsGetter: () => AtTableProps) {
     const columns = cols.value.map((col) => {
       return { ...col, rowSpan: col.needRowSpan ? (rowData: any) => rowData[`${col.key as string}RowSpan`] : undefined }
     })
-    if (props.selection) {
-      columns.unshift({
-        type: 'selection',
-        title: '选择列',
-        key: 'selection',
-      } as any)
-    }
+    if (props.selection)
+      columns.unshift(props.selection as any)
+
     return columns as any
   })
 
