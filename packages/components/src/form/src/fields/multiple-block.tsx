@@ -31,18 +31,17 @@ export const renderMultipleBlock = defineComponent({
     })
 
     const uuids: string[] = []
-
-    // 生成子 field
     const internalGenConfigs = ref<any[][]>([])
-    const widgets = shallowRef<any[]>([])
+
     const genWidgetByIndex = (i: number) => {
       const subItems: VNode[] = []
       if (!compProps.item.children)
         return
-      if (!Array.isArray(internalGenConfigs.value[i]))
+      const currentConfig = [...internalGenConfigs.value[i]]
+      if (!Array.isArray(currentConfig))
         return
       subItems.push(
-        ...(internalGenConfigs.value[i]
+        ...(currentConfig
           .map((child) => {
             const path = `${field}.${i}.${child.field}`
             return child.hide
@@ -64,7 +63,7 @@ export const renderMultipleBlock = defineComponent({
                         getWidget({
                           item: { ...child, path },
                           model: compProps.model[field][i],
-                          internalConfigStates: internalGenConfigs.value[i],
+                          internalConfigStates: currentConfig,
                         }),
                       ),
                     label: getLabelRenderer(child.label),
@@ -88,6 +87,7 @@ export const renderMultipleBlock = defineComponent({
                   onClick={() => {
                     compProps.model[field].splice(i, 1)
                     uuids.splice(i, 1)
+                    internalGenConfigs.value.splice(i, 1)
                     multipleConfig.onRemoveButtonClick?.(i, compProps.item)
                   }}
                 >
@@ -101,7 +101,8 @@ export const renderMultipleBlock = defineComponent({
         </div>
       )
     }
-    const genWidgets = () => {
+
+    const widgets = computed(() => {
       const genWidgetArr: any[] = []
       if (!compProps.model[field] && defaultItem) {
         // 如果 model[field] 为 null 或者 undefined 并且存在 defaultItem，则说明这是一个对象数组表单。需要初始化他为一个数组。避免报错 xxx undefined。
@@ -112,6 +113,8 @@ export const renderMultipleBlock = defineComponent({
         for (let i = 0; i < compProps.model[field].length; i++) {
           if (!uuids[i])
             uuids.push(`${Math.random()}`)
+          if (!internalGenConfigs.value[i])
+            internalGenConfigs.value[i] = cloneDeep(compProps.item.children!)
           genWidgetArr.push(genWidgetByIndex(i))
         }
       }
@@ -145,32 +148,19 @@ export const renderMultipleBlock = defineComponent({
           </NGrid>,
         )
       }
-      widgets.value = genWidgetArr
+      return genWidgetArr
+    })
+
+    const genInternalConfigs = () => {
+      const v = compProps.model[field].length
+      for (let idx = 0; idx < v; idx++)
+        internalGenConfigs.value[idx] = cloneDeep(compProps.item.children!)
     }
 
     watch(
-      () => compProps.model[field].length,
-      (v) => {
-        for (let idx = 0; idx < v; idx++) {
-          if (internalGenConfigs.value[idx] && internalGenConfigs.value[idx].length > 0)
-            continue
-
-          internalGenConfigs.value[idx] = cloneDeep(compProps.item.children!)
-        }
-      },
-      { immediate: true },
-    )
-    watchEffect(genWidgets)
-    watch(
-      () => compProps.item,
-      () => {
-        // should update cache config when props change
-        internalGenConfigs.value.forEach((item) => {
-          Object.assign(item, compProps.item.children!)
-        })
-        genWidgets()
-      },
-      { deep: true },
+      [() => compProps.model[field].length, () => compProps.item],
+      genInternalConfigs,
+      { immediate: true, deep: true },
     )
 
     return () => {
@@ -186,6 +176,8 @@ export const renderMultipleBlock = defineComponent({
               {...multipleConfig.addBtnProps}
               onClick={() => {
                 compProps.model[field].push(cloneDeep(defaultItem))
+                internalGenConfigs.value.push(cloneDeep(compProps.item.children!))
+                uuids.push(`${Math.random()}`)
                 multipleConfig.onAddButtonClick?.(compProps.item)
               }}
             >
