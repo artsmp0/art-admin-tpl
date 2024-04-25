@@ -45,7 +45,7 @@ export default defineConfig({
         'lodash-unified',
         '@vueuse/core',
         'sortablejs',
-        /^monaco-editor/,
+        '@monaco-editor/loader',
       ],
       output: [
         {

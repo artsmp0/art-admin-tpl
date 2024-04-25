@@ -12,8 +12,10 @@ import type {
   SwitchProps,
   TreeSelectProps,
 } from 'naive-ui'
-import type { Component, HTMLAttributes, Ref, VNode } from 'vue'
+import type { CSSProperties, Component, HTMLAttributes, Ref, VNode } from 'vue'
 import type { Recordable } from '../../types'
+import type { AtMonacoEditorProps } from '../../monaco-editor'
+import type { AtUploadProps } from '../../upload'
 
 export interface GpFormProps {
   configs: FormItemConfig[]
@@ -35,9 +37,8 @@ export interface FieldPropMap {
   treeSelect: Omit<TreeSelectProps, UnNeedKey>
   datePicker: Omit<DatePickerProps, UnNeedKey>
   cascader: Omit<CascaderProps, UnNeedKey> & { loading?: boolean }
-  // TODO missing components
-  monacoEditor: any
-  upload: Omit<any, UnNeedKey>
+  monacoEditor: Omit<AtMonacoEditorProps, UnNeedKey>
+  upload: Omit<AtUploadProps, UnNeedKey>
   custom: any
   multipleBlock: Omit<GridProps, 'themeOverrides'>
   titleBar: undefined
@@ -50,7 +51,7 @@ export type FormItemConfig = {
     type: K
     field: string
     label?: string | (() => VNode)
-    props?: FieldPropMap[K] & Omit<HTMLAttributes, 'onChange'> & { onChange?: (newVal: any, internalConfigStates?: FormItemConfig[]) => void }
+    props?: FieldPropMap[K] & { style?: CSSProperties | string } & { onChange?: (newVal: any, internalConfigStates?: FormItemConfig[]) => void }
     deps?: (string | Ref<any>)[]
     listener?: (apiFn?: Function) => void
     /** 是否在对依赖处理的时候需要深度监听 */

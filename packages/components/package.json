@@ -25,6 +25,7 @@
     "vue-router": ">=4.2.5"
   },
   "dependencies": {
+    "@monaco-editor/loader": "^1.4.0",
     "@vueuse/core": "^10.9.0",
     "lodash-unified": "^1.0.3",
     "monaco-editor": "^0.48.0",
