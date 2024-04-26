@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import { cloneDeep, isArray, merge, mergeWith, omit } from 'lodash-unified'
 import type { FormInst } from 'naive-ui'
+import type { Recordable } from '../../types'
 import { EXTRA_FORM_ITEM_PROPS, getElements } from './utils'
-import type { FormItemConfig, FormItemElement, GpFormProps } from './types'
+import type { AtFormProps, FormItemConfig, FormItemElement } from './types'
 
 defineOptions({
   name: 'AtForm',
 })
-const props = withDefaults(defineProps<GpFormProps>(), {
+const props = withDefaults(defineProps<AtFormProps>(), {
   scrollToFirstError: true,
   layout() {
     return { xGap: 16 }
   },
 })
 
-const model = defineModel<object>('model', { required: true })
+const model = defineModel<Recordable>('model', { required: true })
 const { genElement, genElements } = getElements(model.value, () => props.configs)
 const elements = shallowReactive<FormItemElement[]>(genElements())
 // when props.configs is computed, it will auto update elements when config changed.
@@ -82,6 +83,7 @@ defineExpose(
     setValue,
     restoreValidation,
     updateElementByField,
+    getEl() { return (formRef.value as any).$el },
   }),
 )
 
@@ -92,7 +94,7 @@ function isString(thing: any) {
 
 <template>
   <NForm ref="formRef" :model="model" v-bind="props.nFormProps">
-    <NGrid v-bind="layout">
+    <NGrid v-if="!props.nFormProps?.inline" v-bind="layout">
       <template v-for="element in elements" :key="element.props.field">
         <template v-if="element.props.type !== 'titleBar'">
           <NFormItemGi
@@ -124,5 +126,23 @@ function isString(thing: any) {
         </NGridItem>
       </template>
     </NGrid>
+    <template v-for="element in elements" v-else :key="element.props.field">
+      <NFormItem
+        v-if="!element.props.hide"
+        v-bind="omit(element.props, EXTRA_FORM_ITEM_PROPS)"
+        :span="element.props.span ?? 24"
+        :path="element.props.field"
+        :target="element.props.field"
+      >
+        <template v-if="element.props.label" #label>
+          <div flex items-center gap4>
+            <span v-if="isString(element.props.label)">{{ element.props.label }}</span>
+            <Component :is="element.props.label" v-else />
+          </div>
+        </template>
+        <Component :is="element.widget" />
+      </NFormItem>
+    </template>
+    <slot name="search" />
   </NForm>
 </template>

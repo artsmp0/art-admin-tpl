@@ -34,6 +34,15 @@
             "icon": "sidebar-chart"
           },
           "children": []
+        },
+        {
+          "path": "/Demo/Search",
+          "meta": {
+            "title": "AtSearch",
+            "keepAlive": true,
+            "icon": "sidebar-chart"
+          },
+          "children": []
         }
       ]
     }

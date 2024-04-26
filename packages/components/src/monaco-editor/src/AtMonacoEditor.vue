@@ -23,8 +23,6 @@ const emit = defineEmits<{
 }>()
 
 let editorInst = null as editor.IStandaloneCodeEditor | null
-const isDark = useDark()
-const curTheme = computed(() => (isDark.value ? 'vs-dark' : 'vs'))
 const formItem = useFormItem({})
 const editorRef = shallowRef()
 const getValue = () => editorInst?.getValue()
@@ -37,7 +35,7 @@ function initMonacoEditor() {
         value: props.defaultValue ?? props.value,
         readOnly: formItem.mergedDisabledRef.value || props.options?.readOnly,
         automaticLayout: true,
-        theme: curTheme.value,
+        theme: 'vs-dark',
         scrollbar: {
           alwaysConsumeMouseWheel: false,
         },
@@ -62,29 +60,14 @@ function initMonacoEditor() {
     })
   }
 }
-watch(
-  () => props.value,
-  (val) => {
-    if (val !== getValue())
-      editorInst?.setValue(val ?? '')
-  },
-)
+watch(() => props.value, (val) => {
+  if (val !== getValue())
+    editorInst?.setValue(val ?? '')
+})
 
-watch(
-  () => formItem.mergedDisabledRef.value,
-  (value) => {
-    editorInst?.updateOptions({ readOnly: value })
-  },
-)
-
-watch(
-  () => isDark.value,
-  () => {
-    // editor?.dispose()
-    // initMonacoEditor()
-    editorInst?.updateOptions({ theme: curTheme.value })
-  },
-)
+watch(() => formItem.mergedDisabledRef.value, (value) => {
+  editorInst?.updateOptions({ readOnly: value })
+})
 
 onMounted(() => initMonacoEditor())
 onUnmounted(() => editorInst?.dispose())

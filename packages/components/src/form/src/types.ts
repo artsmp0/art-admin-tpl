@@ -12,12 +12,12 @@ import type {
   SwitchProps,
   TreeSelectProps,
 } from 'naive-ui'
-import type { CSSProperties, Component, HTMLAttributes, Ref, VNode } from 'vue'
+import type { CSSProperties, Component, Ref, VNode } from 'vue'
 import type { Recordable } from '../../types'
 import type { AtMonacoEditorProps } from '../../monaco-editor'
 import type { AtUploadProps } from '../../upload'
 
-export interface GpFormProps {
+export interface AtFormProps {
   configs: FormItemConfig[]
   layout?: GridProps
   model: object
