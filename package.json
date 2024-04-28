@@ -21,7 +21,6 @@
     "@unocss/reset": "^0.59.3",
     "@vueuse/core": "^10.9.0",
     "axios": "^1.6.8",
-    "gupo-gm-crypto": "^0.4.10",
     "gupo-vue3-persistedstate": "^1.0.1",
     "naive-ui": "^2.38.1",
     "pinia": "^2.1.7",
