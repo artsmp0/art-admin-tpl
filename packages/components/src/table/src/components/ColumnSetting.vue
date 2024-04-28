@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { cloneDeep } from 'lodash-unified'
-import { NCheckboxGroup } from 'naive-ui'
+import { NButton, NCheckbox, NCheckboxGroup, NPopover } from 'naive-ui'
 import sortablejs from 'sortablejs'
 import type { TableBaseColumn } from 'naive-ui/es/data-table/src/interface'
 import type Sortable from 'sortablejs'
+import { computed, inject, nextTick, reactive, ref, shallowRef, unref, watch } from 'vue'
 import { tableInjectionKey } from '../type'
 
 defineProps<{

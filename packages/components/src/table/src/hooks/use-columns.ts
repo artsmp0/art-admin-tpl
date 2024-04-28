@@ -1,3 +1,4 @@
+import { computed, provide, ref, shallowRef, toValue, watch } from 'vue'
 import { type AtTableProps, type TableColumns, tableInjectionKey } from '../type'
 
 export default function useColumns(propsGetter: () => AtTableProps) {

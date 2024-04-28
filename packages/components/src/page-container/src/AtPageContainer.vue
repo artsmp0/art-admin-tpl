@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { NBackTop, NScrollbar } from 'naive-ui'
+import { computed } from 'vue'
+
 defineOptions({
   name: 'AtPageContainer',
 })

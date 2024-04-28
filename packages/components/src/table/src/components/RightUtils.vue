@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useFullscreen } from '@vueuse/core'
-import type { DataTableProps } from 'naive-ui'
+import { toRef, useFullscreen } from '@vueuse/core'
+import { type DataTableProps, NPopselect } from 'naive-ui'
+import { computed } from 'vue'
 import type { RightUtils } from '../type'
 import { AtIconMsg } from '../../../icon-message'
 import { AtIcon } from '../../../icon'

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { DataTableRowKey } from 'naive-ui'
+import { type DataTableRowKey, NButton, NDataTable, NDivider } from 'naive-ui'
+import { computed, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
 import type { Key } from '../../types'
 import type { AtTableProps } from './type'
 import useColumns from './hooks/use-columns'

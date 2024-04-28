@@ -1,4 +1,5 @@
 import { omit } from 'lodash-unified'
+import { defineComponent, h, reactive, toRefs } from 'vue'
 import { useDeps } from '../utils'
 import { AtMonacoEditor } from '../../../monaco-editor'
 import { type RenderFnParams, needOmitKeyArr } from '../types'

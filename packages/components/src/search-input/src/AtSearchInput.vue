@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import type { InputProps } from 'naive-ui'
+import { type InputProps, NInput } from 'naive-ui'
+import { ref } from 'vue'
+import { AtIcon } from '../../icon'
 
 defineOptions({
   name: 'AtSearchInput',

@@ -1,6 +1,6 @@
 import { cloneDeep, isArray, omit } from 'lodash-unified'
 import { NFormItemGi, NGrid } from 'naive-ui'
-import type { VNode } from 'vue'
+import { type VNode, computed, defineComponent, h, ref, watch } from 'vue'
 import { EXTRA_FORM_ITEM_PROPS, useDeps } from '../utils'
 import type { FormItemConfig, RenderFnParams } from '../types'
 import { AtIconBtn } from '../../../icon'

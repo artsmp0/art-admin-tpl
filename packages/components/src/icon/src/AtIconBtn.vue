@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { NButton } from 'naive-ui'
 import AtIcon from './AtIcon.vue'
 import type { AtIconButtonProps } from './types'
 

@@ -1,5 +1,6 @@
 import { omit } from 'lodash-unified'
 import { NCascader, NSpin } from 'naive-ui'
+import { defineComponent, h, reactive, toRefs } from 'vue'
 import { useDeps, useFetchField } from '../utils'
 import { type RenderFnParams, needOmitKeyArr } from '../types'
 

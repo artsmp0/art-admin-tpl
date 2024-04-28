@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { ButtonProps } from 'naive-ui'
+import { type ButtonProps, NButton, NFlex, NPopconfirm } from 'naive-ui'
+import { ref } from 'vue'
 
 defineOptions({
   name: 'AtConfirm',
@@ -44,14 +45,14 @@ async function handlePositiveClick() {
     </template>
     {{ message }}
     <template #action>
-      <NSpace size="small">
+      <NFlex align="center" size="small">
         <NButton size="tiny" @click="handleCancel">
           取消
         </NButton>
         <NButton type="primary" size="tiny" :loading="loading" @click="handlePositiveClick">
           确认
         </NButton>
-      </NSpace>
+      </NFlex>
     </template>
   </NPopconfirm>
 </template>

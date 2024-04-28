@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TooltipProps } from 'naive-ui'
+import { NTooltip, type TooltipProps } from 'naive-ui'
 import type { AtIconProps } from '../../icon/src/types'
 import { AtIcon } from '../../icon'
 

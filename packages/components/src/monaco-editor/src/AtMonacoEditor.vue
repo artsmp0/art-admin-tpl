@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useDark } from '@vueuse/core'
 import type { editor } from 'monaco-editor'
 import loader from '@monaco-editor/loader'
 import { useThemeVars } from 'naive-ui'
 import useFormItem from 'naive-ui/es/_mixins/use-form-item'
+import { onMounted, onUnmounted, shallowRef, watch } from 'vue'
 import type { AtMonacoEditorProps } from './type'
 
 defineOptions({

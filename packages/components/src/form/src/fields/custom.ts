@@ -1,5 +1,5 @@
 import { omit } from 'lodash-unified'
-import type { Component } from 'vue'
+import { type Component, defineComponent, h, reactive, toRefs } from 'vue'
 import { useDeps } from '../utils'
 import { type RenderFnParams, needOmitKeyArr } from '../types'
 

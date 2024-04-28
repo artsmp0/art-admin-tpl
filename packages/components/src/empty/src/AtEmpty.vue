@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { NEmpty } from 'naive-ui'
 import { AtIcon } from '../../icon'
 
 defineOptions({

@@ -1,4 +1,5 @@
 import { upperFirst } from 'lodash-unified'
+import { h } from 'vue'
 import type { RenderFnParams } from '../types'
 import * as Fields from './fields'
 
