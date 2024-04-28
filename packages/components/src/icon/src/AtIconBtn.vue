@@ -1,23 +1,17 @@
 <script setup lang="ts">
-import type { ButtonProps } from 'naive-ui'
-import type { Component } from 'vue'
 import AtIcon from './AtIcon.vue'
+import type { AtIconButtonProps } from './types'
 
 defineOptions({
   name: 'AtIconBtn',
 })
 const props = defineProps<AtIconButtonProps>()
-
-interface AtIconButtonProps extends /* @vue-ignore */ ButtonProps {
-  icon: string | Component
-  spin?: boolean
-}
 </script>
 
 <template>
   <NButton v-bind="props">
     <template #icon>
-      <AtIcon :icon="props.icon" :class="spin ? 'animate-spin' : ''" />
+      <AtIcon :icon="props.icon" v-bind="props.atIconProps" :class="spin ? 'animate-spin' : ''" />
     </template>
     <slot />
   </NButton>

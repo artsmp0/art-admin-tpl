@@ -20,6 +20,7 @@ function search(v: string) {
       <AtIconBtn icon="i-ph-arrow-clockwise-duotone">
         刷新
       </AtIconBtn>
+      <AtIcon icon="i-ph-arrow-clockwise-duotone" class="text-50 text-rose" />
       <AtIcon icon="svg-test" :svg-icon-props="{ size: '24px' }" />
       <AtIcon icon="svg-vue" :svg-icon-props="{ size: '24px' }" />
     </NFlex>

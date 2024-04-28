@@ -1,49 +1,26 @@
----
-outline: deep
----
+# AtIcon
 
-# Runtime API Examples
+该组件同时支持 `Naive Icon`，`Unocss Icon` 以及 `SvgIcon`。
+1. 如果使用 Svg Icon 请注意需要配置 [`vite-plugin-svg-icons`](https://github.com/vbenjs/vite-plugin-svg-icons) 这个插件，并且传递的 icon 需要以 `svg-` 开头。
+2. 如果使用 Naive Icon，需要根据[文档](https://www.naiveui.com/zh-CN/os-theme/components/icon)安装对应的图标包，传递的 icon 属性是对应的图标组件。
+3. 如果使用 Unocss Icon，则需要安装 [unocss 图标包](https://icones.js.org/)，传递的 icon 字符串需要以 `i-` 开头。
 
-This page demonstrates usage of some of the runtime APIs provided by VitePress.
+### props
 
-The main `useData()` API can be used to access site, theme, and page data for the current page. It works in both `.md` and `.vue` files:
-
-```md
-<script setup>
-import { useData } from 'vitepress'
-
-const { theme, page, frontmatter } = useData()
-</script>
-
-## Results
-
-### Theme Data
-<pre>{{ theme }}</pre>
-
-### Page Data
-<pre>{{ page }}</pre>
-
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
+```ts
+export interface AtIconProps {
+  /** 针对 naive icon 的配置 */
+  iconProps?: Omit<IconProps, 'themeOverrides' | 'component'>
+  /** 针对 SvgIcon 的配置 */
+  svgIconProps?: {
+    color?: string
+    size?: string
+    spin?: boolean
+  }
+  icon: string | Component
+}
 ```
 
-<script setup>
-import { useData } from 'vitepress'
+### demo
 
-const { site, theme, page, frontmatter } = useData()
-</script>
-
-## Results
-
-### Theme Data
-<pre>{{ theme }}</pre>
-
-### Page Data
-<pre>{{ page }}</pre>
-
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
-
-## More
-
-Check out the documentation for the [full list of runtime APIs](https://vitepress.dev/reference/runtime-api#usedata).
+<demo src="../examples/at-icon/at-icon.vue"></demo>

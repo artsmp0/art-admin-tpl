@@ -1,85 +1,21 @@
-# Markdown Extension Examples
+# AtIcon
 
-This page demonstrates some of the built-in markdown extensions provided by VitePress.
+按钮图标，避免写 `template #icon` 这个繁琐操作，支持 `AtIcon` 和 `NButton` 的所有属性。
 
-## Syntax Highlighting
+### props
 
-VitePress provides Syntax Highlighting powered by [Shiki](https://github.com/shikijs/shiki), with additional features like line-highlighting:
-
-**Input**
-
-````md
-```js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
-}
-```
-````
-
-**Output**
-
-```js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
+```ts
+export interface AtIconButtonProps extends /* @vue-ignore */ ButtonProps {
+  icon: string | Component
+  spin?: boolean
+  atIconProps?: AtIconProps
 }
 ```
 
-## Custom Containers
+### demo
 
-**Input**
-
-```md
-::: info
-This is an info box.
-:::
-
-::: tip
-This is a tip.
-:::
-
-::: warning
-This is a warning.
-:::
-
-::: danger
-This is a dangerous warning.
-:::
-
-::: details
-This is a details block.
-:::
+```vue
+<AtIconBtn icon="i-ph-arrow-clockwise-duotone">
+  刷新
+</AtIconBtn>
 ```
-
-**Output**
-
-::: info
-This is an info box.
-:::
-
-::: tip
-This is a tip.
-:::
-
-::: warning
-This is a warning.
-:::
-
-::: danger
-This is a dangerous warning.
-:::
-
-::: details
-This is a details block.
-:::
-
-## More
-
-Check out the documentation for the [full list of markdown extensions](https://vitepress.dev/guide/markdown).

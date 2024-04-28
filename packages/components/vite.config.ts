@@ -20,7 +20,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
     UnoCSS(),
-    createSvgIconsPlugin({ iconDirs, symbolId: 'icon-[dir]-[name]' }),
+    createSvgIconsPlugin({ iconDirs, symbolId: 'icon-[dir]-[name]', customDomId: '__@art-admin/components__svg__icons__dom__' }),
     dts({ outDir: outputEs }),
     Components({ dts: true, dirs: ['src/components', componentDir], extensions: ['vue', 'tsx', 'jsx'], resolvers: [NaiveUiResolver()] }),
     AutoImport({
