@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import { initCrypto } from 'gupo-gm-crypto'
 import { useDiscrete } from '@/composables/discrete'
 import { usePermissionStore } from '@/stores/permission'
 import { type AuthQuery, useUserStore } from '@/stores/user'

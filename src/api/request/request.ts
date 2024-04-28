@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import { cryptoInInterceptors } from 'gupo-gm-crypto'
 import { addAuthHeader } from './interceptors/add-auth-header'
 import { parseArgs } from './interceptors/parse-args'
 import { repeatReq } from './interceptors/repeat-req'
