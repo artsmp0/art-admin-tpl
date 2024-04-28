@@ -17,7 +17,7 @@ function search(v: string) {
 <template>
   <AtPageContainer>
     <NFlex align="center">
-      <AtIconBtn icon="i-ph-arrow-clockwise-duotone">
+      <AtIconBtn icon="i-ph-arrow-clockwise-duotone" spin>
         刷新
       </AtIconBtn>
       <AtIcon icon="i-ph-arrow-clockwise-duotone" class="text-50 text-rose" />

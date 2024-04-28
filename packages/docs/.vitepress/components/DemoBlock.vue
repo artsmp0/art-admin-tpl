@@ -1,6 +1,6 @@
 <script lang='ts' setup name="demo-block">
 import { computed } from 'vue'
-import { isClient, useClipboard, useToggle } from '@vueuse/core'
+import { useClipboard, useToggle } from '@vueuse/core'
 
 const props = withDefaults(defineProps<{
   code: string
@@ -20,22 +20,16 @@ const [value, toggle] = useToggle()
 <template>
   <ClientOnly>
     <div v-bind="$attrs" class="mt-6 of-hidden border border-gray/20 rounded border-solid">
-      <div class="o-demo_wrapper">
+      <div class="at-demo_wrapper">
         <slot />
       </div>
       <div class="relative">
-        <div class="o-demo_actions">
-          <a href="javascript:void(0);" class="o-demo_action_item" group @click="copy()">
-            <div class="o-demo_action_icon i-ph-copy-simple-duotone" />
-            <div class="o-demo_tooltip" group-hover:opacity-100>
-              {{ copied ? 'Copied' : 'Copy code' }}
-            </div>
+        <div class="at-demo_actions">
+          <a href="javascript:void(0);" class="at-demo_action_item" group @click="copy()">
+            <div class="at-demo_action_icon" :class="copied ? 'i-ph-check-circle-duotone' : 'i-ph-copy-simple-duotone'" />
           </a>
-          <a href="javascript:void(0);" class="o-demo_action_item" group @click="toggle()">
-            <div class="o-demo_action_icon i-ph-terminal-window-duotone" />
-            <div class="o-demo_tooltip" group-hover:opacity-100>
-              {{ value ? 'Hidden code' : 'Show code' }}
-            </div>
+          <a href="javascript:void(0);" class="at-demo_action_item" group @click="toggle()">
+            <div class="at-demo_action_icon i-ph-terminal-window-duotone" />
           </a>
         </div>
         <div v-show="value" :class="`language-${lang} my0!`" v-html="decodedHighlightedCode" />

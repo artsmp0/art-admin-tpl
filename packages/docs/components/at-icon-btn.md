@@ -14,8 +14,4 @@ export interface AtIconButtonProps extends /* @vue-ignore */ ButtonProps {
 
 ### demo
 
-```vue
-<AtIconBtn icon="i-ph-arrow-clockwise-duotone">
-  刷新
-</AtIconBtn>
-```
+<demo src="../examples/at-icon/at-icon-btn.vue"></demo>
