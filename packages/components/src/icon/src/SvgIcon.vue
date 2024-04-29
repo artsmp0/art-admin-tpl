@@ -15,20 +15,10 @@ interface Props {
   /** icons 文件夹下的图标名称 */
   name: string
   /**
-   * 图标颜色
-   * @default currentColor
-   */
-  color?: string
-  /**
    * 图标尺寸
    * @default 1em
    */
   size?: string
-  /**
-   * 是否旋转
-   * @default false
-   */
-  spin?: boolean
 }
 
 const symbolId = computed(() => `#icon-${props.name}`)
@@ -41,7 +31,7 @@ const style = computed((): CSSProperties => {
 </script>
 
 <template>
-  <svg aria-hidden="true" :class="spin && 'animate-spin'" class="at-icon" :style="style">
+  <svg aria-hidden="true" class="at-icon" :style="style">
     <use :xlink:href="symbolId" />
   </svg>
 </template>

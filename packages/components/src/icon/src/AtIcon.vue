@@ -9,20 +9,20 @@ defineOptions({
   name: 'AtIcon',
 })
 
-const props = defineProps<AtIconProps>()
+const props = withDefaults(defineProps<AtIconProps>(), { size: '1em' })
 
 const iconTyped = computed(() => {
   if (typeof props.icon === 'string') {
     if (props.icon.startsWith('svg-')) {
       return h(SvgIcon, {
         name: props.icon.slice(4),
-        ...props.svgIconProps,
+        size: props.size,
       })
     }
     else if (props.icon.startsWith('i-')) {
       return h('div', {
         class: `${props.icon}`,
-        style: { display: 'inline-block', verticalAlign: '-0.15em' },
+        style: { display: 'inline-block', verticalAlign: '-0.15em', fontSize: props.size },
       })
     }
     console.warn('icon name is not correct!')
@@ -42,5 +42,5 @@ const iconTyped = computed(() => {
 </script>
 
 <template>
-  <Component v-bind="$attrs" :is="iconTyped" />
+  <Component v-bind="$attrs" :is="iconTyped" :class="spin && 'animate-spin'" />
 </template>

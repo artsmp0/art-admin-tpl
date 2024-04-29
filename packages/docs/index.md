@@ -8,10 +8,10 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /markdown-examples
+      link: /guide/quick-start
     - theme: alt
       text: 组件文档
-      link: /api-examples
+      link: /components/
 
 features:
   - title: Typescript

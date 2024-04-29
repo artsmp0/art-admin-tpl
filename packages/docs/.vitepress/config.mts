@@ -5,6 +5,7 @@ import { applyPlugins } from './plugins/code'
 export default defineConfig({
   title: 'Art-Admin',
   description: '一个基于 vue3+vite+naive-ui 的中后台模板, 拥有一套可扩展并且功能丰富的组件库, 以及完善的使用文档',
+  lastUpdated: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -15,7 +16,6 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
-          text: '指南',
           items: [
             { text: '快速开始', link: '/guide/quick-start' },
           ],
@@ -23,7 +23,6 @@ export default defineConfig({
       ],
       '/components/': [
         {
-          text: '组件',
           items: [
             { text: 'AtIcon', link: '/components/at-icon' },
             { text: 'AtIconBtn', link: '/components/at-icon-btn' },
