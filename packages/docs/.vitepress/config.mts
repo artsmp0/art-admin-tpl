@@ -1,11 +1,12 @@
 import { defineConfig } from 'vitepress'
-import { applyPlugins } from './plugins/code'
+// import { applyPlugins } from './plugins/code'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Art-Admin',
   description: '一个基于 vue3+vite+naive-ui 的中后台模板, 拥有一套可扩展并且功能丰富的组件库, 以及完善的使用文档',
   lastUpdated: true,
+  cleanUrls: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -47,13 +48,13 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
     ],
   },
-  markdown: {
-    config(md) {
-      applyPlugins(md)
-    },
-    theme: {
-      light: 'vitesse-light',
-      dark: 'vitesse-dark',
-    },
-  },
+  // markdown: {
+  //   config(md) {
+  //     applyPlugins(md)
+  //   },
+  //   theme: {
+  //     light: 'vitesse-light',
+  //     dark: 'vitesse-dark',
+  //   },
+  // },
 })

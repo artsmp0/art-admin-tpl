@@ -1,8 +1,8 @@
-import { defineConfig, presetAttributify, presetIcons, presetUno, transformerAttributifyJsx, transformerDirectives } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetUno, transformerDirectives } from 'unocss'
 
 export default defineConfig({
   presets: [presetUno(), presetAttributify(), presetIcons()],
-  transformers: [transformerDirectives(), transformerAttributifyJsx()],
+  transformers: [transformerDirectives()],
   shortcuts: [
     {
       'fscw': 'flex justify-start items-center flex-wrap w-full',

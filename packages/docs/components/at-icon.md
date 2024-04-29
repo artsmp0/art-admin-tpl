@@ -1,6 +1,11 @@
 # AtIcon
 
-该组件同时支持 `Naive Icon`，`Unocss Icon` 以及 `SvgIcon`。
+该组件同时支持 `Naive Icon`，`Unocss Icon` 以及 `SvgIcon`。.=== `[ceshi](/)`
+<span class="text-[var(--vp-c-brand-lighter)]">123[ceshi](/)</span>
+
+[ceshi](/)
+
+<a>123123</a>
 1. 如果使用 Svg Icon 请注意需要配置 [`vite-plugin-svg-icons`](https://github.com/vbenjs/vite-plugin-svg-icons) 这个插件，并且传递的 icon 需要以 `svg-` 开头。
 2. 如果使用 Naive Icon，需要根据[文档](https://www.naiveui.com/zh-CN/os-theme/components/icon)安装对应的图标包，传递的 icon 属性是对应的图标组件。
 3. 如果使用 Unocss Icon，则需要安装 [unocss 图标包](https://icones.js.org/)，传递的 icon 字符串需要以 `i-` 开头。

@@ -6,7 +6,9 @@ import { NFlex, NH6 } from 'naive-ui'
 
 <template>
   <div class="flex flex-col gap2">
-    <NH6>svg icon</NH6>
+    <NH6 class="text-[var(--vp-c-brand-1)]">
+      svg icon
+    </NH6>
     <NFlex gap="12px">
       <AtIcon icon="svg-vue" size="24px" />
       <AtIcon icon="svg-column-height" size="24px" class="text-blue" />
