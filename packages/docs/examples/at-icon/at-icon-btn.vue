@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtEmpty, AtIconBtn } from '@art-admin/components'
+import { AtIconBtn } from '@art-admin/components'
 </script>
 
 <template>
