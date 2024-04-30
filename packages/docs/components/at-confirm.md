@@ -5,9 +5,14 @@
 ### props
 
 ```ts
-interface Props {
+export interface AtConfirmProps {
+  /** 二次确认消息 */
   message: string
-  buttonProps?: /* vue-ignore */ ButtonProps
+  /** 触发按钮的属性 */
+  buttonProps?: /* @vue-ignore */ AtIconButtonProps
+  /** NPopconfirm 的属性 */
+  confirmProps?: /* @vue-ignore */ Omit<PopconfirmProps, 'onPositiveClick' | 'onNegativeClick'>
+  /** 确认回调，支持异步 loading */
   onConfirm?: () => Promise<any>
 }
 ```
