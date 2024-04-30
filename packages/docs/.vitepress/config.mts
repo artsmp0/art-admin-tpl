@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-// import { applyPlugins } from './plugins/code'
+import { applyPlugins } from './plugins/code'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -10,8 +10,8 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '指南', link: '/guide/' },
-      { text: '组件', link: '/components/' },
+      { text: '指南', link: '/guide/', activeMatch: '^/guide/' },
+      { text: '组件', link: '/components/', activeMatch: '^/components/' },
     ],
 
     sidebar: {
@@ -48,13 +48,13 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
     ],
   },
-  // markdown: {
-  //   config(md) {
-  //     applyPlugins(md)
-  //   },
-  //   theme: {
-  //     light: 'vitesse-light',
-  //     dark: 'vitesse-dark',
-  //   },
-  // },
+  markdown: {
+    config(md) {
+      applyPlugins(md)
+    },
+    theme: {
+      light: 'vitesse-light',
+      dark: 'vitesse-dark',
+    },
+  },
 })

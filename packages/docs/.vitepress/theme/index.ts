@@ -1,8 +1,6 @@
 import theme from 'vitepress/theme'
 import { type Theme, useData } from 'vitepress'
-import './rainbow.css'
 import './vars.css'
-import './overrides.css'
 import '@art-admin/components/es/style.css'
 import 'virtual:uno.css'
 import 'virtual:svg-icons-register'
