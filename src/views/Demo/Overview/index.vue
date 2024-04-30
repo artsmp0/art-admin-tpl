@@ -24,7 +24,7 @@ function search(v: string) {
       <AtIcon icon="svg-test" :svg-icon-props="{ size: '24px' }" />
       <AtIcon icon="svg-vue" :svg-icon-props="{ size: '24px' }" />
     </NFlex>
-    <AtEmpty height="200px" size="huge" />
+    <AtEmpty height="200px" size="huge" description="暂无数据" :theme-overrides="{ iconColor: '#f00', textColor: 'cyan' }" />
     <AtLoading :show="true" :spin-props="{ size: 'small', themeOverrides: { color: '#f00' } }" />
     <div mb8>
       这是一行文字
