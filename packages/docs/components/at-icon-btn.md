@@ -6,11 +6,8 @@
 
 ```ts
 export interface AtIconButtonProps extends /* @vue-ignore */ ButtonProps {
-  icon: string | Component
-  /** 图标旋转 */
-  spin?: boolean
-  /** 图标接收的 props */
-  atIconProps?: AtIconProps
+  icon?: string | Component
+  atIconProps?: Omit<AtIconProps, 'icon'>
 }
 ```
 

@@ -12,7 +12,7 @@ const props = defineProps<AtIconButtonProps>()
 <template>
   <NButton v-bind="props">
     <template v-if="props.icon" #icon>
-      <AtIcon :icon="props.icon" v-bind="props.atIconProps" :class="spin ? 'animate-spin' : ''" />
+      <AtIcon :icon="props.icon" v-bind="props.atIconProps" />
     </template>
     <slot />
   </NButton>

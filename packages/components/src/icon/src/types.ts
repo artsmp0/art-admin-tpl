@@ -14,6 +14,5 @@ export interface AtIconProps {
 
 export interface AtIconButtonProps extends /* @vue-ignore */ ButtonProps {
   icon?: string | Component
-  spin?: boolean
-  atIconProps?: AtIconProps
+  atIconProps?: Omit<AtIconProps, 'icon'>
 }
