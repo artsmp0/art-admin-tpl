@@ -1,37 +1,16 @@
 <script setup lang="ts">
 import { NSpin, type SpinProps } from 'naive-ui'
+import type { AtLoadingProps } from './types'
 
 defineOptions({
   name: 'AtLoading',
 })
 
-withDefaults(defineProps<{
-  show: boolean
-  minHeight?: string
-  desc?: string
-  spinProps?: /* @vue-ignore */ SpinProps
-}>(), {
-  desc: '努力加载中...',
-})
+withDefaults(defineProps<AtLoadingProps>(), { minHeight: '200px' })
 </script>
 
 <template>
-  <div v-if="show" class="at-loading" :style="{ minHeight }">
-    <NSpin v-bind="spinProps">
-      <template #description>
-        {{ desc }}
-      </template>
-    </NSpin>
+  <div v-if="show" class="flex items-center justify-center w-full h-full" :style="{ minHeight }">
+    <NSpin v-bind="$attrs" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.at-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    min-height: 200px;
-}
-</style>
