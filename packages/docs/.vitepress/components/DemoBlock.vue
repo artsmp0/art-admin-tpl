@@ -1,6 +1,7 @@
 <script lang='ts' setup name="demo-block">
 import { computed } from 'vue'
 import { useClipboard, useToggle } from '@vueuse/core'
+import { AtExpandTransition } from '@art-admin/components'
 import { NText } from 'naive-ui'
 
 const props = withDefaults(defineProps<{
@@ -40,7 +41,9 @@ const [value, toggle] = useToggle()
               <div class="at-demo_action_icon i-ph-terminal-window-duotone" />
             </a>
           </div>
-          <div v-show="value" :class="`language-${lang} my0!`" v-html="decodedHighlightedCode" />
+          <AtExpandTransition :show="value">
+            <div :class="`language-${lang} my0!`" v-html="decodedHighlightedCode" />
+          </AtExpandTransition>
         </div>
       </div>
     </div>

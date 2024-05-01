@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useToggle } from '@vueuse/core'
 import { useDiscrete } from '@/composables/discrete'
 
 function confirmDel() {
@@ -12,6 +13,8 @@ const { message } = useDiscrete()
 function search(v: string) {
   message.info(v)
 }
+
+const [show, toggleShow] = useToggle(true)
 </script>
 
 <template>
@@ -46,5 +49,16 @@ function search(v: string) {
 
       <AtSearchInput size="large" style="width: 266px;" @search="search" />
     </NFlex>
+
+    <div>
+      <AtIconBtn class="mb4" type="primary" @click="toggleShow()">
+        {{ show ? '收起' : '展开' }}
+      </AtIconBtn>
+      <AtExpandTransition :show="show">
+        <p v-for="item in 10" :key="item" class="bg-rose mb4 p8">
+          Lorem ipsum dolor sit{{ item }}
+        </p>
+      </AtExpandTransition>
+    </div>
   </AtPageContainer>
 </template>

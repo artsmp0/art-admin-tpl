@@ -5,6 +5,8 @@ defineOptions({
   name: 'AtExpandTransition',
 })
 
+defineProps<{ show?: boolean }>()
+
 function reset(el: RendererElement) {
   el.style.maxHeight = ''
   el.style.overflow = el.dataset.oldOverflow
@@ -77,6 +79,8 @@ const on = {
 
 <template>
   <Transition name="at-collapse" v-on="on">
-    <slot />
+    <div v-if="show" class="transition-property-all transition-300 transition-top">
+      <slot />
+    </div>
   </Transition>
 </template>
