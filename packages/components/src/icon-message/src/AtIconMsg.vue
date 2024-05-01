@@ -5,6 +5,7 @@ import { AtIcon } from '../../icon'
 
 defineOptions({
   name: 'AtIconMsg',
+  inheritAttrs: false,
 })
 
 const props = withDefaults(
@@ -24,7 +25,7 @@ const props = withDefaults(
   <NTooltip v-bind="tooltipProps">
     <template #trigger>
       <slot name="trigger">
-        <AtIcon v-bind="{ ...$attrs, ...iconProps }" />
+        <AtIcon v-bind="{ ...iconProps }" />
       </slot>
     </template>
     <slot>{{ props.message }}</slot>
