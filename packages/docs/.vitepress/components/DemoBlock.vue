@@ -22,8 +22,8 @@ const [value, toggle] = useToggle()
 
 <template>
   <ClientOnly>
-    <div class="my4">
-      <div class="mb2">
+    <div class="my16">
+      <div class="mb8">
         <NText strong>
           {{ title }}
         </NText>

@@ -9,7 +9,7 @@ function changeType() {
 </script>
 
 <template>
-  <div class="flex items-center gap2">
+  <div class="flex items-center gap8">
     <AtIconBtn icon="svg-vue" :type="type" secondary :at-icon-props="{ spin: true }">
       vue 🐮🍺
     </AtIconBtn>
