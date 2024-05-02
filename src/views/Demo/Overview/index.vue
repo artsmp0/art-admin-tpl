@@ -60,5 +60,11 @@ const [show, toggleShow] = useToggle(true)
         </p>
       </AtExpandTransition>
     </div>
+    <n-spin description="你不知道你有多幸运">
+      <n-alert title="啦啦啦" type="success">
+        明天再打开行李箱。宝贝，挂电话啦。
+      </n-alert>
+    </n-spin>
+    <n-spin description="你不知道你有多幸运" />
   </AtPageContainer>
 </template>

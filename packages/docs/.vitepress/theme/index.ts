@@ -1,11 +1,11 @@
 import theme from 'vitepress/theme'
-import { type Theme, useData } from 'vitepress'
+import type { Theme } from 'vitepress'
 import './vars.css'
 import '@art-admin/components/es/style.css'
 import 'virtual:uno.css'
 import 'virtual:svg-icons-register'
 import { h, watch } from 'vue'
-import { NConfigProvider, darkTheme } from 'naive-ui'
+import NaiveLayout from '../components/NaiveLayout.vue'
 import DemoBlock from '../components/DemoBlock.vue'
 
 let homePageStyle: HTMLStyleElement | undefined
@@ -25,11 +25,7 @@ export default {
   },
 
   Layout() {
-    const { isDark } = useData()
-
-    return h(NConfigProvider, { theme: isDark.value ? darkTheme : null }, {
-      default: () => h(theme.Layout),
-    })
+    return h(NaiveLayout)
   },
 } satisfies Theme
 
