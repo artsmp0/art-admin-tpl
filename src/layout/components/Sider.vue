@@ -51,8 +51,9 @@ const renderLabel: any = (option: AtMenuOption) => {
 
 const route = useRoute()
 const selectedItem = computed(() => {
-  if (route.meta.activeMenu)
-    return route.meta.activeMenu
+  const activeMenu = route.query.activeMenu || route.meta.activeMenu
+  if (activeMenu)
+    return activeMenu
   if (route.meta.hideInMenu) {
     // 表示是详情页
     const t = permissionStore.flatMenuList.find(m => m.path === route.path)

@@ -6,11 +6,14 @@ defineOptions({
   name: 'AtPageHeader',
 })
 
-defineProps<{
+const props = defineProps<{
   title?: string
+  onBack?: () => void
 }>()
 const router = useRouter()
 function handleBack() {
+  if (props.onBack)
+    return props.onBack()
   router.back()
 }
 </script>
