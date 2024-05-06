@@ -18,6 +18,17 @@
           "children": []
         },
         {
+          "path": "/aaa",
+          "meta": {
+            "micro": "/#/dynamic-page",
+            "title": "动态微应用",
+            "icon": "sidebar-dashboard",
+            "microName": "std-pc",
+            "isVite": true
+          },
+          "children": []
+        },
+        {
           "path": "/Demo/Table",
           "meta": {
             "title": "AtTable",

@@ -22,7 +22,14 @@ export default defineConfig((config) => {
     envDir,
     resolve: { alias: { '@': srcDir, '@art-admin/components': componentDir } },
     plugins: [
-      vue(),
+      vue({
+        template: {
+          compilerOptions: {
+            // 注册自定义组件micro-app 防止控制台警告
+            isCustomElement: tag => tag.startsWith('micro-app'),
+          },
+        },
+      }),
       vueJsx(),
       UnoCSS(),
       EnvTypes({ dts: './types/env.d.ts' }),

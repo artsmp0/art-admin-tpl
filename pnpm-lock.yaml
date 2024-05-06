@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@micro-zoe/micro-app':
+        specifier: 1.0.0-rc.5
+        version: 1.0.0-rc.5
       '@unocss/reset':
         specifier: ^0.59.3
         version: 0.59.3
@@ -676,6 +679,9 @@ packages:
 
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
+
+  '@micro-zoe/micro-app@1.0.0-rc.5':
+    resolution: {integrity: sha512-Z7Qkp1ZxFc04UYkR6UYPorg/VgACvE0E0Y8tyOKfR9AZmvoSNPdv4TpBFv3FRoYcvMlXW8TnEXhxL1VmCbL+2w==}
 
   '@microsoft/api-extractor-model@7.28.14':
     resolution: {integrity: sha512-Bery/c8A8SsKPSvA82cTTuy/+OcxZbLRmKhPkk91/AJOQzxZsShcrmHFAGeiEqSIrv1nPZ3tKq9kfMLdCHmsqg==, tarball: https://registry.npmmirror.com/@microsoft/api-extractor-model/-/api-extractor-model-7.28.14.tgz}
@@ -4434,6 +4440,8 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.4.15
 
   '@juggle/resize-observer@3.4.0': {}
+
+  '@micro-zoe/micro-app@1.0.0-rc.5': {}
 
   '@microsoft/api-extractor-model@7.28.14(@types/node@20.12.7)':
     dependencies:
