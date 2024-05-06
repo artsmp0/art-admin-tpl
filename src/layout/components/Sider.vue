@@ -51,7 +51,7 @@ const renderLabel: any = (option: AtMenuOption) => {
 
 const route = useRoute()
 const selectedItem = computed(() => {
-  const activeMenu = route.query.activeMenu || route.meta.activeMenu
+  const activeMenu = route.query.activeMenu as string || route.meta.activeMenu
   if (activeMenu)
     return activeMenu
   if (route.meta.hideInMenu) {
