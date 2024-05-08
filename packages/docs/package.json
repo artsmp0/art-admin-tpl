@@ -17,6 +17,7 @@
     "markdown-it": "^14.1.0"
   },
   "devDependencies": {
+    "@css-render/vue3-ssr": "^0.15.14",
     "@iconify-json/carbon": "^1.1.31",
     "@types/markdown-it": "^14.0.1",
     "@vicons/carbon": "^0.12.0",

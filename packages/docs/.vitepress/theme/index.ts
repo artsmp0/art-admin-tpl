@@ -5,6 +5,7 @@ import '@art-admin/components/es/style.css'
 import 'virtual:uno.css'
 import 'virtual:svg-icons-register'
 import { h, watch } from 'vue'
+import { setup } from '@css-render/vue3-ssr'
 import NaiveLayout from '../components/NaiveLayout.vue'
 import DemoBlock from '../components/DemoBlock.vue'
 
@@ -13,7 +14,11 @@ export default {
   ...theme,
   enhanceApp({ app, router }) {
     app.component('Demo', DemoBlock)
-
+    // @ts-expect-error missing types
+    if (import.meta.env.SSR) {
+      const { collect } = setup(app)
+      app.provide('css-render-collect', collect)
+    }
     if (typeof window === 'undefined')
       return
 
