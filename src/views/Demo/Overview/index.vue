@@ -23,13 +23,12 @@ const [show, toggleShow] = useToggle(true)
       <AtIconBtn icon="i-ph-arrow-clockwise-duotone" spin>
         刷新
       </AtIconBtn>
-      <AtIcon icon="i-ph-arrow-clockwise-duotone" class="text-50 text-rose" />
-      <AtIcon icon="svg-test" :svg-icon-props="{ size: '24px' }" />
-      <AtIcon icon="svg-vue" :svg-icon-props="{ size: '24px' }" />
+      <AtIcon icon="i-ph-arrow-clockwise-duotone" size="30px" class="text-rose" />
+      <AtIcon icon="svg-test" size="30px" />
     </NFlex>
     <AtEmpty height="200px" size="huge" description="暂无数据" :theme-overrides="{ iconColor: '#f00', textColor: 'cyan' }" />
     <AtLoading :show="true" :spin-props="{ size: 'small', themeOverrides: { color: '#f00' } }" />
-    <div mb8>
+    <div mb2>
       这是一行文字
       <AtIconMsg
         style="color: royalblue;"
@@ -51,11 +50,11 @@ const [show, toggleShow] = useToggle(true)
     </NFlex>
 
     <div>
-      <AtIconBtn class="mb4" type="primary" @click="toggleShow()">
+      <AtIconBtn class="mb1" type="primary" @click="toggleShow()">
         {{ show ? '收起' : '展开' }}
       </AtIconBtn>
       <AtExpandTransition :show="show">
-        <p v-for="item in 10" :key="item" class="bg-rose mb4 p8">
+        <p v-for="item in 10" :key="item" class="bg-rose mb1 p2">
           Lorem ipsum dolor sit{{ item }}
         </p>
       </AtExpandTransition>

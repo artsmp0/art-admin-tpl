@@ -123,7 +123,7 @@ defineExpose(reactive({ $atForm }))
         <template #search>
           <NFormItem v-for="item in emptyBoxCount" :key="item" />
           <div
-            flex="~ items-start justify-end gap-8 "
+            flex="~ items-start justify-end gap-2"
             class="absolute bottom-0 right-0 z-2"
             :class="bgCls"
             :style="{ width: `${searchBoxWidth}px`, height: `${defaultHeight + 2}px`, marginRight: '16px' }"

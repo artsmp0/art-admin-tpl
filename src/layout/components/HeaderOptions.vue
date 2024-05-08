@@ -28,13 +28,13 @@ const { dialog } = useDiscrete()
 
 function renderCustomHeader() {
   return (
-    <div class="flex items-center px8 py12">
-      <NAvatar round class="mr12" src={userStore.userInfo?.img}></NAvatar>
+    <div class="flex items-center px4 py3">
+      <NAvatar round class="mr3" src={userStore.userInfo?.img}></NAvatar>
       <div>
         <div>
           <NText depth={2}>{userStore.userInfo?.name || '打工仔'}</NText>
         </div>
-        <div class="text-12">
+        <div class="text-xs">
           <NText depth={3}>{userStore.userInfo?.phone || '毫无疑问，你是办公室里最亮的星'}</NText>
         </div>
       </div>
@@ -77,7 +77,7 @@ function onSelect(key: string) {
 </script>
 
 <template>
-  <div class="shrink-0" flex="~ items-center gap-16">
+  <div class="shrink-0" flex="~ items-center gap4">
     <AtIconBtn v-if="SHOW_REFRESH_BTN" secondary circle icon="i-ph-arrow-clockwise-duotone" @click="reload" />
     <AtIconBtn
       v-if="SHOW_FULLSCREEN_BTN"

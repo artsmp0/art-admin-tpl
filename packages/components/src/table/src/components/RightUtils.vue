@@ -84,17 +84,17 @@ const sizeOptions = [
 </script>
 
 <template>
-  <div flex="~ items-center gap-16 ">
+  <div flex="~ items-center gap4">
     <!-- <AtIcon v-for="item in data" :key="item.key" :icon="item.icon" /> -->
-    <AtIconMsg v-for="item in data" :key="item.key" :message="item.tip" :icon-size="18">
+    <AtIconMsg v-for="item in data" :key="item.key" :message="item.tip">
       <template #trigger>
         <NPopselect v-if="item.key === 'size'" v-model:value="size" :options="sizeOptions" trigger="click">
-          <AtIcon :svg-icon-props="{ size: '18px' }" :icon="item.icon" class="cursor-pointer outline-none" />
+          <AtIcon size="18px" :icon="item.icon" class="cursor-pointer outline-none" />
         </NPopselect>
         <ColumnSetting v-else-if="item.key === 'setting'" :wrapper="wrapper">
-          <AtIcon :svg-icon-props="{ size: '18px' }" :icon="item.icon" class="cursor-pointer outline-none" />
+          <AtIcon size="18px" :icon="item.icon" class="cursor-pointer outline-none" />
         </ColumnSetting>
-        <AtIcon v-else :svg-icon-props="{ size: '18px' }" :icon="item.icon" class="cursor-pointer outline-none" @click="handleClick(item.key)" />
+        <AtIcon v-else size="18px" :icon="item.icon" class="cursor-pointer outline-none" @click="handleClick(item.key)" />
       </template>
     </AtIconMsg>
   </div>

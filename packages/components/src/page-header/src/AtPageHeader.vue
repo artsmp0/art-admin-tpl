@@ -19,7 +19,7 @@ function handleBack() {
 </script>
 
 <template>
-  <NPageHeader class="mb16 shrink-0" @back="handleBack">
+  <NPageHeader class="mb4 shrink-0" @back="handleBack">
     <template #title>
       <slot>{{ title }}</slot>
     </template>

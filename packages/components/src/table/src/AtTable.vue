@@ -104,11 +104,11 @@ defineExpose(
 </script>
 
 <template>
-  <div ref="$tableWrapper" :class="{ 'bd-base': outerBordered }" class="h-full rounded-base bg-base p-12 pt0 text-base" flex="~ col">
-    <div class="py8 shrink-0" :class="props.headerCls" flex="~ justify-between items-center">
+  <div ref="$tableWrapper" :class="{ 'bd-base': outerBordered }" class="h-full rounded-base bg-base p3 pt0 text-base" flex="~ col">
+    <div class="py2 shrink-0" :class="props.headerCls" flex="~ justify-between items-center">
       <div class="flex items-center">
         <slot name="title">
-          <div class="text-16">
+          <div class="text-16px">
             {{ tableTitle }}
           </div>
         </slot>
@@ -122,10 +122,10 @@ defineExpose(
           </span>
         </template>
       </div>
-      <div flex="~ items-center gap8">
+      <div flex="~ items-center gap2">
         <slot name="extra" />
         <NDivider v-if="$slots?.extra" vertical />
-        <RightUtils v-model:size="size" class="my4" :options="props.rightUtils" :wrapper="$tableWrapper" :reload="refresh" />
+        <RightUtils v-model:size="size" class="my1" :options="props.rightUtils" :wrapper="$tableWrapper" :reload="refresh" />
       </div>
     </div>
 

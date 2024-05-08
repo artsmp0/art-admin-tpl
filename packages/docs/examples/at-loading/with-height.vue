@@ -7,7 +7,7 @@ setTimeout(toggleShow, 2000)
 </script>
 
 <template>
-  <div class="flex flex-col w-full h-200">
+  <div class="flex flex-col w-full h-200px">
     <div class="shrink-0">
       <AtIconBtn @click="toggleShow()">
         {{ show ? '别转了' : '转起来' }}

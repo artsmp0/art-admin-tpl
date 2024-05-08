@@ -57,13 +57,13 @@ const handleRemove: UploadProps['onRemove'] = ({ file, fileList }) => {
     <slot>
       <NButton v-if="!props.dragTip && props.nUploadProps?.listType !== 'image-card'" type="primary">
         <template #icon>
-          <AtIcon icon="i-ph-upload-simple-duotone" class="text-48" />
+          <AtIcon icon="i-ph-upload-simple-duotone" class="text-5xl" />
         </template>
         上传文件
       </NButton>
       <NUploadDragger v-else-if="props.nUploadProps?.listType !== 'image-card'">
         <div style="margin-bottom: 12px">
-          <AtIcon icon="i-ph-archive-duotone" class="text-48" />
+          <AtIcon icon="i-ph-archive-duotone" class="text-5xl" />
         </div>
         <NText style="font-size: 16px">
           点击或者拖动文件到该区域来上传

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { NEmpty } from 'naive-ui'
-import { useAttrs } from 'vue'
 import { AtIcon } from '../../icon'
 import type { AtEmptyProps } from './types'
 

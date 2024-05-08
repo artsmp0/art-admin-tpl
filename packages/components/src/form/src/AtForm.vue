@@ -117,10 +117,10 @@ function isString(thing: any) {
         <NGridItem v-else :span="24">
           <div
             :style="{ background: '#f5f5f5' }"
-            class="text-16 font-bold mb16 relative flex items-center gap8 flex-auto rounded-base of-hidden"
+            class="text-16px font-bold mb4 relative flex items-center gap2 flex-auto rounded-base of-hidden"
             :class="titleBarCls"
           >
-            <span class="h-36 w4 bg-primary" />
+            <span class="h9 w1 bg-primary" />
             <span v-if="isString(element.props.label)">{{ element.props.label }}</span>
             <Component :is="element.props.label" v-else />
           </div>
@@ -136,7 +136,7 @@ function isString(thing: any) {
         :target="element.props.field"
       >
         <template v-if="element.props.label" #label>
-          <div flex items-center gap4>
+          <div flex items-center gap1>
             <span v-if="isString(element.props.label)">{{ element.props.label }}</span>
             <Component :is="element.props.label" v-else />
           </div>

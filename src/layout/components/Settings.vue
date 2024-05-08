@@ -27,7 +27,7 @@ async function handleCopy() {
   <NDrawer v-model:show="show" :width="300">
     <NDrawerContent title="系统设置">
       <NDivider> 界面显示 </NDivider>
-      <div flex="~ col gap-16">
+      <div flex="~ col gap-4">
         <div v-for="item in UI.settingMap" :key="item.key" flex="~ items-center justify-between">
           <span>{{ item.label }}</span>
           <NSwitch v-if="item.type === 'switch'" v-model:value="UI.defaultSetting[item.key]" />

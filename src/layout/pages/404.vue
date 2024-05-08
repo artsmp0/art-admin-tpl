@@ -9,7 +9,7 @@ function backHome() {
 <template>
   <div class="wscn-http404-container">
     <div class="wscn-http404 md:flex">
-      <div class="pic-404 dark:opacity-70 md:w-550!">
+      <div class="pic-404 dark:opacity-70 md:w-137.5!">
         <img alt="404" class="pic-404__parent" src="@/assets/imgs/404.png">
         <img alt="404" class="left pic-404__child" src="@/assets/imgs/404_cloud.png">
         <img alt="404" class="pic-404__child mid" src="@/assets/imgs/404_cloud.png">

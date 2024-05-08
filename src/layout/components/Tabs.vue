@@ -212,7 +212,7 @@ onMounted(() => {
     <NScrollbar ref="$scrollbar" :x-scrollable="true" :size="2" @scroll="handleScroll">
       <TransitionGroup
         name="list"
-        class="relative flex ws-nowrap px8 py8"
+        class="relative flex ws-nowrap px2 py2"
         :class="[tabPos === 'alone' ? '' : 'tab-wrapper']"
         tag="div"
         @before-enter="canCenterActivation = false"
@@ -224,7 +224,7 @@ onMounted(() => {
           v-for="[, t] of tabStore.openTabs"
           :key="t.path"
           :closable="tabStore.openTabs.size !== 1"
-          class="mr8 cursor-pointer"
+          class="mr2 cursor-pointer"
           :bordered="false"
           :data-path="t.path"
           :class="route.path === t.path && 'tag-selected'"

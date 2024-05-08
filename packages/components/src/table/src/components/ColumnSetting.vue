@@ -112,9 +112,9 @@ async function handleVisibleChange() {
           </NButton>
         </div>
       </template>
-      <div class="w166">
+      <div class="w166px">
         <NCheckboxGroup ref="$sortableWrapper" v-model:value="state.checkedList">
-          <div v-for="col in originalColumns" :key="col.key" class="column-setting__item hover:bg-blue/20! p4">
+          <div v-for="col in originalColumns" :key="col.key" class="column-setting__item hover:bg-blue/20! p1">
             <NCheckbox :value="col.key">
               {{ col.title }}
             </NCheckbox>

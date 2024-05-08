@@ -74,9 +74,9 @@ export const renderMultipleBlock = defineComponent({
           .filter(Boolean) as any[]),
       )
       return (
-        <div class="mb8 w-full rounded-base bg-base px8 pt8 hover:shadow-base bd-base" key={uuids[i]}>
-          <div class="mb4 flex items-center justify-between">
-            <div class="h20 w20 rounded-base bg-gray/30 text-center text-12 lh-20">{i + 1}</div>
+        <div class="mb2 w-full rounded-base bg-base px2 pt2 hover:shadow-base bd-base" key={uuids[i]}>
+          <div class="mb1 flex items-center justify-between">
+            <div class="h5 w5 rounded-base bg-gray/30 text-center text-xs lh-20px">{i + 1}</div>
             {multipleConfig
               ? (
                 <AtIconBtn
@@ -124,7 +124,7 @@ export const renderMultipleBlock = defineComponent({
             xGap={12}
             {...props}
             {...state}
-            class={`w-full rounded-base bd-base bg-base ${children[0].labelPlacement === 'left' ? 'pt24 px24' : 'px8 pt4'}`}
+            class={`w-full rounded-base bd-base bg-base ${children[0].labelPlacement === 'left' ? 'pt6 px6' : 'px2 pt1'}`}
           >
             {children.map((child) => {
               const path = `${field}.${child.field}`

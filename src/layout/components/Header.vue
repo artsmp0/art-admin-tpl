@@ -10,11 +10,11 @@ const TAB_POSITION = computed(() => UI.defaultSetting.TAB_POSITION)
 </script>
 
 <template>
-  <NLayoutHeader class="h60 w-full of-hidden pr20" flex="~ items-center" bordered>
+  <NLayoutHeader class="h15 w-full of-hidden pr5" flex="~ items-center" bordered>
     <div class="hidden md:flex" :style="{ width: `${UI.defaultSetting.SIDE_WIDTH}px` }" flex="justify-center items-center shrink-0">
-      <img :src="logo" alt="LOGO" class="w-150px">
+      <img :src="logo" alt="LOGO" class="w-37.5">
     </div>
-    <div class="ml--1 h-full min-w-0 flex-1 pr24">
+    <div class="ml--0.25 h-full min-w-0 flex-1 pr6">
       <Tabs v-if="TAB_POSITION === 'top'" />
     </div>
     <HeaderOptions class="ml-auto shrink-0" />

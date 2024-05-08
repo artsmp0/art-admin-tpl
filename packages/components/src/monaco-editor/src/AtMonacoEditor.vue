@@ -78,7 +78,7 @@ const themes = useThemeVars()
 <template>
   <div
     ref="editorRef"
-    class="h300 w-full rounded-base bd-base"
+    class="h300px w-full rounded-base bd-base"
     :style="{
       borderColor: formItem.mergedStatusRef.value === 'error' ? themes.errorColor : undefined,
     }"
