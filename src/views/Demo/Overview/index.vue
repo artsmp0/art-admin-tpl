@@ -36,9 +36,10 @@ const [show, toggleShow] = useToggle(true)
         message="这是一行文字的提示这是一行文字的提示这是一行文字的提示这是一行文字的提示"
       />
     </div>
-    <AtPageHeader title="这里是页面标题" style="width: 500px;">
+    <AtPageHeader title="这里是页面标题" subtitle="子标题" style="width: 500px;">
       <template #extra>
         <AtIcon icon="i-ph-magnifying-glass-duotone" />
+        额外内容
       </template>
     </AtPageHeader>
     <NFlex>

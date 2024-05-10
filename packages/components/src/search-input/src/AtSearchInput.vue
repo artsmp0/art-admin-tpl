@@ -26,7 +26,7 @@ function handleSearch(clear = false) {
 </script>
 
 <template>
-  <NInput v-bind="props" v-model:value="value" clearable @keydown.enter="handleSearch()" @clear="handleSearch(true)">
+  <NInput v-bind="{ ...props, ...$attrs }" v-model:value="value" clearable @keydown.enter="handleSearch()" @clear="handleSearch(true)">
     <template #prefix>
       <AtIcon icon="i-ph-magnifying-glass-duotone" />
     </template>
