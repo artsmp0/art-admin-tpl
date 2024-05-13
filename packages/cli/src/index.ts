@@ -32,10 +32,15 @@ inquirer.prompt([
   const projectName = answers.projectName
   const git: SimpleGit = simpleGit(gitOptions)
   try {
-    await git.clone(repo, projectName, [])
+    await git.clone(repo, projectName, ['--depth', '1'])
     spinner.succeed(`${repo} downloaded successfully!`)
     const packageDir = path.join(process.cwd(), projectName, 'packages')
+    const gitDir = path.join(process.cwd(), projectName, '.git')
     await fs.rm(packageDir, { recursive: true, force: true })
+    await fs.rm(gitDir, { recursive: true, force: true })
+    await git.init()
+    await git.add('.')
+    await git.commit('chore: init')
     // eslint-disable-next-line no-console
     console.log(chalk.green(`Project ${projectName} created successfully!`))
   }
