@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
+import { useModal } from '@art-admin/components'
 import { useDiscrete } from '@/composables/discrete'
 
 function confirmDel() {
@@ -15,6 +16,8 @@ function search(v: string) {
 }
 
 const [show, toggleShow] = useToggle(true)
+
+const [modalRef, open] = useModal()
 </script>
 
 <template>
@@ -66,5 +69,13 @@ const [show, toggleShow] = useToggle(true)
       </n-alert>
     </n-spin>
     <n-spin description="你不知道你有多幸运" />
+    <NButton @click="open">
+      打开模态框
+    </NButton>
+    <AtModal ref="modalRef" title="测试">
+      <div>
+        无敌了
+      </div>
+    </AtModal>
   </AtPageContainer>
 </template>
