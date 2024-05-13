@@ -1,5 +1,6 @@
 import process from 'node:process'
 import path from 'node:path'
+import fs from 'node:fs/promises'
 import { program } from 'commander'
 import inquirer from 'inquirer'
 import ora from 'ora'
@@ -33,6 +34,8 @@ inquirer.prompt([
   try {
     await git.clone(repo, projectName, [])
     spinner.succeed(`${repo} downloaded successfully!`)
+    const packageDir = path.join(process.cwd(), projectName, 'packages')
+    await fs.rm(packageDir, { recursive: true, force: true })
     // eslint-disable-next-line no-console
     console.log(chalk.green(`Project ${projectName} created successfully!`))
   }

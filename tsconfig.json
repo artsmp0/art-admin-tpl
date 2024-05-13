@@ -9,7 +9,7 @@
     /* Bundler mode */
     "moduleResolution": "bundler",
     "paths": {
-      "@art-admin/components": ["./packages/components/src/index.ts"],
+      "@art-admin/components": ["./components/src/index.ts"],
       "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,

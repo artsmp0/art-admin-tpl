@@ -97,6 +97,28 @@ importers:
         specifier: ^2.0.6
         version: 2.0.13(typescript@5.4.5)
 
+  components:
+    dependencies:
+      '@monaco-editor/loader':
+        specifier: ^1.4.0
+        version: 1.4.0(monaco-editor@0.48.0)
+      '@vueuse/core':
+        specifier: ^10.9.0
+        version: 10.9.0(vue@3.4.23(typescript@5.4.5))
+      lodash-unified:
+        specifier: ^1.0.3
+        version: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
+      monaco-editor:
+        specifier: ^0.48.0
+        version: 0.48.0
+      sortablejs:
+        specifier: ^1.15.2
+        version: 1.15.2
+    devDependencies:
+      '@types/sortablejs':
+        specifier: ^1.15.8
+        version: 1.15.8
+
   packages/cli:
     dependencies:
       chalk:
@@ -128,33 +150,11 @@ importers:
         specifier: ^9.0.7
         version: 9.0.7
 
-  packages/components:
-    dependencies:
-      '@monaco-editor/loader':
-        specifier: ^1.4.0
-        version: 1.4.0(monaco-editor@0.48.0)
-      '@vueuse/core':
-        specifier: ^10.9.0
-        version: 10.9.0(vue@3.4.23(typescript@5.4.5))
-      lodash-unified:
-        specifier: ^1.0.3
-        version: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
-      monaco-editor:
-        specifier: ^0.48.0
-        version: 0.48.0
-      sortablejs:
-        specifier: ^1.15.2
-        version: 1.15.2
-    devDependencies:
-      '@types/sortablejs':
-        specifier: ^1.15.8
-        version: 1.15.8
-
   packages/docs:
     dependencies:
       '@art-admin/components':
         specifier: workspace:^
-        version: link:../components
+        version: link:../../components
       markdown-it:
         specifier: ^14.1.0
         version: 14.1.0
