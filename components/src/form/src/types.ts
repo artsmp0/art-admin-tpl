@@ -51,7 +51,7 @@ export type FormItemConfig = {
     type: K
     field: string
     label?: string | (() => VNode)
-    props?: FieldPropMap[K] & { style?: CSSProperties | string } & { onChange?: (newVal: any, internalConfigStates?: FormItemConfig[]) => void }
+    props?: FieldPropMap[K] & { style?: CSSProperties | string } & { onChange?: (newVal: any, internalConfigStates?: Ref<FormItemConfig[]>) => void }
     deps?: (string | Ref<any>)[]
     listener?: (apiFn?: Function) => void
     /** 是否在对依赖处理的时候需要深度监听 */

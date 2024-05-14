@@ -1,72 +1,216 @@
 <script setup lang="ts">
-import type { AtFormItemConfig } from '@art-admin/components'
+import type { AtFormInst, AtFormItemConfig } from '@art-admin/components'
 import { AtForm } from '@art-admin/components'
-import { computed, ref } from 'vue'
+import { NButton, NFlex } from 'naive-ui'
+import { h, ref, shallowRef } from 'vue'
+import { getOptions, treeOptions } from './mock'
+import CustomField from './custom-field.vue'
 
-const model = ref<any>({
-  a: 1,
-  b: 1,
-  c: 3,
+const model = ref({
+  a: '这里是 a',
+  b: 2,
+  c: null,
+  d: 1,
+  e: null,
+  f: null,
+  g: 1,
+  h: null,
+  i: null,
+  j: '',
+  k: [{ area: null, name: '' }],
+  l: { area: null, name: '', age: 18 },
+  m: [{ id: 'c', name: '图片.png', status: 'finished', url: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg' }],
+  n: `{
+    "key": "value"
+}`,
 })
 
-const options1 = shallowRef<any[]>([])
-const options2 = shallowRef<any[]>([])
-function getOptions() {
-  setTimeout(() => {
-    options1.value = [
-      { label: '选项一', value: 1 },
-      { label: '选项二', value: 2 },
-    ]
-
-    options2.value = [
-      { label: '选项5', value: 1 },
-      { label: '选项6', value: 2 },
-    ]
-  }, 1000)
-}
-getOptions()
-const configs = computed<AtFormItemConfig[]>(() => [
+const configs: AtFormItemConfig[] = [
   {
-    field: 'a',
-    type: 'select',
-    label: '三级联动 a',
-    span: 8,
-    props: {
-      options: options1.value,
-    },
-  },
-  {
-    field: 'b',
-    type: 'select',
-    label: 'b',
-    span: 8,
-    props: {
-      options: [{ label: '选项1-1', value: 1 }, { label: '选项1-2', value: 2 }],
-      multiple: true,
-    },
-  },
-  {
-    field: 'c',
-    type: 'select',
-    label: 'c',
-    span: 8,
-    props: { options: [{ label: '选项2-2-1', value: 3 }, { label: '选项2-2-2', value: 4 }] },
-    // hide: model.value.a !== 1,
-  },
-  {
-    field: 'd',
     type: 'input',
-    label: 'd',
-    span: 8,
+    field: 'a',
+    label: '文本输入',
+    span: 24,
+    rule: { message: '请输入', required: true },
   },
-])
+  {
+    type: 'inputNumber',
+    field: 'b',
+    label: '数字输入',
+    span: 12,
+    props: { min: 0, max: 999, step: 3, style: { width: '100%' } },
+  },
+  {
+    type: 'select',
+    field: 'c',
+    label: '根据接口获取下拉列表',
+    span: 12,
+    apiFn() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve([
+            { label: '选项一', value: 1 },
+            { label: '选项二', value: 2 },
+          ])
+        }, 1000)
+      })
+    },
+  },
+  {
+    type: 'radio',
+    field: 'd',
+    label: '单选',
+    span: 12,
+    props: { options: [{ label: '选项一', value: 1 }, { label: '选项二', value: 2 }] },
+  },
+  {
+    type: 'radio',
+    field: 'd',
+    label: '单选（按钮）',
+    span: 12,
+    button: true,
+    props: { options: [{ label: '选项一', value: 1 }, { label: '选项二', value: 2 }] },
+  },
+  {
+    type: 'cascader',
+    field: 'e',
+    label: '级联选择',
+    span: 12,
+    props: { options: getOptions(), cascade: true, showPath: true, filterable: true, multiple: true },
+  },
+  {
+    type: 'datePicker',
+    field: 'f',
+    label: '日期（自动格式化为字符串）',
+    span: 12,
+  },
+  {
+    type: 'switch',
+    field: 'g',
+    label: '开关',
+    span: 6,
+    props: { checkedValue: 1, uncheckedValue: 0 },
+  },
+  {
+    type: 'treeSelect',
+    field: 'h',
+    label: '树选择',
+    span: 18,
+    props: { options: treeOptions, multiple: true, checkable: true, filterable: true, cascade: true, maxTagCount: 1, checkStrategy: 'child' },
+  },
+  {
+    field: 'm',
+    type: 'upload',
+    label: '上传',
+    span: 8,
+    props: { nUploadProps: { listType: 'image-card' } },
+  },
+  {
+    field: 'n',
+    type: 'monacoEditor',
+    label: '编辑器',
+    span: 16,
+    props: { options: { language: 'json' } },
+  },
+  {
+    type: 'titleBar',
+    field: 'i',
+    label: '标题栏，下面是自定义组件和嵌套表单',
+  },
+  {
+    type: 'custom',
+    field: 'j',
+    label: '自定义组件',
+    rule: { required: true, message: '请输入自定义组件的值' },
+    span: 24,
+    props: { xx: 123 },
+    component: CustomField,
+  },
+  {
+    field: 'k',
+    type: 'multipleBlock',
+    label: '混合表单(数组)',
+    multipleConfig: {
+      limit: 2,
+      addBtnText: '自定义按钮标签',
+      defaultItem: {
+        area: null,
+        name: '',
+      },
+    },
+    span: 24,
+    children: [
+      {
+        field: 'name',
+        type: 'input',
+        label: () => h('span', { style: 'color:deeppink' }, '自定义渲染标签'),
+        labelPlacement: 'left',
+        span: 12,
+      },
+      {
+        field: 'area',
+        type: 'select',
+        label: 'area',
+        labelPlacement: 'left',
+        span: 12,
+        props: { options: [{ label: '浙江', value: 1 }, { label: '福建', value: 2 }] },
+      },
+    ],
+  },
+  {
+    field: 'l',
+    type: 'multipleBlock',
+    label: '混合表单(对象)',
+    span: 24,
+    children: [
+      {
+        field: 'name',
+        type: 'input',
+        label: '姓名',
+        labelPlacement: 'left',
+        span: 8,
+      },
+      {
+        field: 'age',
+        type: 'inputNumber',
+        label: '年龄',
+        labelPlacement: 'left',
+        span: 8,
+      },
+      {
+        field: 'area',
+        type: 'select',
+        label: 'area',
+        labelPlacement: 'left',
+        span: 8,
+        props: { options: [{ label: '浙江', value: 1 }, { label: '福建', value: 2 }] },
+      },
+    ],
+  },
+]
+
+const $form = shallowRef<AtFormInst>()
+
+async function submit() {
+  try {
+    await $form.value?.validate()
+    // eslint-disable-next-line no-console
+    console.log(model.value)
+  }
+  catch {}
+}
 </script>
 
 <template>
-  <div w-full>
-    <AtForm :model="model" :configs="configs" />
-    <pre>
-      {{ model }}
-    </pre>
+  <div class="p4 w-full">
+    <AtForm ref="$form" :model="model" :configs="configs" :layout="{ xGap: 16, yGap: 8 }" title-bar-cls="bg-green/30" />
+    <NFlex size="medium" vertical>
+      <NButton @click="$form?.resetValue()">
+        重置
+      </NButton>
+      <NButton type="primary" @click="submit">
+        提交
+      </NButton>
+    </NFlex>
   </div>
 </template>

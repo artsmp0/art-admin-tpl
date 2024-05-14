@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { AtFormItemConfig } from '@art-admin/components'
 import { AtForm } from '@art-admin/components'
-import { ref } from 'vue'
+import { reactive } from 'vue'
 
-const model = ref<any>({
+const model = reactive<any>({
   a: 1,
   b: 1,
   c: 1,
@@ -18,8 +18,8 @@ const configs: AtFormItemConfig[] = [
     props: {
       options: [{ label: '选项1', value: 1 }, { label: '选项2', value: 2 }],
       onChange: () => {
-        model.value.b = null
-        model.value.c = null
+        model.b = null
+        model.c = null
       },
     },
   },
@@ -30,12 +30,12 @@ const configs: AtFormItemConfig[] = [
     deps: ['a'],
     span: 8,
     props: {
-      onChange: () => { model.value.c = null },
+      onChange: () => { model.c = null },
     },
     listener: () => {
-      if (!model.value.a)
+      if (!model.a)
         return { disabled: true, options: [] }
-      else if (model.value.a === 1)
+      else if (model.a === 1)
         return { disabled: false, options: [{ label: '选项1-1', value: 1 }, { label: '选项1-2', value: 2 }] }
       else return { disabled: false, options: [{ label: '选项2-1', value: 1 }, { label: '选项2-2', value: 2 }] }
     },
@@ -47,9 +47,9 @@ const configs: AtFormItemConfig[] = [
     deps: ['b'],
     span: 8,
     listener: () => {
-      if (!model.value.b)
+      if (!model.b)
         return { disabled: true, options: [] }
-      else if (model.value.b === 1)
+      else if (model.b === 1)
         return { disabled: false, options: [{ label: '选项1-1-1', value: 1 }, { label: '选项1-1-2', value: 2 }] }
       else return { disabled: false, options: [{ label: '选项2-2-1', value: 3 }, { label: '选项2-2-2', value: 4 }] }
     },
@@ -59,6 +59,7 @@ const configs: AtFormItemConfig[] = [
 
 <template>
   <div w-full>
+    {{ model }}
     <AtForm :model="model" :configs="configs" />
   </div>
 </template>

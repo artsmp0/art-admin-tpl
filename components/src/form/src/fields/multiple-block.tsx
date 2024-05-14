@@ -1,33 +1,31 @@
 import { cloneDeep, isArray, omit } from 'lodash-unified'
 import { NFormItemGi, NGrid } from 'naive-ui'
-import { type VNode, computed, defineComponent, h, ref, watch } from 'vue'
-import { EXTRA_FORM_ITEM_PROPS, useDeps } from '../utils'
+import { type VNode, computed, defineComponent, h, ref, toRefs, watch } from 'vue'
+import { EXTRA_FORM_ITEM_PROPS, getLabelRenderer, useDeps } from '../utils'
 import type { FormItemConfig, RenderFnParams } from '../types'
 import { AtIconBtn } from '../../../icon'
+import { FORM_FIELDS } from './fields'
 import { getWidget } from '.'
 
 export const renderMultipleBlock = defineComponent({
   props: ['item', 'model'],
   setup(compProps: RenderFnParams) {
-    const { props = undefined, field, children, multipleConfig } = compProps.item
-    const state = useDeps({ item: compProps.item, model: compProps.model })
-    const defaultItem = multipleConfig?.defaultItem ?? cloneDeep(compProps.model[field][0])
-    if (!compProps.model[compProps.item.field]) {
-      console.warn(`表单 model 无 ${field} 字段！`)
+    const { item, model } = toRefs(compProps)
+    // const { props = undefined, field, children, multipleConfig } = compProps.item
+    const state = useDeps({ item, model })
+    const defaultItem = item.value.multipleConfig?.defaultItem ?? cloneDeep(model.value[item.value.field][0])
+    if (!model.value[item.value.field]) {
+      console.warn(`表单 model 无 ${item.value.field} 字段！`)
       return null
     }
-    if (!children?.length)
+    if (!item.value.children?.length)
       return null
-    const getLabelRenderer = (label: FormItemConfig['label']) => {
-      if (typeof label === 'string')
-        return () => label
-      return label
-    }
 
     const disableDel = computed(() => {
-      if (!multipleConfig?.limit)
+      const limit = item.value.multipleConfig?.limit
+      if (!limit)
         return
-      return compProps.model[field].length <= multipleConfig.limit
+      return model.value[item.value.field].length <= limit
     })
 
     const uuids: string[] = []
@@ -42,8 +40,8 @@ export const renderMultipleBlock = defineComponent({
         return
       subItems.push(
         ...(currentConfig
-          .map((child) => {
-            const path = `${field}.${i}.${child.field}`
+          .map((child: FormItemConfig) => {
+            const path = `${item.value.field}.${i}.${child.field}`
             return child.hide
               ? null
               : (
@@ -59,13 +57,11 @@ export const renderMultipleBlock = defineComponent({
                 >
                   {{
                     default: () =>
-                      h(
-                        getWidget({
-                          item: { ...child, path },
-                          model: compProps.model[field][i],
-                          internalConfigStates: currentConfig,
-                        }),
-                      ),
+                      h(FORM_FIELDS[child.type]!, {
+                        item: { ...child, path },
+                        model: model.value[item.value.field][i],
+                        internalConfigStates: currentConfig,
+                      }),
                     label: getLabelRenderer(child.label),
                   }}
                 </NFormItemGi>
@@ -77,7 +73,7 @@ export const renderMultipleBlock = defineComponent({
         <div class="mb2 w-full rounded-base bg-base px2 pt2 hover:shadow-base bd-base" key={uuids[i]}>
           <div class="mb1 flex items-center justify-between">
             <div class="h5 w5 rounded-base bg-gray/30 text-center text-xs lh-20px">{i + 1}</div>
-            {multipleConfig
+            {item.value.multipleConfig
               ? (
                 <AtIconBtn
                   icon="i-ph-trash-simple-duotone"
@@ -85,17 +81,17 @@ export const renderMultipleBlock = defineComponent({
                   text
                   disabled={disableDel.value}
                   onClick={() => {
-                    compProps.model[field].splice(i, 1)
+                    model.value[item.value.field].splice(i, 1)
                     uuids.splice(i, 1)
                     internalGenConfigs.value.splice(i, 1)
-                    multipleConfig.onRemoveButtonClick?.(i, compProps.item)
+                    item.value.multipleConfig?.onRemoveButtonClick?.(i, compProps.item)
                   }}
                 >
                 </AtIconBtn>
                 )
               : null}
           </div>
-          <NGrid xGap={12} {...props} {...state}>
+          <NGrid xGap={12} {...item.value.props} {...state}>
             {subItems}
           </NGrid>
         </div>
@@ -104,13 +100,13 @@ export const renderMultipleBlock = defineComponent({
 
     const widgets = computed(() => {
       const genWidgetArr: any[] = []
-      if (!compProps.model[field] && defaultItem) {
+      if (!model.value[item.value.field] && defaultItem) {
         // 如果 model[field] 为 null 或者 undefined 并且存在 defaultItem，则说明这是一个对象数组表单。需要初始化他为一个数组。避免报错 xxx undefined。
         // !!! 后端不规范问题
-        compProps.model[field] = []
+        model.value[item.value.field] = []
       }
-      if (isArray(compProps.model[field])) {
-        for (let i = 0; i < compProps.model[field].length; i++) {
+      if (isArray(model.value[item.value.field])) {
+        for (let i = 0; i < model.value[item.value.field].length; i++) {
           if (!uuids[i])
             uuids.push(`${Math.random()}`)
           if (!internalGenConfigs.value[i])
@@ -122,12 +118,12 @@ export const renderMultipleBlock = defineComponent({
         genWidgetArr.push(
           <NGrid
             xGap={12}
-            {...props}
+            {...item.value.props}
             {...state}
-            class={`w-full rounded-base bd-base bg-base ${children[0].labelPlacement === 'left' ? 'pt6 px6' : 'px2 pt1'}`}
+            class={`w-full rounded-base bd-base bg-base ${item.value.children?.[0].labelPlacement === 'left' ? 'pt6 px6' : 'px2 pt1'}`}
           >
-            {children.map((child) => {
-              const path = `${field}.${child.field}`
+            {item.value.children?.map((child) => {
+              const path = `${item.value.field}.${child.field}`
               return (
                 <NFormItemGi
                   {...omit(child, EXTRA_FORM_ITEM_PROPS)}
@@ -139,7 +135,7 @@ export const renderMultipleBlock = defineComponent({
                   {...{ target: path }}
                 >
                   {{
-                    default: () => h(getWidget({ item: { ...child, path }, model: compProps.model[field] })),
+                    default: () => h(FORM_FIELDS[child.type]!, { item: { ...child, path }, model: model.value[item.value.field] }),
                     label: getLabelRenderer(child.label),
                   }}
                 </NFormItemGi>
@@ -150,15 +146,14 @@ export const renderMultipleBlock = defineComponent({
       }
       return genWidgetArr
     })
-
     const genInternalConfigs = () => {
-      const v = compProps.model[field].length
+      const v = model.value[item.value.field].length
       for (let idx = 0; idx < v; idx++)
-        internalGenConfigs.value[idx] = cloneDeep(compProps.item.children!)
+        internalGenConfigs.value[idx] = cloneDeep(item.value.children!)
     }
 
-    watch(
-      [() => compProps.model[field].length, () => compProps.item],
+    Array.isArray(model.value[item.value.field]) && watch(
+      [() => model.value[item.value.field].length, () => item.value],
       genInternalConfigs,
       { immediate: true, deep: true },
     )
@@ -167,18 +162,18 @@ export const renderMultipleBlock = defineComponent({
       return (
         <div class="w-full">
           {widgets.value}
-          {multipleConfig && (
+          {item.value.multipleConfig && (
             <AtIconBtn
               icon="i-ph-plus-circle-duotone"
               type="primary"
               secondary
               block
-              {...multipleConfig.addBtnProps}
+              {...item.value.multipleConfig.addBtnProps}
               onClick={() => {
-                compProps.model[field].push(cloneDeep(defaultItem))
+                model.value[item.value.field].push(cloneDeep(defaultItem))
                 internalGenConfigs.value.push(cloneDeep(compProps.item.children!))
                 uuids.push(`${Math.random()}`)
-                multipleConfig.onAddButtonClick?.(compProps.item)
+                item.value.multipleConfig?.onAddButtonClick?.(compProps.item)
               }}
             >
               {compProps.item.multipleConfig?.addBtnText}

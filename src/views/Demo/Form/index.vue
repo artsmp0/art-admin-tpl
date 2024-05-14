@@ -82,8 +82,8 @@ const configs = computed(
               onChange: (val, configs) => {
                 if (!configs)
                   return
-                configs[1].hide = val === 2
-                configs[2].hide = val === 1
+                configs.value[1].hide = val === 2
+                configs.value[2].hide = val === 1
               },
             },
           },
@@ -92,9 +92,9 @@ const configs = computed(
             labelPlacement: 'left',
             label: '下拉选择1',
             type: 'select',
+            hide: false,
             props: {
               options: options1.value,
-
             },
           },
           {
@@ -102,6 +102,7 @@ const configs = computed(
             labelPlacement: 'left',
             label: '下拉选择2',
             type: 'select',
+            hide: true,
             props: {
               options: options2.value,
             },

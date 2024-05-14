@@ -1,7 +1,9 @@
 import { type MaybeRefOrGetter, toValue, tryOnMounted, tryOnUnmounted } from '@vueuse/core'
 import { omit } from 'lodash-unified'
+import type { Ref } from 'vue'
 import { isRef, reactive, ref, shallowReactive, shallowRef, watch } from 'vue'
-import { getWidget } from './fields'
+import type { AtFormItemConfig } from '..'
+import type { Recordable } from '../../types'
 import type { FormItemConfig, FormItemElement, RenderFnParams } from './types'
 
 /** 传给表单 FormItem 时需要排除掉这些额外的属性 */
@@ -37,23 +39,19 @@ export function useFetchField(apiFn?: Function) {
   return { loading, options, fetchData }
 }
 
-export function useDeps({ item, model }: RenderFnParams, args?: ReturnType<typeof useFetchField>) {
+export function useDeps({ item, model }: { item: Ref<AtFormItemConfig>, model: Ref<Recordable> }, args?: ReturnType<typeof useFetchField>) {
   const state = reactive({})
-  if (!item.deps)
+  if (!item.value.deps)
     return state
 
   const watcher = async () => {
-    Object.assign(state, await item.listener?.(args?.fetchData))
+    Object.assign(state, await item.value.listener?.(args?.fetchData))
   }
   tryOnMounted(watcher)
-  const refDeps = item.deps.filter(d => isRef(d))
+  const refDeps = item.value.deps.filter(d => isRef(d))
 
-  // 这种写法不行（不知道为啥
-  // const modelDeps = item.deps.filter((d) => typeof d === 'string').map((k) => model[k as string]);
-  // watch(() => modelDeps, watcher);
-
-  const stop1 = watch(() => item.deps?.map(k => (typeof k === 'string' ? model[k] : null)), watcher, {
-    deep: item.deep,
+  const stop1 = watch(() => item.value.deps?.map(k => (typeof k === 'string' ? model.value[k] : null)), watcher, {
+    deep: item.value.deep,
   })
   const stop2 = watch(refDeps, watcher)
 
@@ -65,25 +63,8 @@ export function useDeps({ item, model }: RenderFnParams, args?: ReturnType<typeo
   return state
 }
 
-export function getElements(model: any, outerConfigs: MaybeRefOrGetter<FormItemConfig[] | undefined>) {
-  const genElement = (item: FormItemConfig) => {
-    item.path = item.field
-    return {
-      field: item.field,
-      widget: item.type === 'titleBar' ? undefined : getWidget({ item, model }),
-      oldJson: item,
-      props: shallowReactive(
-        omit(item, ['children', 'themeOverrides', 'component', 'multipleConfig', 'slots', 'apiFn', 'props', 'deep', 'deps', 'listener']),
-      ),
-    } as FormItemElement
-  }
-
-  const genElements = () => {
-    return toValue(outerConfigs)?.map(config => genElement(config)) ?? []
-  }
-
-  return {
-    genElement,
-    genElements,
-  }
+export function getLabelRenderer(label: FormItemConfig['label']) {
+  if (typeof label === 'string')
+    return () => label
+  return label
 }

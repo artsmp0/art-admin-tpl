@@ -1,19 +1,16 @@
 import { omit } from 'lodash-unified'
 import { NCascader, NSpin } from 'naive-ui'
-import { defineComponent, h, reactive, toRefs } from 'vue'
+import { defineComponent, h, toRefs } from 'vue'
 import { useDeps, useFetchField } from '../utils'
 import { type RenderFnParams, needOmitKeyArr } from '../types'
 
 export const renderCascader = defineComponent({
-  props: ['item', 'model'],
+  props: ['item', 'model', 'internalConfigStates'],
   setup(compProps: RenderFnParams) {
-    const { item, model, internalConfigStates } = reactive(toRefs(compProps))
-    const { props = undefined, field, apiFn } = item
-    const fetchRes = useFetchField(apiFn)
+    const { item, model, internalConfigStates } = toRefs(compProps)
+    const fetchRes = useFetchField(item.value.apiFn)
     const state: any = useDeps({ item, model }, fetchRes)
-    const isStringLabel = typeof item.label === 'string'
-    props?.onChange?.(model[field], internalConfigStates)
-
+    const isStringLabel = typeof item.value.label === 'string'
     return () => {
       return h(
         NCascader,
@@ -21,18 +18,18 @@ export const renderCascader = defineComponent({
           clearable: true,
           maxTagCount: 'responsive',
           options: fetchRes?.options.value,
-          value: model[field],
-          placeholder: isStringLabel ? `请选择${item.label}` : undefined,
+          value: model.value[item.value.field],
+          placeholder: isStringLabel ? `请选择${item.value.label}` : undefined,
           onUpdateValue: (v: any) => {
-            model[field] = v
-            props?.onChange?.(v, internalConfigStates)
+            model.value[item.value.field] = v
+            item.value.props?.onChange?.(v, internalConfigStates)
           },
-          ...omit(props, needOmitKeyArr),
+          ...omit(item.value.props, needOmitKeyArr),
           ...state,
         },
         {
           arrow: () =>
-            state?.loading ?? (props as any)?.loading ?? fetchRes?.loading
+            state?.loading ?? (item.value.props as any)?.loading ?? fetchRes?.loading
               ? h(NSpin, {
                 size: 12,
               })

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { cloneDeep, isArray, merge, mergeWith, omit } from 'lodash-unified'
+import { cloneDeep, isArray, mergeWith, omit } from 'lodash-unified'
 import { type FormInst, NForm, NFormItem, NFormItemGi, NGrid, NGridItem } from 'naive-ui'
-import { reactive, shallowReactive, shallowRef, watch } from 'vue'
-import type { Recordable } from '../../types'
-import { EXTRA_FORM_ITEM_PROPS, getElements } from './utils'
-import type { AtFormProps, FormItemConfig, FormItemElement } from './types'
+import { computed, reactive, shallowRef } from 'vue'
+import { EXTRA_FORM_ITEM_PROPS } from './utils'
+import type { AtFormProps } from './types'
+import { FORM_FIELDS } from './fields/fields'
 
 defineOptions({
   name: 'AtForm',
@@ -16,17 +16,15 @@ const props = withDefaults(defineProps<AtFormProps>(), {
   },
 })
 
-const model = defineModel<Recordable>('model', { required: true })
-const { genElement, genElements } = getElements(model.value, () => props.configs)
-const elements = shallowReactive<FormItemElement[]>(genElements())
-// when props.configs is computed, it will auto update elements when config changed.
-watch(
-  () => props.configs,
-  () => {
-    Object.assign(elements, genElements())
-  },
-  { deep: true },
-)
+const finalConfigs = computed(() => {
+  return props.configs.map((item) => {
+    return {
+      ...item,
+      path: item.field,
+    }
+  })
+})
+
 const formRef = shallowRef<FormInst>()
 
 async function validate(...args: any[]) {
@@ -44,14 +42,14 @@ async function validate(...args: any[]) {
 }
 
 async function setValue(newValue: any) {
-  mergeWith(model.value, newValue, (oldVal, newVal) => {
+  mergeWith(props.model, newValue, (oldVal, newVal) => {
     // 重置对象数组类型的表单需要对齐数组的长度
     if (isArray(oldVal) && isArray(newVal) && oldVal.length > newVal.length)
       oldVal.splice(newVal.length - oldVal.length, Number.POSITIVE_INFINITY)
   })
 }
 
-const cloneInitVal = cloneDeep(model.value)
+const cloneInitVal = cloneDeep(props.model)
 async function resetValue() {
   setValue(props.initValue ?? cloneInitVal)
   restoreValidation()
@@ -61,24 +59,6 @@ function restoreValidation() {
   formRef.value?.restoreValidation()
 }
 
-function updateElementByField(field: string, config: Partial<FormItemConfig>, idx?: number) {
-  const oldIdx = elements.findIndex(el => el.field === field)
-  if (oldIdx === -1) {
-    if (config.field && config.type) {
-      const newEl = genElement(config as FormItemConfig)
-      if (idx)
-        elements.splice(idx, 0, newEl)
-      else
-        elements.push(newEl)
-    }
-    else {
-      console.warn('新建字段的 type 和 field 必传！')
-    }
-
-    return
-  }
-  elements[oldIdx] = genElement(merge(elements[oldIdx].oldJson, config))
-}
 function isString(thing: any) {
   return typeof thing === 'string'
 }
@@ -88,7 +68,6 @@ defineExpose(
     resetValue,
     setValue,
     restoreValidation,
-    updateElementByField,
     getEl() { return (formRef.value as any).$el },
   }),
 )
@@ -96,23 +75,24 @@ defineExpose(
 
 <template>
   <NForm ref="formRef" :model="model" v-bind="props.nFormProps">
+    <!-- for search component -->
     <NGrid v-if="!props.nFormProps?.inline" v-bind="layout">
-      <template v-for="element in elements" :key="element.props.field">
-        <template v-if="element.props.type !== 'titleBar'">
+      <template v-for="config in finalConfigs" :key="config.field">
+        <template v-if="config.type !== 'titleBar'">
           <NFormItemGi
-            v-if="!element.props.hide"
-            v-bind="omit(element.props, EXTRA_FORM_ITEM_PROPS)"
-            :span="element.props.span ?? 24"
-            :path="element.props.field"
-            :target="element.props.field"
+            v-if="!config.hide"
+            v-bind="omit(config, EXTRA_FORM_ITEM_PROPS)"
+            :span="config.span ?? 24"
+            :path="config.field"
+            :target="config.field"
           >
-            <template v-if="element.props.label" #label>
+            <template v-if="config.label" #label>
               <div flex items-center gap4>
-                <span v-if="isString(element.props.label)">{{ element.props.label }}</span>
-                <Component :is="element.props.label" v-else />
+                <span v-if="isString(config.label)">{{ config.label }}</span>
+                <Component :is="config.label" v-else />
               </div>
             </template>
-            <Component :is="element.widget" />
+            <Component :is="FORM_FIELDS[config.type]" :item="config" :model="model" />
           </NFormItemGi>
         </template>
         <NGridItem v-else :span="24">
@@ -121,27 +101,28 @@ defineExpose(
             :class="titleBarCls"
           >
             <span class="h9 w1 bg-primary" />
-            <span v-if="isString(element.props.label)">{{ element.props.label }}</span>
-            <Component :is="element.props.label" v-else />
+            <span v-if="isString(config.label)">{{ config.label }}</span>
+            <Component :is="config.label" v-else />
           </div>
         </NGridItem>
       </template>
     </NGrid>
-    <template v-for="element in elements" v-else :key="element.props.field">
+    <!-- normal form -->
+    <template v-for="config in finalConfigs" v-else :key="config.field">
       <NFormItem
-        v-if="!element.props.hide"
-        v-bind="omit(element.props, EXTRA_FORM_ITEM_PROPS)"
-        :span="element.props.span ?? 24"
-        :path="element.props.field"
-        :target="element.props.field"
+        v-if="!config.hide"
+        v-bind="omit(config, EXTRA_FORM_ITEM_PROPS)"
+        :span="config.span ?? 24"
+        :path="config.field"
+        :target="config.field"
       >
-        <template v-if="element.props.label" #label>
+        <template v-if="config.label" #label>
           <div flex items-center gap1>
-            <span v-if="isString(element.props.label)">{{ element.props.label }}</span>
-            <Component :is="element.props.label" v-else />
+            <span v-if="isString(config.label)">{{ config.label }}</span>
+            <Component :is="config.label" v-else />
           </div>
         </template>
-        <Component :is="element.widget" />
+        <Component :is="FORM_FIELDS[config.type]" :item="config" :model="model" />
       </NFormItem>
     </template>
     <slot name="search" />

@@ -1,26 +1,24 @@
 import { omit } from 'lodash-unified'
 import { NDatePicker } from 'naive-ui'
-import { defineComponent, h, reactive, toRefs } from 'vue'
+import { defineComponent, h, toRefs } from 'vue'
 import { useDeps } from '../utils'
 import { type RenderFnParams, needOmitKeyArr } from '../types'
 
 export const renderDatePicker = defineComponent({
   props: ['item', 'model', 'internalConfigStates'],
   setup(compProps: RenderFnParams) {
-    const { item, model, internalConfigStates } = reactive(toRefs(compProps))
-    const { props = undefined, field } = item
+    const { item, model, internalConfigStates } = toRefs(compProps)
     const state = useDeps({ item, model })
-    props?.onChange?.(model[field], internalConfigStates)
     return () =>
       h(NDatePicker, {
         clearable: true,
-        formattedValue: model[field],
+        formattedValue: model.value[item.value.field],
         onUpdateFormattedValue: (v: any) => {
-          model[field] = v
-          props?.onChange?.(v, internalConfigStates)
+          model.value[item.value.field] = v
+          item.value.props?.onChange?.(v, internalConfigStates)
         },
         style: { width: '100%' },
-        ...omit(props, ['formattedValue', 'onUpdateFormattedValue', 'onUpdate:formattedValue'].concat(needOmitKeyArr)),
+        ...omit(item.value.props, ['formattedValue', 'onUpdateFormattedValue', 'onUpdate:formattedValue'].concat(needOmitKeyArr)),
         ...state,
       } as any)
   },
