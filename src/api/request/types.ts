@@ -2,8 +2,8 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 /**
  * makeRequest 函数返回的最终结果
- * @param data: 接口结果
- * @param err: 如果有就说明接口报错了
+ * @param data 接口结果
+ * @param err 如果有就说明接口报错了
  */
 export interface MakeRequestRes<D = unknown, E = any> {
   data: D

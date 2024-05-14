@@ -8,7 +8,7 @@ import { downloadBlob, isDdOrZzd } from '@/utils'
 
 let alreadyShowError = false
 
-/** 处理授权错误 */
+/** 处理授权接口 */
 function handleAuth(response: AxiosResponse) {
   const { notification } = useDiscrete()
 
@@ -109,17 +109,12 @@ export function apiResult(instance: AxiosInstance) {
       const { message } = useDiscrete()
       if (err.code === 'ECONNABORTED')
         message.warning('请求超时取消，请重试或联系管理员！')
-
-      if (err.code === 'ERR_NETWORK')
+      else if (err.code === 'ERR_NETWORK')
         message.error('貌似断网了喔~~')
-
-      if (err.code !== 'ERR_CANCELED') {
+      else if (err.code !== 'ERR_CANCELED')
         message.error(err.message)
-      }
-      else {
-        // 请求状态码非2xx或者网络错误
-        console.warn('cancel request:', err)
-      }
+      else console.warn('cancel request:', err)
+
       return { err, data: undefined, response: undefined } as any
     },
   )
