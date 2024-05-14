@@ -128,22 +128,23 @@ defineExpose(
         <RightUtils v-model:size="size" class="my1" :options="props.rightUtils" :wrapper="$tableWrapper" :reload="refresh" />
       </div>
     </div>
-
-    <NDataTable
-      v-bind="$attrs"
-      :scroll-x="computedScrollX"
-      remote
-      :loading="loading"
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-      :row-class-name="rowClassName"
-      :checked-row-keys="checkedKeys"
-      :size="size"
-      :row-key="props.rowKey"
-      :default-expanded-row-keys="defaultExpandedRowKeys"
-      @update:sorter="handleSorterChange"
-      @update:checked-row-keys="handleCheck"
-    />
+    <div class="flex-1">
+      <NDataTable
+        v-bind="$attrs"
+        :scroll-x="computedScrollX"
+        remote
+        :loading="loading"
+        :columns="columns"
+        :data="data"
+        :pagination="pagination"
+        :row-class-name="rowClassName"
+        :checked-row-keys="checkedKeys"
+        :size="size"
+        :row-key="props.rowKey"
+        :default-expanded-row-keys="defaultExpandedRowKeys"
+        @update:sorter="handleSorterChange"
+        @update:checked-row-keys="handleCheck"
+      />
+    </div>
   </div>
 </template>
