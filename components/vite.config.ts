@@ -15,7 +15,7 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    UnoCSS(),
+    UnoCSS({ configFile: '../uno.config.ts' }),
     createSvgIconsPlugin({ iconDirs, symbolId: 'icon-[dir]-[name]', customDomId: '__@art-admin/components__svg__icons__dom__' }),
     dts({ outDir: outputEs }),
   ],

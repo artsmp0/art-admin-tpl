@@ -25,6 +25,7 @@ watch(
   () => {
     Object.assign(elements, genElements())
   },
+  { deep: true },
 )
 const formRef = shallowRef<FormInst>()
 
@@ -53,6 +54,7 @@ async function setValue(newValue: any) {
 const cloneInitVal = cloneDeep(model.value)
 async function resetValue() {
   setValue(props.initValue ?? cloneInitVal)
+  restoreValidation()
 }
 
 function restoreValidation() {
@@ -77,6 +79,9 @@ function updateElementByField(field: string, config: Partial<FormItemConfig>, id
   }
   elements[oldIdx] = genElement(merge(elements[oldIdx].oldJson, config))
 }
+function isString(thing: any) {
+  return typeof thing === 'string'
+}
 defineExpose(
   reactive({
     validate,
@@ -87,10 +92,6 @@ defineExpose(
     getEl() { return (formRef.value as any).$el },
   }),
 )
-
-function isString(thing: any) {
-  return typeof thing === 'string'
-}
 </script>
 
 <template>
@@ -116,8 +117,7 @@ function isString(thing: any) {
         </template>
         <NGridItem v-else :span="24">
           <div
-            :style="{ background: '#f5f5f5' }"
-            class="text-16px font-bold mb4 relative flex items-center gap2 flex-auto rounded-base of-hidden"
+            class="text-16px font-bold mb4 relative flex items-center gap2 flex-auto rounded-base of-hidden bg-gray/20"
             :class="titleBarCls"
           >
             <span class="h9 w1 bg-primary" />

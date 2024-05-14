@@ -13,7 +13,7 @@ export const renderSelect = defineComponent({
     const fetchRes = useFetchField(apiFn)
     const state = useDeps({ item, model }, fetchRes)
     const isStringLabel = typeof item.label === 'string'
-    props?.onChange?.(model[field], internalConfigStates)
+    internalConfigStates && props?.onChange?.(model[field], internalConfigStates)
     return () =>
       h(NSelect, {
         value: model[field],

@@ -6,25 +6,9 @@ import { computed, ref } from 'vue'
 const model = ref<any>({
   a: 1,
   b: 1,
-  c: 3,
+  c: 1,
 })
 
-const options1 = shallowRef<any[]>([])
-const options2 = shallowRef<any[]>([])
-function getOptions() {
-  setTimeout(() => {
-    options1.value = [
-      { label: '选项一', value: 1 },
-      { label: '选项二', value: 2 },
-    ]
-
-    options2.value = [
-      { label: '选项5', value: 1 },
-      { label: '选项6', value: 2 },
-    ]
-  }, 1000)
-}
-getOptions()
 const configs = computed<AtFormItemConfig[]>(() => [
   {
     field: 'a',
@@ -32,32 +16,26 @@ const configs = computed<AtFormItemConfig[]>(() => [
     label: '三级联动 a',
     span: 8,
     props: {
-      options: options1.value,
+      options: [{ label: '选项1', value: 1 }, { label: '选项2', value: 2 }],
     },
   },
   {
     field: 'b',
     type: 'select',
-    label: 'b',
+    label: '选中1显示',
     span: 8,
+    hide: model.value.a !== 1,
     props: {
       options: [{ label: '选项1-1', value: 1 }, { label: '选项1-2', value: 2 }],
-      multiple: true,
     },
   },
   {
     field: 'c',
     type: 'select',
-    label: 'c',
+    label: '选中1禁用',
     span: 8,
-    props: { options: [{ label: '选项2-2-1', value: 3 }, { label: '选项2-2-2', value: 4 }] },
-    // hide: model.value.a !== 1,
-  },
-  {
-    field: 'd',
-    type: 'input',
-    label: 'd',
-    span: 8,
+    props: { options: [{ label: '选项2-2-1', value: 3 }, { label: '选项2-2-2', value: 4 }], disabled: model.value.a !== 2 },
+
   },
 ])
 </script>
@@ -65,8 +43,5 @@ const configs = computed<AtFormItemConfig[]>(() => [
 <template>
   <div w-full>
     <AtForm :model="model" :configs="configs" />
-    <pre>
-      {{ model }}
-    </pre>
   </div>
 </template>
