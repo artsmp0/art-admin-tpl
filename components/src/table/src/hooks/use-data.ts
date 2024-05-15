@@ -1,7 +1,7 @@
 /* eslint-disable ts/no-use-before-define */
 import type { DataTableSortState } from 'naive-ui'
 import type { RowData } from 'naive-ui/es/data-table/src/interface'
-import { type Ref, type VNode, type VNodeChild, computed, createApp, h, nextTick, reactive, ref, shallowRef, toValue } from 'vue'
+import { type Ref, computed, h, nextTick, reactive, ref, render, shallowRef, toValue } from 'vue'
 import type { AtTableProps } from '../type'
 
 interface UseData {
@@ -89,12 +89,15 @@ export default function useData({ propsGetter, updateCheckedRows, columns }: Use
   /** 缓存当前列表的筛选参数 */
   const cachedParams = ref<any>({})
 
-  const getWidth = (node: VNode | VNodeChild) => {
-    const app = createApp({
-      setup() {
-        return () => node
-      },
-    })
+  const getWidth = (el: HTMLDivElement, node: any) => {
+    if (typeof node === 'string' || typeof node === 'number')
+      node = h('span', node)
+    render(node, el)
+    const w = el.offsetWidth
+    return w
+  }
+  /** 自适应列宽计算 */
+  const calcColWidthAndScrollX = async () => {
     const el = document.createElement('div')
     el.style.width = 'fit-content'
     el.style.visibility = 'hidden'
@@ -102,35 +105,36 @@ export default function useData({ propsGetter, updateCheckedRows, columns }: Use
     el.style.whiteSpace = 'nowrap'
     el.style.fontSize = '14px'
     el.style.fontWeight = 'bold'
-    el.style.padding = '0 24px'
-    app.mount(el)
+    el.style.padding = '0 12px'
     document.body.append(el)
-    const w = el.offsetWidth
-    el.remove()
-    app.unmount()
-    return w
-  }
-  /** 自适应列宽计算 */
-  const calcColWidthAndScrollX = async () => {
     // 动态计算 fitColKeys 的列宽
-    const promises = fitColKeys.value.map(async (key) => {
+    for (const k in fitColKeys.value) {
+      const key = fitColKeys.value[k]
       const col = columns.value.find(col => col.key === key)!
-      col.width = getWidth(h('span', { style: { whiteSpace: 'nowrap' } }, col.title as string)) + CELL_PADDING
-      data.value.forEach((row, idx) => {
-        // eslint-disable-next-line eqeqeq
-        if (row[key as string] == undefined)
-          return
-        const renderRes = col.render?.(row, idx) ?? h('span', { style: { whiteSpace: 'nowrap' } }, row[key as string])
-        const wid = getWidth(renderRes)
-        col.width = Math.max((col.width ?? CELL_PADDING) as number, wid + CELL_PADDING)
-      })
-    })
-    await Promise.all(promises)
+      if (col.fitContent) {
+        col.width
+                = getWidth(
+            el,
+            typeof col.title === 'function' ? col.title(col as any) : h('span', { style: { whiteSpace: 'nowrap' } }, col.title as string),
+          ) + CELL_PADDING
+        if (col.filter || col.sorter)
+          col.width += 40
+
+        data.value.forEach((row, idx) => {
+          if (row[key as string] === undefined)
+            return
+          const renderRes = col.render?.(row, idx) ?? h('span', { style: { whiteSpace: 'nowrap' } }, `${row[key as string]}`)
+          const wid = renderRes ? getWidth(el, renderRes) : 0
+          col.width = Math.max((col.width ?? CELL_PADDING) as number, wid + CELL_PADDING)
+        })
+      }
+    }
     computedScrollX.value = columns.value.reduce((cur, next) => {
       if (next.type === 'selection')
         return cur + 40
       return cur + (next.width as number)
     }, 0)
+    el.remove()
   }
   const getRowSpanKey = (): string[] => {
     return columns.value.filter(col => col.needRowSpan).map(col => col.key as string) || ([] as string[])
