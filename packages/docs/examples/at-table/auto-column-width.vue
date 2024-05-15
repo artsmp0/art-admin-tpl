@@ -7,11 +7,11 @@ import { getListData } from './mock'
 const { getList } = useTableListApi(getListData)
 const $table = shallowRef<GpTableInst>()
 const columns: TableColumns<any> = [
-  { key: '1', title: '表名', width: 100 },
-  { key: '2', title: '描述', width: 100, ellipsis: true },
-  { key: '3', title: '数据量', width: 200, render(rowData) { return <NTag>{rowData['3']}</NTag> } },
-  { key: '4', title: '占用磁盘', width: 100 },
-  { title: '最近更新时间', key: '5', width: 180 },
+  { key: '1', title: '表名', fitContent: true },
+  { key: '2', title: '描述', fitContent: true },
+  { key: '3', title: '数据量', fitContent: true, render(rowData) { return <NTag>{rowData['3']}</NTag> } },
+  { key: '4', title: '占用磁盘', fitContent: true },
+  { title: '最近更新时间', key: '5', fitContent: true },
   { title: '操作', key: 'operation', fixed: 'right', width: 150, render() {
     return (
       <NSpace>
@@ -35,7 +35,6 @@ const columns: TableColumns<any> = [
       :row-key="(row: any) => row.id"
       :columns="(columns as any)"
       table-title="这是表格标题"
-      :scroll-x="1000"
       :selection="{ type: 'selection', disabled(row:any) { return row[1] === '名字0' } }"
       flex-height
       :list-api="getList"

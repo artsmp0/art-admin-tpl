@@ -37,3 +37,7 @@ export interface AtTableProps {
 #### 基础示例
 自适应容器高度，并且表格内滚动。
 <demo src="../examples/at-table/basic.vue"></demo>
+
+#### 自适应列宽
+开启自适应列宽(有一列存在 `fitContent`)后，`scrollX` 由内部计算，注意：此时非自适应列宽的 `column` 的 `width` 必须存在。
+<demo src="../examples/at-table/auto-column-width.vue"></demo>

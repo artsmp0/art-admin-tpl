@@ -18,3 +18,43 @@
 .dark::view-transition-old(root) {
   z-index: 9999;
 }
+
+
+/**
+ * Table
+ * -------------------------------------------------------------------------- */
+
+ .vp-doc table {
+  display: table;
+  border-collapse: unset;
+  margin: unset;
+  overflow-x: unset;
+}
+
+.vp-doc tr {
+  background-color:unset;
+  border-top: unset;
+  transition: unset;
+}
+
+.vp-doc tr:nth-child(2n) {
+  background-color: unset;
+}
+
+.vp-doc th,
+.vp-doc td {
+  border: unset;
+  padding: unset;
+}
+
+.vp-doc th {
+  text-align: unset;
+  font-size: unset;
+  font-weight: unset;
+  color: unset;
+  background-color: unset;
+}
+
+.vp-doc td {
+  font-size: unset;
+}
