@@ -5,7 +5,6 @@ import { EXTRA_FORM_ITEM_PROPS, getLabelRenderer, useDeps } from '../utils'
 import type { FormItemConfig, RenderFnParams } from '../types'
 import { AtIconBtn } from '../../../icon'
 import { FORM_FIELDS } from './fields'
-import { getWidget } from '.'
 
 export const renderMultipleBlock = defineComponent({
   props: ['item', 'model'],

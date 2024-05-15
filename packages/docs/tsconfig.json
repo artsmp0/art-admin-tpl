@@ -6,7 +6,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "types": ["node", "vite/client"],
+    "types": ["node", "vite/client", "naive-ui/volar"],
     "strict": true,
     "strictNullChecks": true,
     "noImplicitAny": false,
@@ -14,5 +14,5 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "include": ["**/*.vue", "**/*.ts"]
+  "include": ["**/*.vue", "**/*.ts", ".vitepress/**/*.vue", ".vitepress/**/*.ts"]
 }

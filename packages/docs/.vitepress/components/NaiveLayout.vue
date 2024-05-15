@@ -30,7 +30,6 @@ const VitepressPath = defineComponent({
   },
 })
 
-// @ts-expect-error missing types
 const isSsr = computed(() => import.meta.env.SSR)
 </script>
 

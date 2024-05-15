@@ -16,7 +16,6 @@ export default {
   ...theme,
   enhanceApp({ app, router }) {
     app.component('Demo', DemoBlock)
-    // @ts-expect-error missing types
     if (import.meta.env.SSR) {
       const { collect } = setup(app)
       app.provide('css-render-collect', collect)
