@@ -26,11 +26,11 @@ const themes = useThemeVars()
 </script>
 
 <template>
-  <div>
+  <div w-full>
     <input
       v-model="localVal"
       type="text"
-      class="outline-none bg-base"
+      class="outline-none w-full p1 bg-gray/10"
       :style="{
         border: `1px solid ${themes.primaryColor}`,
         borderColor: formItem.mergedStatusRef.value === 'error' ? themes.errorColor : themes.primaryColor,

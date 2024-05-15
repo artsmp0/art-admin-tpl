@@ -187,7 +187,6 @@ const configs: AtFormItemConfig[] = [
       },
     ],
   },
-
 ]
 
 const $form = shallowRef<AtFormInst>()
@@ -203,7 +202,7 @@ async function submit() {
 </script>
 
 <template>
-  <div w-full>
+  <div class="p4 w-full">
     <AtForm ref="$form" :model="model" :configs="configs" :layout="{ xGap: 16, yGap: 8 }" title-bar-cls="bg-green/30" />
     <NFlex size="medium" vertical>
       <NButton @click="$form?.resetValue()">

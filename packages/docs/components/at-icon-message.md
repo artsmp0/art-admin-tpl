@@ -1,6 +1,6 @@
 # AtIconMessage
 
-### props
+## props
 
 ```ts
 const props = withDefaults(
@@ -15,7 +15,7 @@ const props = withDefaults(
   },
 )
 ```
-### demos
+## demos
 
 <demo title="基础示例" src="../examples/at-icon-message/basic.vue"></demo>
 <demo title="基础示例" src="../examples/at-icon-message/custom-trigger.vue"></demo>

@@ -10,12 +10,12 @@ export default defineConfig({
   lastUpdated: true,
   cleanUrls: true,
   themeConfig: {
+    outline: { level: 'deep' },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '指南', link: '/guide/', activeMatch: '^/guide/' },
       { text: '组件', link: '/components/', activeMatch: '^/components/' },
     ],
-
     sidebar: {
       '/guide/': [
         {

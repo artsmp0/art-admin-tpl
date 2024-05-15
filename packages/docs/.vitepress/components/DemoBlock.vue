@@ -2,13 +2,11 @@
 import { computed } from 'vue'
 import { useClipboard, useToggle } from '@vueuse/core'
 import { AtExpandTransition } from '@art-admin/components'
-import { NText } from 'naive-ui'
 
 const props = withDefaults(defineProps<{
   code: string
   highlightedCode: string
   lang?: string
-  title?: string
 }>(), {
   lang: 'vue',
 })
@@ -23,11 +21,6 @@ const [value, toggle] = useToggle()
 <template>
   <ClientOnly>
     <div class="my4">
-      <div class="mb2">
-        <NText strong>
-          {{ title }}
-        </NText>
-      </div>
       <div v-bind="$attrs" class="of-hidden border border-gray/20 rounded border-solid">
         <div class="at-demo_wrapper">
           <slot />

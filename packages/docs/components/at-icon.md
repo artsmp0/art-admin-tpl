@@ -24,6 +24,6 @@ export interface AtIconProps {
 }
 ```
 
-### demo
+## demo
 
 <demo src="../examples/at-icon/at-icon.vue"></demo>

@@ -1,11 +1,11 @@
 # AtPageHeader
 
-### props
+## props
 
 ```ts
 interface Props extends /* @vue-ignore */ PageHeaderProps {}
 ```
 
-### demos
+## demos
 
 <demo src="../examples/at-page-header/basic.vue"></demo>

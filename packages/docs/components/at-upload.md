@@ -5,7 +5,7 @@
 2. 根据你传进来的 `format` 函数格式化成你想要的数据格式
 3. 根据你传进来的 `toFileList` 函数格式化成 `NUpload` 想要的数据格式
 
-### props
+## props
 
 ```ts
 export interface AtUploadProps {
@@ -22,7 +22,7 @@ export interface AtUploadProps {
 }
 ```
 
-### demos
+## demos
 
 <demo src="../examples/at-upload/basic.vue"></demo>
 <demo src="../examples/at-upload/image-list.vue"></demo>

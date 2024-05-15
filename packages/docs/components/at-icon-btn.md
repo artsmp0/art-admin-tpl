@@ -2,7 +2,7 @@
 
 按钮图标，避免写 `template #icon` 这个繁琐操作，支持 `AtIcon` 和 `NButton` 的所有属性。
 
-### props
+## props
 
 ```ts
 export interface AtIconButtonProps extends /* @vue-ignore */ ButtonProps {
@@ -11,6 +11,6 @@ export interface AtIconButtonProps extends /* @vue-ignore */ ButtonProps {
 }
 ```
 
-### demo
+## demo
 
 <demo src="../examples/at-icon/at-icon-btn.vue"></demo>

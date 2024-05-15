@@ -1,6 +1,6 @@
 # AtPageContainer
 
-### props
+## props
 
 ```ts
 const props = withDefaults(
@@ -18,7 +18,7 @@ const props = withDefaults(
 )
 ```
 
-### demos
+## demos
 
 <demo src="../examples/at-page-container/basic.vue"></demo>
 <demo src="../examples/at-page-container/inner-scroll.vue"></demo>

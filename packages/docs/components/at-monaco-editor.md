@@ -2,7 +2,7 @@
 
 一个支持 naive 表单状态的编辑器。
 
-### props
+## props
 
 ```ts
 export interface AtMonacoEditorProps {
@@ -13,7 +13,7 @@ export interface AtMonacoEditorProps {
 }
 ```
 
-### events
+## events
 
 ```ts
 const emit = defineEmits<{
@@ -25,6 +25,6 @@ const emit = defineEmits<{
 }>()
 ```
 
-### demos
+## demos
 
 <demo src="../examples/at-monaco-editor/basic.vue"></demo>
