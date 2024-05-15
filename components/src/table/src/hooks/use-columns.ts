@@ -16,7 +16,7 @@ export default function useColumns(propsGetter: () => AtTableProps) {
       return { ...col, rowSpan: col.needRowSpan ? (rowData: any) => rowData[`${col.key as string}RowSpan`] : undefined }
     })
     if (props.selection)
-      columns.unshift(props.selection as any)
+      columns.unshift({ title: '选择列', key: 'selection', ...props.selection } as any)
 
     return columns as any
   })

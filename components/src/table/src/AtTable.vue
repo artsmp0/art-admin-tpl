@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type DataTableRowKey, NButton, NDataTable, NDivider } from 'naive-ui'
+import { type DataTableRowKey, NButton, NDataTable, NDivider, NEl } from 'naive-ui'
 import { computed, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
 import type { Key } from '../../types'
 import type { AtTableProps } from './type'
@@ -104,47 +104,49 @@ defineExpose(
 </script>
 
 <template>
-  <div ref="$tableWrapper" :class="{ 'bd-base': outerBordered }" class="h-full rounded-base bg-base p3 pt0 text-base" flex="~ col">
-    <div class="py2 shrink-0" :class="props.headerCls" flex="~ justify-between items-center">
-      <div class="flex items-center">
-        <slot name="title">
-          <div class="text-16px">
-            {{ tableTitle }}
-          </div>
-        </slot>
-        <template v-if="checkedKeys.length > 0 && !$slots.title">
-          <NDivider vertical />
-          <span text-gray>
-            当前已选中
-            <strong class="text-red">{{ checkedKeys.length }}</strong>
-            项，
-            <NButton size="small" type="info" text @click="handleCheck([], [])"> 取消所有 </NButton>
-          </span>
-        </template>
+  <NEl class="h-full">
+    <div ref="$tableWrapper" :class="{ 'bd-base': outerBordered }" class="h-full rounded-base bg-base p3 pt0 text-base" flex="~ col">
+      <div class="py2 shrink-0" :class="props.headerCls" flex="~ justify-between items-center">
+        <div class="flex items-center">
+          <slot name="title">
+            <div class="text-16px">
+              {{ tableTitle }}
+            </div>
+          </slot>
+          <template v-if="checkedKeys.length > 0 && !$slots.title">
+            <NDivider vertical />
+            <span text-gray>
+              当前已选中
+              <strong class="text-red">{{ checkedKeys.length }}</strong>
+              项，
+              <NButton size="small" type="info" text @click="handleCheck([], [])"> 取消所有 </NButton>
+            </span>
+          </template>
+        </div>
+        <div flex="~ items-center gap2">
+          <slot name="extra" />
+          <NDivider v-if="$slots?.extra" vertical />
+          <RightUtils v-model:size="size" class="my1" :options="props.rightUtils" :wrapper="$tableWrapper" :reload="refresh" />
+        </div>
       </div>
-      <div flex="~ items-center gap2">
-        <slot name="extra" />
-        <NDivider v-if="$slots?.extra" vertical />
-        <RightUtils v-model:size="size" class="my1" :options="props.rightUtils" :wrapper="$tableWrapper" :reload="refresh" />
+      <div class="flex-1">
+        <NDataTable
+          v-bind="$attrs"
+          :scroll-x="computedScrollX"
+          remote
+          :loading="loading"
+          :columns="columns"
+          :data="data"
+          :pagination="pagination"
+          :row-class-name="rowClassName"
+          :checked-row-keys="checkedKeys"
+          :size="size"
+          :row-key="props.rowKey"
+          :default-expanded-row-keys="defaultExpandedRowKeys"
+          @update:sorter="handleSorterChange"
+          @update:checked-row-keys="handleCheck"
+        />
       </div>
     </div>
-    <div class="flex-1">
-      <NDataTable
-        v-bind="$attrs"
-        :scroll-x="computedScrollX"
-        remote
-        :loading="loading"
-        :columns="columns"
-        :data="data"
-        :pagination="pagination"
-        :row-class-name="rowClassName"
-        :checked-row-keys="checkedKeys"
-        :size="size"
-        :row-key="props.rowKey"
-        :default-expanded-row-keys="defaultExpandedRowKeys"
-        @update:sorter="handleSorterChange"
-        @update:checked-row-keys="handleCheck"
-      />
-    </div>
-  </div>
+  </NEl>
 </template>

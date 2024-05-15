@@ -60,7 +60,7 @@ const columns: TableColumns<any> = [
   <AtPageContainer inner-scroll>
     <AtTable
       ref="$table"
-      class="flex-1"
+      class="h-full"
       :row-key="(row: any) => row.id"
       :columns="(columns as any)"
       table-title="这是表格标题"

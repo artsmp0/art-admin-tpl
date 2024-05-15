@@ -20,7 +20,7 @@ const [value, toggle] = useToggle()
 
 <template>
   <ClientOnly>
-    <div class="my4">
+    <div class="my4 demo-block">
       <div v-bind="$attrs" class="of-hidden border border-gray/20 rounded border-solid">
         <div class="at-demo_wrapper">
           <slot />
@@ -42,3 +42,17 @@ const [value, toggle] = useToggle()
     </div>
   </ClientOnly>
 </template>
+
+<style>
+.demo-block {
+  .n-data-table {
+    table {
+      margin: 0;
+      overflow: hidden;
+    }
+    th,td {
+      border: none;
+    }
+  }
+}
+</style>

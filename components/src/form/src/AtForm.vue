@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { cloneDeep, isArray, mergeWith, omit } from 'lodash-unified'
-import { type FormInst, NForm, NFormItem, NFormItemGi, NGrid, NGridItem } from 'naive-ui'
+import { type FormInst, NEl, NForm, NFormItem, NFormItemGi, NGrid, NGridItem } from 'naive-ui'
 import { computed, reactive, shallowRef } from 'vue'
 import { EXTRA_FORM_ITEM_PROPS } from './utils'
 import type { AtFormProps } from './types'
@@ -74,57 +74,59 @@ defineExpose(
 </script>
 
 <template>
-  <NForm ref="formRef" :model="model" v-bind="props.nFormProps">
-    <!-- for search component -->
-    <NGrid v-if="!props.nFormProps?.inline" v-bind="layout">
-      <template v-for="config in finalConfigs" :key="config.field">
-        <template v-if="config.type !== 'titleBar'">
-          <NFormItemGi
-            v-if="!config.hide"
-            v-bind="omit(config, EXTRA_FORM_ITEM_PROPS)"
-            :span="config.span ?? 24"
-            :path="config.field"
-            :target="config.field"
-          >
-            <template v-if="config.label" #label>
-              <div flex items-center gap4>
-                <span v-if="isString(config.label)">{{ config.label }}</span>
-                <Component :is="config.label" v-else />
-              </div>
-            </template>
-            <Component :is="FORM_FIELDS[config.type]" :item="config" :model="model" />
-          </NFormItemGi>
+  <NEl>
+    <NForm ref="formRef" :model="model" v-bind="props.nFormProps">
+      <!-- for search component -->
+      <NGrid v-if="!props.nFormProps?.inline" v-bind="layout">
+        <template v-for="config in finalConfigs" :key="config.field">
+          <template v-if="config.type !== 'titleBar'">
+            <NFormItemGi
+              v-if="!config.hide"
+              v-bind="omit(config, EXTRA_FORM_ITEM_PROPS)"
+              :span="config.span ?? 24"
+              :path="config.field"
+              :target="config.field"
+            >
+              <template v-if="config.label" #label>
+                <div flex items-center gap4>
+                  <span v-if="isString(config.label)">{{ config.label }}</span>
+                  <Component :is="config.label" v-else />
+                </div>
+              </template>
+              <Component :is="FORM_FIELDS[config.type]" :item="config" :model="model" />
+            </NFormItemGi>
+          </template>
+          <NGridItem v-else :span="24">
+            <div
+              class="text-16px font-bold mb4 relative flex items-center gap2 flex-auto rounded-base of-hidden bg-gray/20"
+              :class="titleBarCls"
+            >
+              <span class="h9 w1 bg-primary" />
+              <span v-if="isString(config.label)">{{ config.label }}</span>
+              <Component :is="config.label" v-else />
+            </div>
+          </NGridItem>
         </template>
-        <NGridItem v-else :span="24">
-          <div
-            class="text-16px font-bold mb4 relative flex items-center gap2 flex-auto rounded-base of-hidden bg-gray/20"
-            :class="titleBarCls"
-          >
-            <span class="h9 w1 bg-primary" />
-            <span v-if="isString(config.label)">{{ config.label }}</span>
-            <Component :is="config.label" v-else />
-          </div>
-        </NGridItem>
+      </NGrid>
+      <!-- normal form -->
+      <template v-for="config in finalConfigs" v-else :key="config.field">
+        <NFormItem
+          v-if="!config.hide"
+          v-bind="omit(config, EXTRA_FORM_ITEM_PROPS)"
+          :span="config.span ?? 24"
+          :path="config.field"
+          :target="config.field"
+        >
+          <template v-if="config.label" #label>
+            <div flex items-center gap1>
+              <span v-if="isString(config.label)">{{ config.label }}</span>
+              <Component :is="config.label" v-else />
+            </div>
+          </template>
+          <Component :is="FORM_FIELDS[config.type]" :item="config" :model="model" />
+        </NFormItem>
       </template>
-    </NGrid>
-    <!-- normal form -->
-    <template v-for="config in finalConfigs" v-else :key="config.field">
-      <NFormItem
-        v-if="!config.hide"
-        v-bind="omit(config, EXTRA_FORM_ITEM_PROPS)"
-        :span="config.span ?? 24"
-        :path="config.field"
-        :target="config.field"
-      >
-        <template v-if="config.label" #label>
-          <div flex items-center gap1>
-            <span v-if="isString(config.label)">{{ config.label }}</span>
-            <Component :is="config.label" v-else />
-          </div>
-        </template>
-        <Component :is="FORM_FIELDS[config.type]" :item="config" :model="model" />
-      </NFormItem>
-    </template>
-    <slot name="search" />
-  </NForm>
+      <slot name="search" />
+    </NForm>
+  </NEl>
 </template>

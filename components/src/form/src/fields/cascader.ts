@@ -1,6 +1,6 @@
 import { omit } from 'lodash-unified'
 import { NCascader, NSpin } from 'naive-ui'
-import { defineComponent, h, toRefs } from 'vue'
+import { defineComponent, h, toRefs, unref } from 'vue'
 import { useDeps, useFetchField } from '../utils'
 import { type RenderFnParams, needOmitKeyArr } from '../types'
 
@@ -29,7 +29,7 @@ export const renderCascader = defineComponent({
         },
         {
           arrow: () =>
-            state?.loading ?? (item.value.props as any)?.loading ?? fetchRes?.loading
+            state?.loading ?? (item.value.props as any)?.loading ?? unref(fetchRes?.loading)
               ? h(NSpin, {
                 size: 12,
               })
