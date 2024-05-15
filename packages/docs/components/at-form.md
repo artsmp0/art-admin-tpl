@@ -56,9 +56,9 @@ defineExpose(
 <demo src="../examples/at-form/basic.vue"></demo>
 
 #### 三级联动
-该例子展示了如何声明式的处理依赖和动态获取下拉数据。
+该例子展示了如何声明式的处理依赖和动态获取下拉数据。当然你也可以通过响应式配置，来获取异步加载的下拉数据，具体示例请看 [隐藏还是显示？](#隐藏还是显示)。
 <demo src="../examples/at-form/linked-form.vue"></demo>
 
 #### 隐藏还是显示？
-如果表单要控制某一项的显示隐藏，则必须使用 `computed` 来包裹 `configs`。如果在这里使用到 自定义组件，则还需要使用 `markRaw` 包裹。
+如果表单要控制某一项的显示隐藏，则必须使用 `computed` 来包裹 `configs`，这样当你的 configs 依赖的响应式数据变化时，表单会更新。如果在这里使用到自定义组件，则还需要使用 `markRaw` 包裹。
 <demo src="../examples/at-form/hide-or-show-field.vue"></demo>

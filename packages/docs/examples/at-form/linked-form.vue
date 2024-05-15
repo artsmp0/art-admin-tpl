@@ -41,6 +41,8 @@ const configs: AtFormItemConfig[] = [
     },
     apiFn() {
       // 模拟接口请求
+      if (!model.a)
+        return []
       return new Promise((resolve) => {
         setTimeout(() => {
           if (model.a === 1)
@@ -51,9 +53,10 @@ const configs: AtFormItemConfig[] = [
       })
     },
     listener: async (apiFn) => {
+      apiFn?.()
       if (!model.a)
-        return { disabled: true, options: [] }
-      return { disabled: false, options: await apiFn?.() }
+        return { disabled: true }
+      return { disabled: false }
     },
   },
   {

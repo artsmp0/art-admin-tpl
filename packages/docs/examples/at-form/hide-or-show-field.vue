@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AtFormItemConfig } from '@art-admin/components'
 import { AtForm } from '@art-admin/components'
-import { computed, markRaw, reactive } from 'vue'
+import { computed, markRaw, reactive, shallowRef } from 'vue'
 import CustomField from './custom-field.vue'
 
 const model = reactive<any>({
@@ -11,13 +11,22 @@ const model = reactive<any>({
   d: '自定义表单组件需要使用 markRaw',
 })
 
+const options = shallowRef<any[]>([])
+
+function fetchData() {
+  setTimeout(() => {
+    options.value = [{ label: '选项1', value: 1 }, { label: '选项2', value: 2 }]
+  }, 1000)
+}
+fetchData()
+
 const configs = computed<AtFormItemConfig[]>(() => [
   {
     field: 'a',
     type: 'select',
     label: 'AAA',
     span: 8,
-    props: { options: [{ label: '选项1', value: 1 }, { label: '选项2', value: 2 }] },
+    props: { options: options.value },
   },
   {
     field: 'b',
@@ -33,7 +42,7 @@ const configs = computed<AtFormItemConfig[]>(() => [
     label: 'CCC',
     span: 8,
     hide: model.a !== 2,
-    props: { options: [{ label: '选项1-1-1', value: 1 }, { label: '选项1-1-2', value: 2 }] },
+    props: { options: [{ label: '选项2-1', value: 1 }, { label: '选项2-2', value: 2 }] },
   },
   {
     type: 'custom',
