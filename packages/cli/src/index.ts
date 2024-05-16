@@ -11,6 +11,8 @@ program.version('1.0.0').option('-t, --template <template>', 'Specify the Vue3 t
 
 const repo = `https://github.com/artsmp0/${program.opts().template || 'art-admin-tpl'}`
 
+const shouldDeleteScripts = ['build:comp', 'dev:docs']
+
 const gitOptions: Partial<SimpleGitOptions> = {
   baseDir: process.cwd(),
   binary: 'git',
@@ -35,9 +37,14 @@ inquirer.prompt([
     await git.clone(repo, projectName, ['--depth', '1'])
     spinner.succeed(`${repo} downloaded successfully!`)
     const packageDir = path.join(process.cwd(), projectName, 'packages')
+    const pkgJsonPath = path.join(process.cwd(), projectName, 'package.json')
     const gitDir = path.join(process.cwd(), projectName, '.git')
     await fs.rm(packageDir, { recursive: true, force: true })
     await fs.rm(gitDir, { recursive: true, force: true })
+    const pkgJson = JSON.parse(await fs.readFile(pkgJsonPath, 'utf-8'))
+    if (pkgJson.scripts)
+      shouldDeleteScripts.forEach(s => delete pkgJson.scripts[s])
+    await fs.writeFile(pkgJsonPath, JSON.stringify(pkgJson, null, 2))
     await git.init()
     await git.add('.')
     await git.commit('chore: init')
