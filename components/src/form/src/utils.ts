@@ -1,10 +1,9 @@
-import { type MaybeRefOrGetter, toValue, tryOnMounted, tryOnUnmounted } from '@vueuse/core'
-import { omit } from 'lodash-unified'
+import { tryOnMounted, tryOnUnmounted } from '@vueuse/core'
 import type { Ref } from 'vue'
-import { isRef, reactive, ref, shallowReactive, shallowRef, watch } from 'vue'
+import { isRef, reactive, ref, shallowRef, watch } from 'vue'
 import type { AtFormItemConfig } from '..'
 import type { Recordable } from '../../types'
-import type { FormItemConfig, FormItemElement, RenderFnParams } from './types'
+import type { FormItemConfig } from './types'
 
 /** 传给表单 FormItem 时需要排除掉这些额外的属性 */
 export const EXTRA_FORM_ITEM_PROPS = [

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/one-component-per-file -->
 <script setup lang="ts">
 import DefaultTheme from 'vitepress/theme'
 import { NConfigProvider, darkTheme, dateZhCN, zhCN } from 'naive-ui'
@@ -6,7 +7,6 @@ import { computed, defineComponent, h, inject } from 'vue'
 
 const { isDark } = useData()
 const theme = computed(() => isDark.value ? darkTheme : null)
-
 const CssRenderStyle = defineComponent({
   setup() {
     const collect = inject('css-render-collect') as any

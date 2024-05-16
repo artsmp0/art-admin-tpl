@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NButton, NFlex, NPopconfirm } from 'naive-ui'
 import { computed, ref } from 'vue'
-import { AtIconBtn, type AtIconButtonProps } from '../../icon'
+import { AtIconBtn } from '../../icon'
 import type { AtConfirmProps } from './types'
 
 defineOptions({

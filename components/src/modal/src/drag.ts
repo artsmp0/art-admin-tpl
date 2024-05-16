@@ -1,7 +1,6 @@
 /**
  * @param {Element} eleBar 拖拽触发元素
  * @param {object} options 可选参数
- * @returns
  */
 const startDrag = function (eleBar: any, options: any) {
   if (!eleBar)

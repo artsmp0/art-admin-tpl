@@ -1,7 +1,7 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
-import { NButton, NP, NText, NUpload, NUploadDragger, type UploadProps } from 'naive-ui'
-import { nextTick, shallowRef, useAttrs, watch } from 'vue'
+import { NP, NText, NUpload, NUploadDragger, type UploadProps } from 'naive-ui'
+import { nextTick, shallowRef, watch } from 'vue'
 import { AtIcon, AtIconBtn } from '../../icon'
 import type { AtUploadProps } from './type'
 

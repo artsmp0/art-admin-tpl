@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<AtTableProps>(), {
   defaultExpandAll: false,
   autoFetch: true,
   outerBordered: true,
+  pagerKeys: () => ({ page: 'page', pageSize: 'size', total: 'meta.total', list: 'data' }),
 })
 const $tableWrapper = shallowRef<HTMLDivElement>()
 const size = ref(props.size)
