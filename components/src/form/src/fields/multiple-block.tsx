@@ -1,4 +1,4 @@
-import { cloneDeep, isArray, omit } from 'lodash-unified'
+import { cloneDeep, isArray, merge, omit } from 'lodash-unified'
 import { NFormItemGi, NGrid } from 'naive-ui'
 import { type VNode, computed, defineComponent, h, ref, toRefs, watch } from 'vue'
 import { EXTRA_FORM_ITEM_PROPS, getLabelRenderer, useDeps } from '../utils'
@@ -60,6 +60,7 @@ export const renderMultipleBlock = defineComponent({
                         item: { ...child, path },
                         model: model.value[item.value.field][i],
                         internalConfigStates: currentConfig,
+                        index: i,
                       }),
                     label: getLabelRenderer(child.label),
                   }}
@@ -147,8 +148,12 @@ export const renderMultipleBlock = defineComponent({
     })
     const genInternalConfigs = () => {
       const v = model.value[item.value.field].length
-      for (let idx = 0; idx < v; idx++)
-        internalGenConfigs.value[idx] = cloneDeep(item.value.children!)
+      for (let idx = 0; idx < v; idx++) {
+        if (internalGenConfigs.value[idx])
+          merge(cloneDeep(item.value.children!), internalGenConfigs.value[idx])
+        else
+          internalGenConfigs.value[idx] = cloneDeep(item.value.children!)
+      }
     }
 
     Array.isArray(model.value[item.value.field]) && watch(

@@ -5,9 +5,9 @@ import { useDeps, useFetchField } from '../utils'
 import { type RenderFnParams, needOmitKeyArr } from '../types'
 
 export const renderCascader = defineComponent({
-  props: ['item', 'model', 'internalConfigStates'],
+  props: ['item', 'model', 'internalConfigStates', 'index'],
   setup(compProps: RenderFnParams) {
-    const { item, model, internalConfigStates } = toRefs(compProps)
+    const { item, model, internalConfigStates, index } = toRefs(compProps)
     const fetchRes = useFetchField(item.value.apiFn)
     const state: any = useDeps({ item, model }, fetchRes)
     const isStringLabel = typeof item.value.label === 'string'
@@ -20,9 +20,15 @@ export const renderCascader = defineComponent({
           options: fetchRes?.options.value,
           value: model.value[item.value.field],
           placeholder: isStringLabel ? `请选择${item.value.label}` : undefined,
-          onUpdateValue: (v: any) => {
+          onUpdateValue: (v: any, option: any, pathValues: any) => {
             model.value[item.value.field] = v
-            item.value.props?.onChange?.(v, internalConfigStates)
+            item.value.props?.onChange?.({
+              value: v,
+              configs: internalConfigStates,
+              index: index?.value,
+              option,
+              pathValues,
+            })
           },
           ...omit(item.value.props, needOmitKeyArr),
           ...state,

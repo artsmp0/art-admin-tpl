@@ -26,6 +26,7 @@ const finalConfigs = computed(() => {
 })
 
 const formRef = shallowRef<FormInst>()
+const cloneInitVal = cloneDeep(props.model)
 
 async function validate(...args: any[]) {
   try {
@@ -49,9 +50,15 @@ async function setValue(newValue: any) {
   })
 }
 
-const cloneInitVal = cloneDeep(props.model)
 async function resetValue() {
-  setValue(props.initValue ?? cloneInitVal)
+  const resetData = props.initValue ?? cloneInitVal
+  setValue(resetData)
+  // 去除 model 中不在 resetData 中的字段
+  for (const key in props.model) {
+    if (!Object.hasOwn(resetData, key))
+      // eslint-disable-next-line vue/no-mutating-props
+      delete props.model[key]
+  }
   restoreValidation()
 }
 

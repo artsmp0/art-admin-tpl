@@ -4,9 +4,9 @@ import { useDeps } from '../utils'
 import { type RenderFnParams, needOmitKeyArr } from '../types'
 
 export const renderCustom = defineComponent({
-  props: ['item', 'model', 'internalConfigStates'],
+  props: ['item', 'model', 'internalConfigStates', 'index'],
   setup(compProps: RenderFnParams) {
-    const { item, model, internalConfigStates } = toRefs(compProps)
+    const { item, model, internalConfigStates, index } = toRefs(compProps)
     const state = useDeps({ item, model })
     const isStringLabel = typeof item.value.label === 'string'
     return () =>
@@ -14,7 +14,11 @@ export const renderCustom = defineComponent({
         'value': model.value[item.value.field],
         'onUpdate:value': (v: any) => {
           model.value[item.value.field] = v
-          item.value.props?.onChange?.(v, internalConfigStates)
+          item.value.props?.onChange?.({
+            value: v,
+            configs: internalConfigStates,
+            index: index?.value,
+          })
         },
         'placeholder': isStringLabel ? `请输入${item.value.label}` : undefined,
         ...omit(item.value.props, needOmitKeyArr),

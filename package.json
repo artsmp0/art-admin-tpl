@@ -10,7 +10,7 @@
   "scripts": {
     "build:comp": "pnpm --filter=@art-admin/components build",
     "lint": "eslint . --fix",
-    "dev": "vite",
+    "dev": "vite --host",
     "dev:docs": "pnpm --filter=@art-admin/docs docs:dev",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",

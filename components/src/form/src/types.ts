@@ -16,11 +16,12 @@ import type { CSSProperties, Component, Ref, VNode } from 'vue'
 import type { Recordable } from '../../types'
 import type { AtMonacoEditorProps } from '../../monaco-editor'
 import type { AtUploadProps } from '../../upload'
+import type { AtFormItemConfig } from '..'
 
 export interface AtFormProps {
   configs: FormItemConfig[]
   layout?: GridProps
-  model: object
+  model: any
   initValue?: object
   scrollToFirstError?: boolean
   nFormProps?: Omit<FormProps, 'themeOverrides' | 'model'>
@@ -46,12 +47,19 @@ export interface FieldPropMap {
 }
 export type FieldType = keyof FieldPropMap
 
+export interface OnChangeOption {
+  value: any
+  configs: Ref<AtFormItemConfig[]>
+  index: number
+  [key: string]: any
+}
+
 export type FormItemConfig = {
   [K in FieldType]: Omit<FormItemGiProps, 'label'> & {
     type: K
     field: string
     label?: string | (() => VNode)
-    props?: FieldPropMap[K] & { style?: CSSProperties | string } & { onChange?: (newVal: any, internalConfigStates?: Ref<FormItemConfig[]>) => void }
+    props?: FieldPropMap[K] & { style?: CSSProperties | string } & { onChange?: (options: OnChangeOption) => void }
     deps?: (string | Ref<any>)[]
     listener?: (apiFn?: Function) => void
     /** 是否在对依赖处理的时候需要深度监听 */
@@ -90,4 +98,5 @@ export interface RenderFnParams {
   item: FormItemConfig
   model: Recordable
   internalConfigStates?: FormItemConfig[]
+  index?: number
 }

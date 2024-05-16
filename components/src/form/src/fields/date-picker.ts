@@ -5,9 +5,9 @@ import { useDeps } from '../utils'
 import { type RenderFnParams, needOmitKeyArr } from '../types'
 
 export const renderDatePicker = defineComponent({
-  props: ['item', 'model', 'internalConfigStates'],
+  props: ['item', 'model', 'internalConfigStates', 'index'],
   setup(compProps: RenderFnParams) {
-    const { item, model, internalConfigStates } = toRefs(compProps)
+    const { item, model, internalConfigStates, index } = toRefs(compProps)
     const state = useDeps({ item, model })
     return () =>
       h(NDatePicker, {
@@ -15,7 +15,13 @@ export const renderDatePicker = defineComponent({
         formattedValue: model.value[item.value.field],
         onUpdateFormattedValue: (v: any) => {
           model.value[item.value.field] = v
-          item.value.props?.onChange?.(v, internalConfigStates)
+          item.value.props?.onChange?.(
+            {
+              value: v,
+              configs: internalConfigStates,
+              index: index?.value,
+            },
+          )
         },
         style: { width: '100%' },
         ...omit(item.value.props, ['formattedValue', 'onUpdateFormattedValue', 'onUpdate:formattedValue'].concat(needOmitKeyArr)),
