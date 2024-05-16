@@ -45,6 +45,7 @@ inquirer.prompt([
     if (pkgJson.scripts)
       shouldDeleteScripts.forEach(s => delete pkgJson.scripts[s])
     await fs.writeFile(pkgJsonPath, JSON.stringify(pkgJson, null, 2))
+    await git.cwd(path.join(process.cwd(), projectName))
     await git.init()
     await git.add('.')
     await git.commit('chore: init')
