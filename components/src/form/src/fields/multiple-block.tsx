@@ -1,6 +1,6 @@
-import { cloneDeep, isArray, merge, omit } from 'lodash-unified'
+import { cloneDeep, isArray, omit } from 'lodash-unified'
 import { NFormItemGi, NGrid } from 'naive-ui'
-import { type VNode, computed, defineComponent, h, ref, toRefs, watch } from 'vue'
+import { type VNode, computed, defineComponent, h, ref, toRefs } from 'vue'
 import { EXTRA_FORM_ITEM_PROPS, getLabelRenderer, useDeps } from '../utils'
 import type { FormItemConfig, RenderFnParams } from '../types'
 import { AtIconBtn } from '../../../icon'
@@ -10,7 +10,6 @@ export const renderMultipleBlock = defineComponent({
   props: ['item', 'model'],
   setup(compProps: RenderFnParams) {
     const { item, model } = toRefs(compProps)
-    // const { props = undefined, field, children, multipleConfig } = compProps.item
     const state = useDeps({ item, model })
     const defaultItem = item.value.multipleConfig?.defaultItem ?? cloneDeep(model.value[item.value.field][0])
     if (!model.value[item.value.field]) {
@@ -34,7 +33,7 @@ export const renderMultipleBlock = defineComponent({
       const subItems: VNode[] = []
       if (!compProps.item.children)
         return
-      const currentConfig = [...internalGenConfigs.value[i]]
+      const currentConfig = internalGenConfigs.value[i]
       if (!Array.isArray(currentConfig))
         return
       subItems.push(
@@ -81,10 +80,14 @@ export const renderMultipleBlock = defineComponent({
                   text
                   disabled={disableDel.value}
                   onClick={() => {
+                    if (item.value.multipleConfig?.onRemoveButtonClick) {
+                      const shouldRemove = item.value.multipleConfig?.onRemoveButtonClick(i, currentConfig, internalGenConfigs)
+                      if (!shouldRemove)
+                        return
+                    }
                     model.value[item.value.field].splice(i, 1)
                     uuids.splice(i, 1)
                     internalGenConfigs.value.splice(i, 1)
-                    item.value.multipleConfig?.onRemoveButtonClick?.(i, compProps.item)
                   }}
                 >
                 </AtIconBtn>
@@ -102,7 +105,6 @@ export const renderMultipleBlock = defineComponent({
       const genWidgetArr: any[] = []
       if (!model.value[item.value.field] && defaultItem) {
         // 如果 model[field] 为 null 或者 undefined 并且存在 defaultItem，则说明这是一个对象数组表单。需要初始化他为一个数组。避免报错 xxx undefined。
-        // !!! 后端不规范问题
         model.value[item.value.field] = []
       }
       if (isArray(model.value[item.value.field])) {
@@ -146,21 +148,6 @@ export const renderMultipleBlock = defineComponent({
       }
       return genWidgetArr
     })
-    const genInternalConfigs = () => {
-      const v = model.value[item.value.field].length
-      for (let idx = 0; idx < v; idx++) {
-        if (internalGenConfigs.value[idx])
-          merge(cloneDeep(item.value.children!), internalGenConfigs.value[idx])
-        else
-          internalGenConfigs.value[idx] = cloneDeep(item.value.children!)
-      }
-    }
-
-    Array.isArray(model.value[item.value.field]) && watch(
-      [() => model.value[item.value.field].length, () => item.value],
-      genInternalConfigs,
-      { immediate: true, deep: true },
-    )
 
     return () => {
       return (
@@ -174,10 +161,15 @@ export const renderMultipleBlock = defineComponent({
               block
               {...item.value.multipleConfig.addBtnProps}
               onClick={() => {
+                const newItems = cloneDeep(compProps.item.children!)
+                if (item.value.multipleConfig?.onAddButtonClick) {
+                  const shouldAdd = item.value.multipleConfig?.onAddButtonClick?.(newItems)
+                  if (!shouldAdd)
+                    return
+                }
                 model.value[item.value.field].push(cloneDeep(defaultItem))
-                internalGenConfigs.value.push(cloneDeep(compProps.item.children!))
+                internalGenConfigs.value.push(newItems)
                 uuids.push(`${Math.random()}`)
-                item.value.multipleConfig?.onAddButtonClick?.(compProps.item)
               }}
             >
               {compProps.item.multipleConfig?.addBtnText}

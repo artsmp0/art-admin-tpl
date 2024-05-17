@@ -81,9 +81,9 @@ export type FormItemConfig = {
       /** 默认取数组第一行作为初始值 */
       defaultItem?: object
       /** 点击添加一行按钮执行的回调函数 */
-      onAddButtonClick?: (item: FormItemConfig) => void
+      onAddButtonClick?: (items: FormItemConfig[]) => boolean | void
       /** 点击每一项的删除按钮触发的回调函数 */
-      onRemoveButtonClick?: (idx: number, item: FormItemConfig) => void
+      onRemoveButtonClick?: (idx: number, items: FormItemConfig[], internalConfigs: Ref<FormItemConfig[][]>) => void | boolean
     }
   };
 }[keyof FieldPropMap]
