@@ -82,7 +82,7 @@ defineExpose(
 
 <template>
   <NEl>
-    <NForm ref="formRef" :model="model" v-bind="props.nFormProps">
+    <NForm ref="formRef" :model="model" v-bind="{ ...$attrs, ...props.nFormProps }">
       <!-- for search component -->
       <NGrid v-if="!props.nFormProps?.inline" v-bind="layout">
         <template v-for="config in finalConfigs" :key="config.field">
@@ -95,10 +95,8 @@ defineExpose(
               :target="config.field"
             >
               <template v-if="config.label" #label>
-                <div flex items-center gap4>
-                  <span v-if="isString(config.label)">{{ config.label }}</span>
-                  <Component :is="config.label" v-else />
-                </div>
+                <span v-if="isString(config.label)">{{ config.label }}</span>
+                <Component :is="config.label" v-else />
               </template>
               <Component :is="FORM_FIELDS[config.type]" :item="config" :model="model" />
             </NFormItemGi>
@@ -125,10 +123,8 @@ defineExpose(
           :target="config.field"
         >
           <template v-if="config.label" #label>
-            <div flex items-center gap1>
-              <span v-if="isString(config.label)">{{ config.label }}</span>
-              <Component :is="config.label" v-else />
-            </div>
+            <span v-if="isString(config.label)">{{ config.label }}</span>
+            <Component :is="config.label" v-else />
           </template>
           <Component :is="FORM_FIELDS[config.type]" :item="config" :model="model" />
         </NFormItem>

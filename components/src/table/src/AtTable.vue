@@ -106,16 +106,15 @@ defineExpose(
 
 <template>
   <NEl class="h-full">
-    <div ref="$tableWrapper" :class="{ 'bd-base': outerBordered }" class="h-full rounded-base bg-base p3 pt0 text-base" flex="~ col">
+    <div ref="$tableWrapper" :class="{ 'bd-base': outerBordered }" class="h-full rounded-base bg-base p3 pt0 text-base text-sm" flex="~ col">
       <div class="py2 shrink-0" :class="props.headerCls" flex="~ justify-between items-center">
         <div class="flex items-center">
-          <slot name="title">
+          <slot v-if="checkedKeys.length === 0" name="title">
             <div class="text-16px">
               {{ tableTitle }}
             </div>
           </slot>
-          <template v-if="checkedKeys.length > 0 && !$slots.title">
-            <NDivider vertical />
+          <template v-if="checkedKeys.length > 0">
             <span text-gray>
               当前已选中
               <strong class="text-red">{{ checkedKeys.length }}</strong>

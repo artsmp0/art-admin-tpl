@@ -1,11 +1,11 @@
 <script setup lang="tsx">
-import { AtTable, type GpTableInst, type TableColumns, useTableListApi } from '@art-admin/components'
+import { AtTable, type AtTableInst, type TableColumns, useTableListApi } from '@art-admin/components'
 import { NButton, NSpace, NTag } from 'naive-ui'
 import { shallowRef } from 'vue'
 import { getListData } from './mock'
 
 const { getList } = useTableListApi(getListData)
-const $table = shallowRef<GpTableInst>()
+const $table = shallowRef<AtTableInst>()
 const columns: TableColumns<any> = [
   { key: '1', title: '表名', fitContent: true },
   { key: '2', title: '描述', fitContent: true },

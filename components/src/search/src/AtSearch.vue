@@ -1,7 +1,7 @@
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script setup lang="ts">
 import { useResizeObserver } from '@vueuse/core'
-import { NButton, NCard, NFormItem } from 'naive-ui'
+import { NButton, NCard, NEl, NFormItem } from 'naive-ui'
 import { type CSSProperties, computed, onActivated, onDeactivated, onMounted, reactive, ref, shallowRef } from 'vue'
 import type { FormItemConfig } from '../../form/src/types'
 import type { AtFormInst } from '../../form'
@@ -20,12 +20,13 @@ const props = withDefaults(
     configs: FormItemConfig[]
     bgCls?: string
     cardStyle?: CSSProperties
-    initValue?: Record<string, unknown>
+    defaultOpen?: boolean
   }>(),
   {
     labelWidth: '100px',
     minWidth: '320px',
     bgCls: 'bg-base',
+    defaultOpen: false,
     cardStyle: () => ({
       padding: '16px',
       paddingRight: 0,
@@ -53,7 +54,7 @@ onActivated(() => {
   controlObserver.value = false
 })
 const totalRealCount = ref(0)
-const isOpen = ref(false)
+const isOpen = ref(props.defaultOpen)
 function toggle() {
   isOpen.value = !isOpen.value
 }
@@ -117,35 +118,37 @@ defineExpose(reactive({ $atForm }))
 </script>
 
 <template>
-  <NCard :content-style="cardStyle" class="bd-base!" :class="[bgCls]">
-    <div :style="wrapperStyle" @keyup.enter="onSearch">
-      <AtForm ref="$atForm" class="search-form" :n-form-props="{ inline: true, labelPlacement: 'left', labelWidth, showFeedback: false }" :configs="configs" :model="model">
-        <template #search>
-          <NFormItem v-for="item in emptyBoxCount" :key="item" />
-          <div
-            flex="~ items-start justify-end gap-2"
-            class="absolute bottom-0 right-0 z-2"
-            :class="bgCls"
-            :style="{ width: `${searchBoxWidth}px`, height: `${defaultHeight + 2}px`, marginRight: '16px' }"
-          >
-            <NButton secondary type="tertiary" :loading="props.loading" @click="onReset">
-              重置
-            </NButton>
-            <NButton type="primary" :loading="props.loading" @click="onSearch">
-              查询
-            </NButton>
-            <NButton v-if="isShowToggleBtn" @click="toggle">
-              {{ isOpen ? "收起" : "展开" }}
-            </NButton>
-          </div>
-        </template>
-      </AtForm>
-    </div>
-  </NCard>
+  <NEl>
+    <NCard :content-style="cardStyle" class="bd-base!" :class="[bgCls]">
+      <div :style="wrapperStyle" @keyup.enter="onSearch">
+        <AtForm ref="$atForm" class="at-search-form" :n-form-props="{ inline: true, labelPlacement: 'left', labelWidth, labelAlign: 'right', showFeedback: false }" :configs="configs" :model="model">
+          <template #search>
+            <NFormItem v-for="item in emptyBoxCount" :key="item" />
+            <div
+              flex="~ items-start justify-end gap-2"
+              class="absolute bottom-0 right-0 z-2"
+              :class="bgCls"
+              :style="{ width: `${searchBoxWidth}px`, height: `${defaultHeight + 2}px`, marginRight: '16px' }"
+            >
+              <NButton secondary type="tertiary" :loading="props.loading" @click="onReset">
+                重置
+              </NButton>
+              <NButton type="primary" :loading="props.loading" @click="onSearch">
+                查询
+              </NButton>
+              <NButton v-if="isShowToggleBtn" @click="toggle">
+                {{ isOpen ? "收起" : "展开" }}
+              </NButton>
+            </div>
+          </template>
+        </AtForm>
+      </div>
+    </NCard>
+  </NEl>
 </template>
 
 <style lang="scss">
-.search-form {
+.at-search-form {
     flex-wrap: wrap;
     row-gap: 16px;
 
