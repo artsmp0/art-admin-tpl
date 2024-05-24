@@ -8,6 +8,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import EnvTypes from 'vite-plugin-env-types'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import Markdown from 'vite-plugin-md'
 
 const iconDirs = [fileURLToPath(new URL('./src/assets/icons', import.meta.url)), fileURLToPath(new URL('./components/src/svg', import.meta.url))]
 const srcDir = fileURLToPath(new URL('./src', import.meta.url))
@@ -23,6 +24,7 @@ export default defineConfig((config) => {
     resolve: { alias: { '@': srcDir, '@art-admin/components': componentDir } },
     plugins: [
       vue({
+        include: [/\.vue$/, /\.md$/],
         template: {
           compilerOptions: {
             // 注册自定义组件micro-app 防止控制台警告
@@ -34,15 +36,17 @@ export default defineConfig((config) => {
       UnoCSS(),
       EnvTypes({ dts: './types/env.d.ts' }),
       createSvgIconsPlugin({ iconDirs, symbolId: 'icon-[dir]-[name]' }),
-      Components({ dts: './types/components.d.ts', dirs: ['src/components', componentDir], extensions: ['vue', 'tsx', 'jsx'], resolvers: [NaiveUiResolver()] }),
+      Components({
+        dts: './types/components.d.ts',
+        dirs: ['src/components', componentDir],
+        extensions: ['vue', 'tsx', 'jsx'],
+        resolvers: [NaiveUiResolver()],
+      }),
       AutoImport({
         dts: './types/auto-imports.d.ts',
-        imports: [
-          'vue',
-          'vue-router',
-          { 'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'] },
-        ],
+        imports: ['vue', 'vue-router', { 'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'] }],
       }),
+      Markdown(),
     ],
   }
 })
