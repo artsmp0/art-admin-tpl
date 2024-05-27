@@ -39,5 +39,5 @@ export interface AtTableProps {
 <demo src="../examples/at-table/basic.vue"></demo>
 
 #### 自适应列宽
-开启自适应列宽(有一列存在 `fitContent`)后，`scrollX` 由内部计算，注意：此时非自适应列宽的 `column` 的 `width` 必须存在。
+开启自适应列宽(有一列存在 `fitContent`)后，`scrollX` 由内部计算，注意：此时非自适应列宽的 `column` 的 `width` 必须存在。注意，此时每一列的 `key` 不能重复，否则计算会失效。
 <demo src="../examples/at-table/auto-column-width.vue"></demo>
