@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { AtFormItemConfig } from '@art-admin/components'
-
 const model = reactive({
   field1: 1,
   field2: '选项一',
@@ -29,93 +27,98 @@ function getOptions() {
     ]
   }, 5000)
 }
-const configs = computed(
-  () =>
-    [
-      {
-        label: '字段一',
-        field: 'field1',
-        type: 'radio',
-        button: true,
-        props: {
-          options: [
-            { label: '选项一', value: 1 },
-            { label: '选项二', value: 2 },
-          ],
-        },
-      },
-      {
-        label: '字段一为1时显示',
-        field: 'field2',
-        type: 'monacoEditor',
-        hide: model.field1 !== 1,
-        props: {
-          options: {
-            language: 'typescript',
-          },
-        },
-      },
-      {
-        label: '字段一为2时显示',
-        field: 'field3',
-        type: 'inputNumber',
-        hide: model.field1 !== 2,
-      },
-      {
-        label: '字段一为1或2时显示',
-        field: 'field4',
-        type: 'multipleBlock',
-        multipleConfig: {},
-        span: 12,
-        children: [
-          {
-            label: '嵌套表单内层显隐控制',
-            labelPlacement: 'left',
-            field: 'field7',
-            type: 'radio',
-            button: true,
-            props: {
-              options: [
-                { label: '选项一', value: 1 },
-                { label: '选项二', value: 2 },
-              ],
-              onChange: (val, configs) => {
-                if (!configs)
-                  return
-                configs.value[1].hide = val === 2
-                configs.value[2].hide = val === 1
-              },
-            },
-          },
-          {
-            field: 'field5',
-            labelPlacement: 'left',
-            label: '下拉选择1',
-            type: 'select',
-            hide: false,
-            props: {
-              options: options1.value,
-            },
-          },
-          {
-            field: 'field6',
-            labelPlacement: 'left',
-            label: '下拉选择2',
-            type: 'select',
-            hide: true,
-            props: {
-              options: options2.value,
-            },
-          },
-          {
-            field: 'field8',
-            labelPlacement: 'left',
-            label: '输入',
-            type: 'input',
-          },
+const configs = reactive<any>(
+  [
+    {
+      label: '字段一',
+      field: 'field1',
+      type: 'custom',
+      component: markRaw(() => h('div', null, 123)),
+    },
+    {
+      label: '字段一',
+      field: 'field1',
+      type: 'radio',
+      button: true,
+      props: {
+        options: [
+          { label: '选项一', value: 1 },
+          { label: '选项二', value: 2 },
         ],
       },
-    ] satisfies AtFormItemConfig[],
+    },
+    {
+      label: '字段一为1时显示',
+      field: 'field2',
+      type: 'monacoEditor',
+      hide: model.field1 !== 1,
+      props: {
+        options: {
+          language: 'typescript',
+        },
+      },
+    },
+    {
+      label: '字段一为2时显示',
+      field: 'field3',
+      type: 'inputNumber',
+      hide: model.field1 !== 2,
+    },
+    {
+      label: '字段一为1或2时显示',
+      field: 'field4',
+      type: 'multipleBlock',
+      multipleConfig: {},
+      span: 12,
+      children: [
+        {
+          label: '嵌套表单内层显隐控制',
+          labelPlacement: 'left',
+          field: 'field7',
+          type: 'radio',
+          button: true,
+          props: {
+            options: [
+              { label: '选项一', value: 1 },
+              { label: '选项二', value: 2 },
+            ],
+            onChange: (val: any, configs: any) => {
+              if (!configs)
+                return
+              configs.value[1].hide = val === 2
+              configs.value[2].hide = val === 1
+            },
+          },
+        },
+        {
+          field: 'field5',
+          labelPlacement: 'left',
+          label: '下拉选择1',
+          type: 'select',
+          hide: false,
+          props: {
+            options: options1.value,
+          },
+        },
+        {
+          field: 'field6',
+          labelPlacement: 'left',
+          label: '下拉选择2',
+          type: 'select',
+          hide: true,
+          props: {
+            options: options2.value,
+          },
+        },
+        {
+          field: 'field8',
+          labelPlacement: 'left',
+          label: '输入',
+          type: 'input',
+        },
+      ],
+    },
+  ],
 )
 getOptions()
 </script>
