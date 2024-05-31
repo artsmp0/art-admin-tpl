@@ -209,7 +209,7 @@ onMounted(() => {
 
 <template>
   <div v-if="tabStore.accessHistory.size > 0" ref="$tabBar" :class="tabbarCls">
-    <NScrollbar ref="$scrollbar" :x-scrollable="true" :size="2" @scroll="handleScroll">
+    <NScrollbar ref="$scrollbar" :x-scrollable="true" @scroll="handleScroll">
       <TransitionGroup
         name="list"
         class="relative flex ws-nowrap px2 py2"
