@@ -1,6 +1,7 @@
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script setup lang="ts">
 import { useResizeObserver } from '@vueuse/core'
+import type { FormProps } from 'naive-ui'
 import { NButton, NCard, NEl, NFormItem } from 'naive-ui'
 import { type CSSProperties, computed, onActivated, onDeactivated, onMounted, reactive, ref, shallowRef } from 'vue'
 import type { FormItemConfig } from '../../form/src/types'
@@ -14,18 +15,15 @@ defineOptions({
 
 const props = withDefaults(
   defineProps<{
-    labelWidth?: string
     loading?: boolean
     minWidth?: string
     configs: FormItemConfig[]
-    bgCls?: string
     cardStyle?: CSSProperties
     defaultOpen?: boolean
+    nFormProps?: Omit<FormProps, 'themeOverrides' | 'model'>
   }>(),
   {
-    labelWidth: '100px',
     minWidth: '320px',
-    bgCls: 'bg-base',
     defaultOpen: false,
     cardStyle: () => ({
       padding: '16px',
@@ -40,12 +38,21 @@ const emit = defineEmits<{
 
 const model = defineModel<Recordable>('model', { required: true })
 
-const defaultHeight = 34
+const defaultHeight = computed(() => {
+  const size = props.nFormProps?.size
+  if (!size)
+    return 36
+  if (size === 'small')
+    return 28
+  else if (size === 'medium')
+    return 36
+  else return 48
+})
 const emptyBoxCount = ref(0)
 const $atForm = shallowRef<AtFormInst>()
 const isShowToggleBtn = ref(true) // 控制切换按钮显示隐藏
 const searchBoxWidth = ref(0) // 控制 searchBar 的宽度：保证能遮挡住一个 form-item
-const currentHeight = ref(defaultHeight) // 控制 searchBar 的高度
+const currentHeight = ref<number>(defaultHeight.value) // 控制 searchBar 的高度
 const controlObserver = ref(false) // 解决组件失活报错的问题
 onDeactivated(() => {
   controlObserver.value = true
@@ -73,7 +80,7 @@ onMounted(async () => {
       return
     // 取整，这个 blockSize 可能为小数
     currentHeight.value = Math.round(borderBoxSize![0].blockSize)
-    if (currentHeight.value === defaultHeight) {
+    if (currentHeight.value === defaultHeight.value) {
       // 如果相等说明只有一行，不需要显示『展开』『收起』按钮
       isShowToggleBtn.value = false
     }
@@ -103,7 +110,7 @@ const wrapperStyle = computed<CSSProperties>(() => ({
   transition: '0.3s',
   position: 'relative',
   boxSizing: 'content-box',
-  height: `${isOpen.value ? currentHeight.value : defaultHeight}px`,
+  height: `${isOpen.value ? currentHeight.value : defaultHeight.value}px`,
 }))
 function onSearch() {
   emit('search')
@@ -119,24 +126,38 @@ defineExpose(reactive({ $atForm }))
 
 <template>
   <NEl>
-    <NCard :content-style="cardStyle" class="bd-base!" :class="[bgCls]">
+    <NCard :bordered="false" :content-style="cardStyle" v-bind="$attrs" class="bg-base bd-base">
       <div :style="wrapperStyle" @keyup.enter="onSearch">
-        <AtForm ref="$atForm" class="at-search-form" :n-form-props="{ inline: true, labelPlacement: 'left', labelWidth, labelAlign: 'right', showFeedback: false }" :configs="configs" :model="model">
+        <AtForm
+          ref="$atForm"
+          class="at-search-form"
+          :n-form-props="{
+            labelWidth: '100px',
+            labelAlign: 'right',
+            ...nFormProps,
+            inline: true,
+            labelPlacement: 'left',
+            showFeedback: false,
+          }"
+          :configs="configs"
+          :model="model"
+        >
           <template #search>
             <NFormItem v-for="item in emptyBoxCount" :key="item" />
             <div
               flex="~ items-start justify-end gap-2"
-              class="absolute bottom-0 right-0 z-2"
-              :class="bgCls"
+              class="absolute bottom-0 right-0 z-2 bg-base"
               :style="{ width: `${searchBoxWidth}px`, height: `${defaultHeight + 2}px`, marginRight: '16px' }"
             >
-              <NButton secondary type="tertiary" :loading="props.loading" @click="onReset">
-                重置
-              </NButton>
-              <NButton type="primary" :loading="props.loading" @click="onSearch">
-                查询
-              </NButton>
-              <NButton v-if="isShowToggleBtn" @click="toggle">
+              <slot name="action">
+                <NButton :size="nFormProps?.size" secondary type="tertiary" :loading="props.loading" @click="onReset">
+                  重置
+                </NButton>
+                <NButton :size="nFormProps?.size" type="primary" :loading="props.loading" @click="onSearch">
+                  查询
+                </NButton>
+              </slot>
+              <NButton v-if="isShowToggleBtn" :size="nFormProps?.size" @click="toggle">
                 {{ isOpen ? "收起" : "展开" }}
               </NButton>
             </div>

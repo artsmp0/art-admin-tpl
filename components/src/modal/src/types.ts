@@ -11,6 +11,7 @@ export interface GpModalProps {
   draggable?: boolean
   /** 是否显示全屏按钮 @default true */
   fullscreen?: boolean
+  defaultFullscreen?: boolean
   /** 内容区样式 */
   contentCls?: string
   onBeforeClose?: () => boolean

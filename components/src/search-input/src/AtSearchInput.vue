@@ -21,8 +21,6 @@ interface Props extends /* @vue-ignore */ InputProps {
 const value = ref('')
 
 function handleSearch(clear = false) {
-  if (!value.value)
-    return
   if (clear)
     value.value = ''
   emit('search', value.value)

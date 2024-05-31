@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
 import { uniqueId } from 'lodash-unified'
-import { NModal, type ScrollbarInst } from 'naive-ui'
+import { NEl, NModal, NScrollbar, type ScrollbarInst } from 'naive-ui'
 import { computed, nextTick, reactive, shallowRef, unref, watch } from 'vue'
 import type { GpModalProps } from './types'
 import startDrag from './drag'
@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<GpModalProps>(), {
   cancelLabel: '取消',
   draggable: false,
   fullscreen: true,
-
+  defaultFullscreen: false,
 })
 
 const emit = defineEmits<{
@@ -30,11 +30,11 @@ const emit = defineEmits<{
 const modalRef = shallowRef()
 const modalContainerRef = computed(() => unref(modalRef)?.containerRef)
 
-const modalId = uniqueId('gupo-modal-')
-const modalBarId = uniqueId('gupo-modal-bar-')
+const modalId = uniqueId('at-modal-')
+const modalBarId = uniqueId('at-modal-bar-')
 
 const [show, toggleShow] = useToggle()
-const [isFullscreen, toggleFullscreen] = useToggle()
+const [isFullscreen, toggleFullscreen] = useToggle(props.defaultFullscreen)
 
 watch(isFullscreen, (val: boolean) => {
   if (!val || !props.draggable)
@@ -143,15 +143,17 @@ defineExpose(
     </template>
     <template #header-extra>
       <div v-if="fullscreen" class="n-base-close n-base-close--absolute n-card-header__close !mr-8px" @click="toggleFullscreen()">
-        <div :class="isFullscreen ? 'i-icon-park-outline-off-screen' : 'i-icon-park-outline-full-screen'" />
+        <div :class="isFullscreen ? 'i-ant-design-compress-outlined' : 'i-ant-design-expand-outlined'" />
       </div>
     </template>
-    <!-- 用于在模态框内定位元素: 例如滚动时固定某个元素 -->
-    <NScrollbar ref="scrollRef" class="translate-0" :style="{ padding: 0, maxHeight: scrollBarMaxHeight }">
-      <div class="p4" :class="props.contentCls">
-        <slot />
-      </div>
-    </NScrollbar>
+    <NEl>
+      <!-- 用于在模态框内定位元素: 例如滚动时固定某个元素 -->
+      <NScrollbar ref="scrollRef" class="translate-0" :style="{ padding: 0, maxHeight: scrollBarMaxHeight }">
+        <div class="p4" :class="props.contentCls">
+          <slot />
+        </div>
+      </NScrollbar>
+    </NEl>
     <template v-if="showAction" #action>
       <slot name="action">
         <NSpace justify="end">

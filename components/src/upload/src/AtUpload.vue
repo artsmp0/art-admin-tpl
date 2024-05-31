@@ -37,9 +37,9 @@ const handleFinish: UploadProps['onFinish'] = ({ file, event }) => {
   return file
 }
 
-const handleRemove: UploadProps['onRemove'] = ({ file, fileList }) => {
+const handleRemove: UploadProps['onRemove'] = ({ file, fileList, index }) => {
   if (props.nUploadProps?.onRemove)
-    return props.nUploadProps.onRemove({ file, fileList })
+    return props.nUploadProps.onRemove({ file, fileList, index })
 
   // 需要服务端 id 或者前端处理加上 uuid
   const targetIdx = list.value?.findIndex(item => item.id === file.id)

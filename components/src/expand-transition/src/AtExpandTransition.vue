@@ -79,7 +79,7 @@ const on = {
 
 <template>
   <Transition name="at-collapse" v-on="on">
-    <div v-if="show" class="transition-property-all transition-300 transition-top">
+    <div v-if="show" class="transition-300 transition-top transition-property-all">
       <slot />
     </div>
   </Transition>

@@ -92,6 +92,10 @@ const stop = watch(data, () => {
   // 无法直接替换 defaultExpandedRowKeys
   defaultExpandedRowKeys.value.push(...resolveExpandedRowKeys(data.value))
 })
+function clearSelection() {
+  checkedKeys.value = []
+  checkedRows.value = []
+}
 
 defineExpose(
   reactive({
@@ -100,14 +104,15 @@ defineExpose(
     refresh,
     getSelectedData,
     data,
+    clearSelection,
   }),
 )
 </script>
 
 <template>
   <NEl class="h-full">
-    <div ref="$tableWrapper" :class="{ 'bd-base': outerBordered }" class="h-full rounded-base bg-base p3 pt0 text-base text-sm" flex="~ col">
-      <div class="py2 shrink-0" :class="props.headerCls" flex="~ justify-between items-center">
+    <div ref="$tableWrapper" :class="{ 'bd-base': outerBordered }" class="h-full rounded-base bg-base p3 pt0 text-sm text-base" flex="~ col">
+      <div class="shrink-0 py2" :class="props.headerCls" flex="~ justify-between items-center">
         <div class="flex items-center">
           <slot v-if="checkedKeys.length === 0" name="title">
             <div class="text-16px">

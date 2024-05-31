@@ -103,7 +103,7 @@ defineExpose(
           </template>
           <NGridItem v-else :span="24">
             <div
-              class="text-16px font-bold mb4 relative flex items-center gap2 flex-auto rounded-base of-hidden bg-gray/20"
+              class="relative mb4 flex flex-auto items-center gap2 of-hidden rounded-base bg-gray/20 text-16px font-bold"
               :class="titleBarCls"
             >
               <span class="h9 w1 bg-primary" />
