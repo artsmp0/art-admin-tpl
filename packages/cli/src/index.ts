@@ -7,9 +7,7 @@ import ora from 'ora'
 import simpleGit, { type SimpleGit, type SimpleGitOptions } from 'simple-git'
 import chalk from 'chalk'
 
-program.version('1.0.0').option('-t, --template <template>', 'Specify the Vue3 template to use').parse(process.argv)
-
-const repo = `https://github.com/artsmp0/${program.opts().template || 'art-admin-tpl'}`
+const repo = `https://github.com/artsmp0/art-admin-tpl`
 
 const shouldDeleteScripts = ['build:comp', 'dev:docs']
 
