@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtIcon, AtPageHeader } from '@art-admin/components'
+import { AtIcon, AtPageHeader } from '@gupo-admin/components'
 </script>
 
 <template>

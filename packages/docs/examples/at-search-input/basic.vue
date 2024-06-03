@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtSearchInput } from '@art-admin/components'
+import { AtSearchInput } from '@gupo-admin/components'
 import { ref } from 'vue'
 
 const loading = ref(false)

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtEmpty } from '@art-admin/components'
+import { AtEmpty } from '@gupo-admin/components'
 </script>
 
 <template>

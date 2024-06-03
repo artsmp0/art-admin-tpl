@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { AtFormInst, AtFormItemConfig } from '@art-admin/components'
-import { AtForm } from '@art-admin/components'
+import type { AtFormInst, AtFormItemConfig } from '@gupo-admin/components'
+import { AtForm } from '@gupo-admin/components'
 import { NButton, NFlex } from 'naive-ui'
 import { h, ref, shallowRef } from 'vue'
 import { getOptions, treeOptions } from './mock'
@@ -202,7 +202,7 @@ async function submit() {
 </script>
 
 <template>
-  <div class="p4 w-full">
+  <div class="w-full p4">
     <AtForm ref="$form" :model="model" :configs="configs" :layout="{ xGap: 16, yGap: 8 }" title-bar-cls="bg-green/30" />
     <NFlex size="medium" vertical>
       <NButton @click="$form?.resetValue()">

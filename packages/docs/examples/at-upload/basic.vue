@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtUpload } from '@art-admin/components'
+import { AtUpload } from '@gupo-admin/components'
 import { ref } from 'vue'
 
 const files = ref([

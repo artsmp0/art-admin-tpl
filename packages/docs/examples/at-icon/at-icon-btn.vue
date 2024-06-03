@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtIconBtn } from '@art-admin/components'
+import { AtIconBtn } from '@gupo-admin/components'
 import { ref } from 'vue'
 
 const type = ref<any>('primary')

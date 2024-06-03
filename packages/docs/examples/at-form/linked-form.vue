@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { AtFormItemConfig } from '@art-admin/components'
-import { AtForm } from '@art-admin/components'
+import type { AtFormItemConfig } from '@gupo-admin/components'
+import { AtForm } from '@gupo-admin/components'
 import { reactive } from 'vue'
 
 const model = reactive<any>({

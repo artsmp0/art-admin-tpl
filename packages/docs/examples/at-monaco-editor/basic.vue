@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtMonacoEditor } from '@art-admin/components'
+import { AtMonacoEditor } from '@gupo-admin/components'
 import { ref } from 'vue'
 
 const code = ref<string>('const hello = "world";\nhello.aa("hello");')

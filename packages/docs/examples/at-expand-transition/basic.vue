@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtExpandTransition, AtIconBtn } from '@art-admin/components'
+import { AtExpandTransition, AtIconBtn } from '@gupo-admin/components'
 import { useToggle } from '@vueuse/core'
 
 const [show, toggleShow] = useToggle(true)
@@ -11,7 +11,7 @@ const [show, toggleShow] = useToggle(true)
       点我{{ show ? '收起' : '展开' }}
     </AtIconBtn>
     <AtExpandTransition :show="show">
-      <div v-for="item in 10" :key="item" class="bg-rose mb2 px2 py1 rounded-full">
+      <div v-for="item in 10" :key="item" class="mb2 rounded-full bg-rose px2 py1">
         Lorem ipsum dolor sit{{ item }}
       </div>
     </AtExpandTransition>

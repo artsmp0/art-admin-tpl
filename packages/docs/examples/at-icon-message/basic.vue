@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtIconMsg } from '@art-admin/components'
+import { AtIconMsg } from '@gupo-admin/components'
 </script>
 
 <template>

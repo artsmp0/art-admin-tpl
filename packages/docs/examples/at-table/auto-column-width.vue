@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { AtTable, type AtTableInst, type TableColumns, useTableListApi } from '@art-admin/components'
+import { AtTable, type AtTableInst, type TableColumns, useTableListApi } from '@gupo-admin/components'
 import { NButton, NSpace, NTag } from 'naive-ui'
 import { shallowRef } from 'vue'
 import { getListData } from './mock'

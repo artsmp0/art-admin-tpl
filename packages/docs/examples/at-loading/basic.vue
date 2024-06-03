@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtLoading } from '@art-admin/components'
+import { AtLoading } from '@gupo-admin/components'
 </script>
 
 <template>

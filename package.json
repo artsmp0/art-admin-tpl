@@ -8,10 +8,10 @@
     "node": ">=18.12.0"
   },
   "scripts": {
-    "build:comp": "pnpm --filter=@art-admin/components build",
+    "build:comp": "pnpm --filter=@gupo-admin/components build",
     "lint": "eslint . --fix",
     "dev": "vite --host",
-    "dev:docs": "pnpm --filter=@art-admin/docs docs:dev",
+    "dev:docs": "pnpm --filter=@gupo-admin/docs docs:dev",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "prepare": "simple-git-hooks",

@@ -1,7 +1,7 @@
+/* eslint-disable no-console */
 import process from 'node:process'
 import path from 'node:path'
 import fs from 'node:fs/promises'
-import { program } from 'commander'
 import inquirer from 'inquirer'
 import ora from 'ora'
 import simpleGit, { type SimpleGit, type SimpleGitOptions } from 'simple-git'
@@ -47,7 +47,6 @@ inquirer.prompt([
     await git.init()
     await git.add('.')
     await git.commit('chore: init')
-    // eslint-disable-next-line no-console
     console.log(chalk.green(`Project ${projectName} created successfully!`))
   }
   catch (error) {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtConfirm } from '@art-admin/components'
+import { AtConfirm } from '@gupo-admin/components'
 
 function onConfirm() {
   return new Promise((resolve) => {

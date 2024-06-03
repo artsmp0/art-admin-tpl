@@ -1,7 +1,7 @@
 <script lang='ts' setup name="demo-block">
 import { computed } from 'vue'
 import { useClipboard, useToggle } from '@vueuse/core'
-import { AtExpandTransition } from '@art-admin/components'
+import { AtExpandTransition } from '@gupo-admin/components'
 
 const props = withDefaults(defineProps<{
   code: string
@@ -20,7 +20,7 @@ const [value, toggle] = useToggle()
 
 <template>
   <ClientOnly>
-    <div class="my4 demo-block">
+    <div class="demo-block my4">
       <div v-bind="$attrs" class="of-hidden border border-gray/20 rounded border-solid">
         <div class="at-demo_wrapper">
           <slot />

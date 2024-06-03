@@ -3,7 +3,7 @@ import { useWindowSize } from '@vueuse/core'
 import { type MenuOption, NEllipsis } from 'naive-ui'
 import { RouterLink } from 'vue-router'
 import type { RouteMeta } from 'vue-router'
-import { AtIcon } from '@art-admin/components'
+import { AtIcon } from '@gupo-admin/components'
 import { type MenuItemType, usePermissionStore } from '@/stores/permission'
 import { useUIStore } from '@/stores/ui'
 

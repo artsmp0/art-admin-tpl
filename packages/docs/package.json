@@ -1,5 +1,5 @@
 {
-  "name": "@art-admin/docs",
+  "name": "@gupo-admin/docs",
   "type": "module",
   "version": "1.0.0",
   "description": "",
@@ -13,7 +13,7 @@
     "docs:preview": "vitepress preview"
   },
   "dependencies": {
-    "@art-admin/components": "workspace:^",
+    "@gupo-admin/components": "workspace:^",
     "markdown-it": "^14.1.0"
   },
   "devDependencies": {

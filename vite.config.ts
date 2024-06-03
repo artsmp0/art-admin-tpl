@@ -20,7 +20,7 @@ export default defineConfig((config) => {
   return {
     base: VITE_PUBLIC_PATH,
     envDir,
-    resolve: { alias: { '@': srcDir, '@art-admin/components': componentDir } },
+    resolve: { alias: { '@': srcDir, '@gupo-admin/components': componentDir } },
     plugins: [
       vue({
         template: {

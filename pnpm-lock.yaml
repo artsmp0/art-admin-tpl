@@ -152,7 +152,7 @@ importers:
 
   packages/docs:
     dependencies:
-      '@art-admin/components':
+      '@gupo-admin/components':
         specifier: workspace:^
         version: link:../../components
       markdown-it:

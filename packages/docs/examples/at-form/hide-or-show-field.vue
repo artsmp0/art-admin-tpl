@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { AtFormItemConfig } from '@art-admin/components'
-import { AtForm } from '@art-admin/components'
+import type { AtFormItemConfig } from '@gupo-admin/components'
+import { AtForm } from '@gupo-admin/components'
 import { computed, markRaw, reactive, shallowRef } from 'vue'
 import CustomField from './custom-field.vue'
 

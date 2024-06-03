@@ -7,7 +7,7 @@
 3. 如果使用 Unocss Icon，则需要安装 [Unocss](https://unocss.dev/) 以及对应的 [图标包](https://icones.js.org/)，传递的 icon 属性需要是以 `i-` 开头的字符串。
 
 > [!IMPORTANT]
-> 注意 vite-plugin-svg-icons 插件的一个配置项 customDomId，默认值是 `__svg__icons__dom__`，@art-admin/components 采用 `__@art-admin/components__svg__icons__dom__`，若是出现重复图标会被覆盖导致无法显示的问题。
+> 注意 vite-plugin-svg-icons 插件的一个配置项 customDomId，默认值是 `__svg__icons__dom__`，@gupo-admin/components 采用 `__@art-admin/components__svg__icons__dom__`，若是出现重复图标会被覆盖导致无法显示的问题。
 
 ## props
 

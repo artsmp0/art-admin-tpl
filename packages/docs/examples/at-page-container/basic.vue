@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { AtPageContainer } from '@art-admin/components'
+import { AtPageContainer } from '@gupo-admin/components'
 </script>
 
 <template>
-  <div class="h266px w-full transform translate-0">
+  <div class="h266px w-full translate-0 transform">
     <AtPageContainer back-top>
       这是页面内容
       <p v-for="item in 30" :key="item">
