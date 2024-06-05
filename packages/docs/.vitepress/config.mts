@@ -13,13 +13,14 @@ export default defineConfig({
     outline: { level: 'deep' },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '指南', link: '/guide/', activeMatch: '^/guide/' },
+      { text: '指南', link: '/guide/introduction', activeMatch: '^/guide/' },
       { text: '组件', link: '/components/', activeMatch: '^/components/' },
     ],
     sidebar: {
       '/guide/': [
         {
           items: [
+            { text: '项目介绍', link: '/guide/introduction' },
             { text: '快速开始', link: '/guide/quick-start' },
           ],
         },
@@ -60,7 +61,7 @@ export default defineConfig({
     },
   },
   postRender(context) {
-    const styleRegex = /<css-render-style>((.|\s)+)<\/css-render-style>/
+    const styleRegex = /<css-render-style>(([\s\S])+)<\/css-render-style>/
     const vitepressPathRegex = /<vitepress-path>(.+)<\/vitepress-path>/
     const style = styleRegex.exec(context.content)?.[1]
     const vitepressPath = vitepressPathRegex.exec(context.content)?.[1]

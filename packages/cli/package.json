@@ -26,7 +26,7 @@
     }
   },
   "bin": {
-    "art-admin": "./bin/cli.js"
+    "gupo-admin": "./bin/cli.js"
   },
   "files": [
     "bin",
