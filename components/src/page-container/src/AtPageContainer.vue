@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NBackTop, NScrollbar } from 'naive-ui'
-import { computed, shallowRef } from 'vue'
+import { computed, onMounted, ref, shallowRef } from 'vue'
 
 defineOptions({
   name: 'AtPageContainer',
@@ -15,12 +15,21 @@ const props = withDefaults(
   }>(),
   { padding: '16px' },
 )
+const pdTop = ref(props.padding)
 const style = computed(() => ({
   padding: `${Number.parseInt(props.padding as string)}px`,
-  paddingTop: `${Number.parseInt(props.padding as string)}px`,
+  paddingTop: `${Number.parseInt(pdTop.value as string)}px`,
 }))
 
 const $wrapper = shallowRef<HTMLElement>()
+
+// 有面包屑，不需要 paddingTop
+onMounted(() => {
+  const breadcrumbEl = $wrapper.value?.parentElement?.previousElementSibling
+  if (breadcrumbEl && breadcrumbEl.classList.contains('at-breadcrumb')) {
+    pdTop.value = '0'
+  }
+})
 </script>
 
 <template>
