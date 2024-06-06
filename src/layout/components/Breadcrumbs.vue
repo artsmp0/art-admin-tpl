@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { type MenuItemType, usePermissionStore } from '@/stores/permission'
+import { camel2kebab } from '@/utils'
 
 const permissionStore = usePermissionStore()
 const { flatMenuList } = storeToRefs(permissionStore)
 
+const router = useRouter()
 const route = useRoute()
 const data = ref<MenuItemType[]>([])
 function findRoutePath(targetPath: string) {
@@ -24,13 +26,19 @@ watch(
   },
   { immediate: true },
 )
+
+function goto(menu: MenuItemType) {
+  if (!menu.component)
+    return
+  router.push({ path: camel2kebab(menu.path) })
+}
 </script>
 
 <template>
   <!-- 屏幕宽度小于 640 不显示面包屑 -->
   <NEllipsis class="at-breadcrumb px4 py2">
     <NBreadcrumb v-if="data.length > 0" class="hidden! sm:flex!" separator="/">
-      <NBreadcrumbItem v-for="item in data" :key="item.path" :clickable="false">
+      <NBreadcrumbItem v-for="item in data" :key="item.path" :clickable="!!item.component" @click="goto(item)">
         {{ item.meta?.title }}
       </NBreadcrumbItem>
     </NBreadcrumb>
@@ -46,11 +54,6 @@ watch(
         .n-breadcrumb-item__separator {
             margin: 0 2px;
             margin-bottom: 2px;
-        }
-
-        // 移除 hover 效果
-        .n-breadcrumb-item__link {
-            pointer-events: none;
         }
     }
 }
