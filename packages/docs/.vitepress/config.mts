@@ -23,6 +23,7 @@ export default defineConfig({
             { text: '项目介绍', link: '/guide/introduction' },
             { text: '快速开始', link: '/guide/quick-start' },
             { text: '项目配置', link: '/guide/settings' },
+            { text: '路由与菜单', link: '/guide/routes-and-menus' },
           ],
         },
       ],

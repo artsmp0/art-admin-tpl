@@ -3,11 +3,12 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import { useDiscrete } from '@/composables/discrete'
 import { usePermissionStore } from '@/stores/permission'
 import { type AuthQuery, useUserStore } from '@/stores/user'
+import { defaultRoutes } from '@/router/fallback-routes'
 // import { isDev } from '@/utils'
 
 export const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
-  routes: [],
+  routes: defaultRoutes,
 })
 
 const { loadingBar } = useDiscrete()

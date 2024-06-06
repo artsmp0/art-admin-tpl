@@ -18,9 +18,18 @@
           "children": []
         },
         {
+          "path": "/bbb",
+          "meta": {
+            "iframe": "https://www.naiveui.com/zh-CN/os-theme/components/button",
+            "title": "iframe 页面",
+            "icon": "sidebar-dashboard"
+          },
+          "children": []
+        },
+        {
           "path": "/aaa",
           "meta": {
-            "micro": "/#/dynamic-page",
+            "micro": "/#/demo/search",
             "title": "动态微应用",
             "icon": "sidebar-dashboard",
             "microName": "std-pc",

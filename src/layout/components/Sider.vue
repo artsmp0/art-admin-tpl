@@ -6,6 +6,7 @@ import type { RouteMeta } from 'vue-router'
 import { AtIcon } from '@gupo-admin/components'
 import { type MenuItemType, usePermissionStore } from '@/stores/permission'
 import { useUIStore } from '@/stores/ui'
+import { camel2kebab } from '@/utils'
 
 type AtMenuOption = MenuOption & {
   name: string
@@ -53,7 +54,7 @@ const route = useRoute()
 const selectedItem = computed(() => {
   const activeMenu = route.query.activeMenu as string || route.meta.activeMenu
   if (activeMenu)
-    return activeMenu
+    return camel2kebab(activeMenu)
   if (route.meta.hideInMenu) {
     // 表示是详情页
     const t = permissionStore.flatMenuList.find(m => m.path === route.path)
