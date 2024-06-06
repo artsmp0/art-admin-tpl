@@ -28,7 +28,7 @@ watch(
 
 <template>
   <!-- 屏幕宽度小于 640 不显示面包屑 -->
-  <NEllipsis>
+  <NEllipsis class="at-breadcrumb px4 py2">
     <NBreadcrumb v-if="data.length > 0" class="hidden! sm:flex!" separator="/">
       <NBreadcrumbItem v-for="item in data" :key="item.path" :clickable="false">
         {{ item.meta?.title }}

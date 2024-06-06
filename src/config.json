@@ -1,6 +1,6 @@
 {
   "CUR_THEME": "antd",
-  "SHOW_BREADCRUMB": false,
+  "SHOW_BREADCRUMB": true,
   "TAB_POSITION": "top",
   "SHOW_REFRESH_BTN": true,
   "SHOW_FULLSCREEN_BTN": true,

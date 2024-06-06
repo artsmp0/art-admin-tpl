@@ -34,9 +34,7 @@ const route = useRoute()
           }"
         >
           <Tabs v-if="TAB_POSITION === 'alone'" />
-          <div v-if="SHOW_BREADCRUMB" class="px4 py2">
-            <Breadcrumbs />
-          </div>
+          <Breadcrumbs v-if="SHOW_BREADCRUMB" />
           <div class="w-full flex-1 of-auto">
             <RouterView>
               <template #default="{ Component }">

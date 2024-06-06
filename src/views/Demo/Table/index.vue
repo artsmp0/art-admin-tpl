@@ -28,7 +28,7 @@ const columns: TableColumns<any> = [
 </script>
 
 <template>
-  <div class="h-300px w-full">
+  <AtPageContainer inner-scroll>
     <AtTable
       ref="$table"
       class="h-full"
@@ -50,5 +50,5 @@ const columns: TableColumns<any> = [
         </NButton>
       </template>
     </AtTable>
-  </div>
+  </AtPageContainer>
 </template>

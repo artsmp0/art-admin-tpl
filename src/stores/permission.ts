@@ -76,7 +76,7 @@ function transformRoute(item: MenuItemType, parentPath?: string): MenuItemType {
   return {
     path: camel2kebab(item.path ?? ''),
     parentPath,
-    name: item.path?.slice(1).replaceAll('/', '.'),
+    name: item.path,
     meta: {
       ...item.meta,
       activeMenu: item.meta?.activeMenu ? camel2kebab(item.meta.activeMenu) : undefined,
@@ -176,6 +176,14 @@ export const usePermissionStore = defineStore('permission', () => {
   /** 页面缓存 */
   const cachedPages = ref(new Set<string>())
   const cacheRoutes = (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
+    if (cachedPages.value.has(to.name as string)) {
+      // 如果当前去的页面被缓存了，但是上一次的页面不是缓存的页面，则需要清除缓存
+      if (Array.isArray(to.meta.keepAlive)) {
+        if (!to.meta.keepAlive.includes(from.name as string)) {
+          cachedPages.value.delete(to.name as string)
+        }
+      }
+    }
     if (!from.meta.keepAlive)
       return
     const {
@@ -189,10 +197,7 @@ export const usePermissionStore = defineStore('permission', () => {
     if (Array.isArray(keepAlive)) {
       if (!toName || typeof toName !== 'string')
         return
-      const transformNames = keepAlive.map((name) => {
-        return name.replaceAll('/', '.').slice(1)
-      })
-      if (transformNames.includes(toName)) {
+      if (keepAlive.includes(toName)) {
         // 说明当前路由需要被缓存
         if (cachedPages.value.has(name))
           return
