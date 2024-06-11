@@ -25,6 +25,7 @@ export default defineConfig({
             { text: '配置与主题', link: '/guide/settings' },
             { text: '路由与菜单', link: '/guide/routes-and-menus' },
             { text: '样式', link: '/guide/style' },
+            { text: '接口请求', link: '/guide/api' },
           ],
         },
       ],

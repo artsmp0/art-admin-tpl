@@ -7,7 +7,7 @@ export function parseArgs(instance: AxiosInstance) {
     const { url, args } = config as RequestConfig
     if (args && url) {
       const lostParams: string[] = []
-      const replacedUrl = url.replaceAll(/{(.+?)}/g, (_, arg: string) => {
+      const replacedUrl = url.replaceAll(/\{(.+?)\}/g, (_, arg: string) => {
         if (!(args as Record<string, string>)[arg])
           lostParams.push(arg)
 
