@@ -22,8 +22,9 @@ export default defineConfig({
           items: [
             { text: '项目介绍', link: '/guide/introduction' },
             { text: '快速开始', link: '/guide/quick-start' },
-            { text: '项目配置', link: '/guide/settings' },
+            { text: '配置与主题', link: '/guide/settings' },
             { text: '路由与菜单', link: '/guide/routes-and-menus' },
+            { text: '样式', link: '/guide/style' },
           ],
         },
       ],
