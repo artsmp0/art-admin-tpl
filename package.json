@@ -15,7 +15,8 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "prepare": "simple-git-hooks",
-    "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false"
+    "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
+    "release:prod": "gupo-admin release --mode production"
   },
   "dependencies": {
     "@micro-zoe/micro-app": "1.0.0-rc.5",
