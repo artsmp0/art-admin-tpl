@@ -16,6 +16,8 @@
     "preview": "vite preview",
     "prepare": "simple-git-hooks",
     "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
+    "release": "gupo-admin release",
+    "release:test": "gupo-admin release --mode staging",
     "release:prod": "gupo-admin release --mode production"
   },
   "dependencies": {
