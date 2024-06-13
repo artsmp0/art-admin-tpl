@@ -61,6 +61,9 @@ export async function releaseVersion(options: any) {
       custom?: string
     }
     const { release, custom } = answers
+    if (!release && !custom) {
+      return
+    }
     const newTag = OSS_TAG + (custom || semver.inc(currentVersion, release))
     await git.addTag(newTag)
     await git.push('origin')
