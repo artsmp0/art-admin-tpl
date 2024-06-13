@@ -23,7 +23,7 @@ export async function releaseVersion(options: any) {
   }
   try {
     const status = await git.status()
-    if (status.staged.length > 0 || status.not_added.length > 0) {
+    if (!status.isClean()) {
       console.log(chalk.yellow('There are uncommitted files in the staging area! [请先提交变更！]'))
       return
     }
@@ -65,7 +65,7 @@ export async function releaseVersion(options: any) {
     await git.addTag(newTag)
     await git.push('origin')
     await git.pushTags('origin')
-    console.log(chalk.green(`发布成功，最新的标签是：`, chalk.bgBlue(newTag)))
+    console.log(chalk.green(`发布成功，最新的标签是：`, chalk.bgGreen(newTag)))
   }
   catch (error) {
     console.log(chalk.red('发布失败！\n'), error)
