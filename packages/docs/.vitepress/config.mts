@@ -26,6 +26,7 @@ export default defineConfig({
             { text: '路由与菜单', link: '/guide/routes-and-menus' },
             { text: '样式', link: '/guide/style' },
             { text: '接口请求', link: '/guide/api' },
+            { text: '如何改造为自登录', link: '/guide/login' },
           ],
         },
       ],
