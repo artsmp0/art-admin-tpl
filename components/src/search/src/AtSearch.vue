@@ -131,6 +131,7 @@ defineExpose(reactive({ $atForm }))
         <AtForm
           ref="$atForm"
           class="at-search-form"
+          :scroll-to-first-error="false"
           :n-form-props="{
             labelWidth: '100px',
             labelAlign: 'right',

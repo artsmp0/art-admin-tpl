@@ -37,5 +37,7 @@ const props = withDefaults(
 <demo src="../examples/at-search/basic.vue"></demo>
 
 #### 显示 label 与自定义宽度
-
 <demo src="../examples/at-search/custom-width.vue"></demo>
+
+#### 自定义操作
+<demo src="../examples/at-search/custom-action.vue"></demo>
