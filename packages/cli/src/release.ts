@@ -29,6 +29,7 @@ export async function releaseVersion(options: any) {
     }
     await git.cwd(process.cwd())
     let currentVersion = '0.0.0'
+    await git.fetch('origin')
     const tags = await git.tags()
     if (tags.all.length > 0) {
       const filteredTags = tags.all.filter(tag => tag.includes(OSS_TAG)).map(item => item.replace(OSS_TAG, ''))
