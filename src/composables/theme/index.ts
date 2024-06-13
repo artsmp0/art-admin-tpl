@@ -2,8 +2,9 @@ import { useDark } from '@vueuse/core'
 import { useThemeVars } from 'naive-ui'
 import { composite } from 'seemly'
 import { opacityColor } from '@/utils/color'
+import { useLocalStorage } from '@/utils/storage'
 
-export const isDark = useDark({ initialValue: 'light', storageKey: `${import.meta.env.VITE_APP_STORAGE_KEY}_theme` })
+export const isDark = useDark({ initialValue: 'light', storageRef: useLocalStorage('theme', 'light') })
 
 const isAppearanceTransition
     = typeof document !== 'undefined'
