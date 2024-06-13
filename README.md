@@ -1,16 +1,16 @@
-# 记录一下设置过程
 
-1. eslint
+# git
+
 ```bash
- pnpx @antfu/eslint-config@latest
- ni
-```
+git tag  # 查看本地标签
+git ls-remote --tags  # 查看远程标签
 
-2. git hooks
-```bash
-ni -D lint-staged simple-git-hooks
-```
+git tag -l | xargs git tag -d  # 删除本地所有标签
+git fetch --prune  # 从远程获取最新标签信息并删除本地不存在的远程标签
 
-3. [unocss](https://unocss.dev/integrations/vite)
-4. local svg icon
-5. auto import
+git push origin --tags  # 推送本地所有标签到远程
+
+git push origin [tag_name] # 推送指定标签
+
+git push origin :refs/tags/[tag_name]  # 删除远程指定标签
+```

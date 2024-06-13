@@ -39,7 +39,7 @@ export async function releaseVersion(options: any) {
       {
         type: 'autocomplete',
         name: 'release',
-        message: `Current version ${chalk.green(currentVersion)}`,
+        message: `Current version ${chalk.green(OSS_TAG + currentVersion)}`,
         choices: [
           { value: 'patch', title: `${'patch'.padStart(PADDING, ' ')} ${chalk.bold(semver.inc(currentVersion, 'patch'))}` },
           { value: 'minor', title: `${'minor'.padStart(PADDING, ' ')} ${chalk.bold(semver.inc(currentVersion, 'minor'))}` },
