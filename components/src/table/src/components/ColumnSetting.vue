@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { cloneDeep } from 'lodash-unified'
-import { NButton, NCheckbox, NCheckboxGroup, NPopover } from 'naive-ui'
+import { NButton, NCheckbox, NCheckboxGroup, NPopover, NScrollbar } from 'naive-ui'
 import sortablejs from 'sortablejs'
 import type { TableBaseColumn } from 'naive-ui/es/data-table/src/interface'
 import type Sortable from 'sortablejs'
@@ -70,6 +70,7 @@ async function handleVisibleChange() {
     delay: 400,
     delayOnTouchOnly: true,
     handle: '.column-setting__item',
+    scroll: true,
     onEnd: (evt) => {
       const { oldIndex, newIndex } = evt
       if (!injectData || !sortColumns.value)
@@ -112,15 +113,13 @@ async function handleVisibleChange() {
           </NButton>
         </div>
       </template>
-      <div class="w166px">
-        <NCheckboxGroup ref="$sortableWrapper" v-model:value="state.checkedList">
-          <div v-for="col in originalColumns" :key="col.key" class="column-setting__item p1 hover:bg-blue/20!">
-            <NCheckbox :value="col.key">
-              {{ col.title }}
-            </NCheckbox>
-          </div>
-        </NCheckboxGroup>
-      </div>
+      <NCheckboxGroup ref="$sortableWrapper" v-model:value="state.checkedList" class="max-h-200px max-w-166px of-auto">
+        <div v-for="col in originalColumns" :key="col.key" class="column-setting__item p1">
+          <NCheckbox :value="col.key">
+            {{ col.title }}
+          </NCheckbox>
+        </div>
+      </NCheckboxGroup>
     </NPopover>
   </div>
 </template>

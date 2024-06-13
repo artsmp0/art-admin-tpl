@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { AtFormItemConfig } from '@gupo-admin/components'
 import { AtSearch } from '@gupo-admin/components'
+import { cloneDeep } from 'lodash-unified'
 import { reactive } from 'vue'
 
 const model = reactive({
@@ -17,7 +18,7 @@ const configs: AtFormItemConfig[] = [
 ]
 function search() {
   // eslint-disable-next-line no-console
-  console.log('model: ', model)
+  console.log('model: ', cloneDeep(model))
 }
 </script>
 
