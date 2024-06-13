@@ -24,5 +24,12 @@ function search() {
 <template>
   <div w-full of-hidden>
     <AtSearch :configs="configs" default-open :model="model" min-width="350px" @search="search" />
+    <NTag>测试</NTag>
+    <NTag type="success">
+      测试
+    </NTag>
+    <NTag type="success">
+      测试
+    </NTag>
   </div>
 </template>

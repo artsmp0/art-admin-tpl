@@ -1,8 +1,8 @@
 import type { GlobalThemeOverrides } from 'naive-ui'
-import { normal } from './normal'
+import { normal } from './default'
 import { antd } from './antd'
 
-export type AtTheme = '默认' | 'antd'
+export type AtTheme = 'default' | 'antd'
 
 export interface ThemeContent {
   dark?: GlobalThemeOverrides
@@ -12,6 +12,6 @@ export interface ThemeContent {
 export type ThemeMap = Record<AtTheme, ThemeContent>
 
 export const THEME_MAP: ThemeMap = {
-  默认: normal,
+  default: normal,
   antd,
 }

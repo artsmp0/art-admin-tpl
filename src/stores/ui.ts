@@ -11,7 +11,7 @@ export const useUIStore = defineStore('ui', () => {
   const curTheme = computed(() => THEME_MAP[defaultSetting.value.CUR_THEME as AtTheme])
 
   const themeOptions: { label: AtTheme, value: AtTheme }[] = [
-    { label: '默认', value: '默认' },
+    { label: 'default', value: 'default' },
     { label: 'antd', value: 'antd' },
   ]
 
