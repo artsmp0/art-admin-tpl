@@ -51,7 +51,7 @@ export async function releaseVersion(options: any) {
       {
         type: prev => prev === 'custom' ? 'text' : null,
         name: 'custom',
-        message: 'Enter the new version number:',
+        message: '请输入新版本号：',
         initial: currentVersion,
         validate: (custom: string) => {
           return semver.valid(custom) ? true : 'That\'s not a valid version number'
@@ -62,7 +62,9 @@ export async function releaseVersion(options: any) {
       custom?: string
     }
     const { release, custom } = answers
-    if (!release && !custom) {
+    console.log('custom: ', release, custom, currentVersion)
+    if (!release || (release === 'custom' && !custom)) {
+      console.log(chalk.red('没有发布任何内容！'))
       return
     }
     const newTag = OSS_TAG + (custom || semver.inc(currentVersion, release))
