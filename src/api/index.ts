@@ -1,10 +1,10 @@
 import auth from './apis/auth'
-import common from './apis/common'
+import backend from './apis/backend'
 
 export * from './apis/types'
-export { URLS as COMMON_URLS } from './apis/common'
+export { URLS as BACKEND_URLS } from './apis/backend'
 
 export const APIS = {
   auth,
-  common,
+  backend,
 }

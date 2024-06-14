@@ -1,0 +1,53 @@
+<script setup lang="tsx">
+import type { AtTableInst, TableColumns } from '@gupo-admin/components'
+import { AtConfirm, AtIconBtn, useTableListApi } from '@gupo-admin/components'
+import { NButton, NFlex } from 'naive-ui'
+import type { {{typeName}} } from '@/api'
+import { APIS, BACKEND_URLS } from '@/api'
+
+defineOptions({ name: '{{filepath}}' })
+
+const tableRef = shallowRef<AtTableInst>()
+const { getList } = useTableListApi(APIS.backend[BACKEND_URLS.{{apiName}}])
+const columns: TableColumns<{{typeName}}> = [
+  { key: 'operation', title: '操作', fixed: 'right', width: 180, render(rowData) {
+    return (
+      <NFlex align="center">
+        <NButton text type="primary" onClick={() => {}}>编辑</NButton>
+        <AtConfirm
+          message="删除后无法恢复，是否需要删除？"
+          onConfirm={async () => {
+            // const res = await APIS.backend[BACKEND_URLS.stdVersionDel]({ standard_id: rowData.standard_id })
+            // if (res.err || !res.data.data)
+            //   return
+            // message.success('删除成功！')
+            // tableRef.value?.refresh()
+          }}
+          buttonProps={{ type: 'error', text: true }}
+        >
+          删除
+        </AtConfirm>
+      </NFlex>
+    )
+  } },
+]
+
+function onSearch(keyword: string) {
+  tableRef.value?.filter({ keyword })
+}
+</script>
+
+<template>
+  <AtPageContainer inner-scroll>
+    <AtTable ref="tableRef" class="h-full" flex-height :list-api="getList" :columns="columns">
+      <template #extra>
+        <NSpace>
+          <AtSearchInput placeholder="按回车搜索" size="small" @search="onSearch" />
+          <AtIconBtn size="small" type="primary" icon="i-ph-plus">
+            新建
+          </AtIconBtn>
+        </NSpace>
+      </template>
+    </AtTable>
+  </AtPageContainer>
+</template>
