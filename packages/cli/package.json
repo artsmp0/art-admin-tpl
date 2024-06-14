@@ -37,7 +37,7 @@
     "dev": "unbuild --stub",
     "build": "unbuild",
     "prepublishOnly": "npm run build",
-    "release": "bumpp --commit --push --tag && pnpm publish"
+    "release": "bumpp --commit --push && pnpm publish"
   },
   "dependencies": {
     "chalk": "^5.3.0",
