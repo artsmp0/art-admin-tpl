@@ -52,7 +52,9 @@ export async function generate() {
       validate: (input: string) => input ? true : '请输入路由路径',
     },
     {
-      type: prev => prev ? 'text' : null,
+      type: (_, values) => {
+        return values.type === 'table-page' ? 'text' : null
+      },
       name: 'apiName',
       message: '接口名称（定义在 backend.ts 中的 URLS）：',
       validate: (input: string) => input ? true : '请输入接口名称',

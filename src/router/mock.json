@@ -1,5 +1,15 @@
 {
-  "router": [],
+  "router": [
+    {
+      "path": "/Overview",
+      "meta": {
+        "title": "总览",
+        "hideInMenu": false,
+        "hideInTab": false
+      },
+      "children": []
+    }
+  ],
   "button": [
     {
       "title": "测试按钮",
